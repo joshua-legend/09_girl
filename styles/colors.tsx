@@ -7,5 +7,6 @@ export const COLORS = {
   DANGER: '#FF1744',
   LIGHT: '#F3F3F3',
   DARK: '#343A40',
+  TITLE: '#382B2B',
   // 필요한 다른 색상 값들을 추가합니다.
 }
