@@ -46,12 +46,12 @@ const HeaderView = ({}: HeaderViewProps) => {
       style: {
         flexGrow: 1,
         fontFamily: FONTS.TITLE,
-        color: COLORS.TITLE,
+        color: COLORS.SECONDARY,
       },
     } as TypographyProps,
     button: {
       style: {
-        color: COLORS.TITLE,
+        color: COLORS.SECONDARY,
       },
     } as ButtonProps,
   }

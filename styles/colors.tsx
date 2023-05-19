@@ -1,12 +1,11 @@
 export const COLORS = {
-  PRIMARY: '#FEE101',
-  SECONDARY: '#FF5733',
-  SUCCESS: '#78BE20',
-  WARNING: '#FFC107',
-  INFO: '#00B8D9',
-  DANGER: '#FF1744',
-  LIGHT: '#F3F3F3',
-  DARK: '#343A40',
-  TITLE: '#382B2B',
+  PRIMARY : '#FEE101';
+  SECONDARY : '#382B2B';
+  ACCENT : '#FF5722'; // 강조색
+  BACKGROUND : '#F5F5F5'; // 배경색
+  TEXT : '#333333'; // 텍스트 색상
+  LINK : '#1976D2'; // 링크 색상
+  BUTTON : '#4CAF50'; // 버튼 색상
+  BORDER : '#CCCCCC'; // 테두리 색상
   // 필요한 다른 색상 값들을 추가합니다.
 }
