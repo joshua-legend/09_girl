@@ -1,18 +1,24 @@
 import React from 'react'
 import { DefaultLayoutActionProps } from './DefaultLayoutAction'
+import { Box as Main, BoxProps } from '@mui/material'
+import { FONTS } from '@styles/fonts'
+import { TypographyProps } from '@mui/material/Typography'
 
 type ButtonViewProps = {} & DefaultLayoutActionProps
 
-const centerLayoutStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  minHeight: '100vh',
-}
-
 const DefaultLayoutView = ({ children }: ButtonViewProps) => {
+  const uiConfig = {
+    Main: {
+      component: 'main',
+      sx: {
+        marginTop: '60px',
+      },
+    } as BoxProps,
+  }
+
   return (
     <>
-      <main style={centerLayoutStyle}>{children}</main>
+      <Main {...uiConfig.Main}>{children}</Main>
     </>
   )
 }

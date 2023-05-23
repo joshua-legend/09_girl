@@ -14,24 +14,21 @@ import { SvgIconProps } from '@mui/material'
 type HeaderViewProps = {} & HeaderActionProps
 
 const HeaderView = ({}: HeaderViewProps) => {
-  const Wrapper = styled(Box)`
-    flex-grow: 1;
-  `
-  const attrs = {
-    appbar: {
+  const uiConfig = {
+    Appbar: {
       style: {
         position: 'fixed',
         width: '100vw',
         backgroundColor: COLORS.PRIMARY,
       },
     } as AppBarProps,
-    box: {
+    Box: {
       sx: {
         width: '70px',
         height: '100%',
       },
     } as BoxProps,
-    imgBox: {
+    ImgBox: {
       component: 'img',
       src: '/static/09_girl.png',
       alt: 'The house from the offer.',
@@ -41,7 +38,7 @@ const HeaderView = ({}: HeaderViewProps) => {
         objectFit: 'cover',
       },
     } as BoxProps,
-    typo: {
+    Typo: {
       variant: 'h5',
       style: {
         flexGrow: 1,
@@ -49,7 +46,7 @@ const HeaderView = ({}: HeaderViewProps) => {
         color: COLORS.SECONDARY,
       },
     } as TypographyProps,
-    button: {
+    Button: {
       style: {
         color: COLORS.SECONDARY,
       },
@@ -57,13 +54,13 @@ const HeaderView = ({}: HeaderViewProps) => {
   }
 
   return (
-    <AppBar {...attrs.appbar}>
+    <AppBar {...uiConfig.Appbar}>
       <Toolbar>
-        <Box {...attrs.box}>
-          <ImgBox {...attrs.imgBox} />
+        <Box {...uiConfig.Box}>
+          <ImgBox {...uiConfig.ImgBox} />
         </Box>
-        <Typography {...attrs.typo}>공구하는 여자</Typography>
-        <Button {...attrs.button}>Login</Button>
+        <Typography {...uiConfig.Typo}>공구하는 여자</Typography>
+        <Button {...uiConfig.Button}>Login</Button>
       </Toolbar>
     </AppBar>
   )
