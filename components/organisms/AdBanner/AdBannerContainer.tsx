@@ -4,8 +4,8 @@ import AdBannerAction, { AdBannerActionProps } from './AdBannerAction'
 
 export type AdBannerContainerProps = {} & AdBannerViewProps
 
-const AdBannerContainer = ({}: AdBannerContainerProps) => {
-  return <AdBannerView {...AdBannerAction} />
+const AdBannerContainer = ({ cards }: AdBannerContainerProps) => {
+  return <AdBannerView {...AdBannerAction} cards={cards} />
 }
 
 export default AdBannerContainer

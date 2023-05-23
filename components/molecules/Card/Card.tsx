@@ -4,8 +4,8 @@ import { CardViewProps } from '@components/molecules/Card/CardView'
 
 export type CardProps = {} & CardContainerProps
 
-const Card = ({}: CardProps) => {
-  return <CardContainer />
+const Card = ({ card }: CardProps) => {
+  return <CardContainer card={card} />
 }
 
 export default Card

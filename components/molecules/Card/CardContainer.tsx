@@ -4,8 +4,8 @@ import CardAction, { CardActionProps } from './CardAction'
 
 export type CardContainerProps = {} & CardViewProps
 
-const CardContainer = ({}: CardContainerProps) => {
-  return <CardView {...CardAction} />
+const CardContainer = ({ card }: CardContainerProps) => {
+  return <CardView {...CardAction} card={card} />
 }
 
 export default CardContainer

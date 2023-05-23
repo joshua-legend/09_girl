@@ -9,7 +9,7 @@ export type AdBannerViewProps = {
   cards: CardProps[]
 } & AdBannerActionProps
 
-const AdBannerView = ({}: AdBannerViewProps) => {
+const AdBannerView = ({ cards }: AdBannerViewProps) => {
   const uiConfig = {
     AdBanner: {
       sx: {
@@ -32,16 +32,16 @@ const AdBannerView = ({}: AdBannerViewProps) => {
       },
     },
   }
-
   return (
     <AdBanner {...uiConfig.AdBanner}>
       <Swiper {...uiConfig.Swiper}>
-        <SwiperSlide {...uiConfig.SwiperSlide}>
-          <Card />
-        </SwiperSlide>
-        <SwiperSlide {...uiConfig.SwiperSlide}>Slide 2</SwiperSlide>
-        <SwiperSlide {...uiConfig.SwiperSlide}>Slide 3</SwiperSlide>
-        <SwiperSlide {...uiConfig.SwiperSlide}>Slide 4</SwiperSlide>
+        {cards.map((value, idx) => {
+          return (
+            <SwiperSlide key={idx} {...uiConfig.SwiperSlide}>
+              <Card {...value} />
+            </SwiperSlide>
+          )
+        })}
       </Swiper>
     </AdBanner>
   )
