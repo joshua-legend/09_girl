@@ -1,5 +1,5 @@
-import React, { CSSProperties } from 'react'
-import { Box as Left, Box as Right, Box as Banner, BoxProps, ButtonProps } from '@mui/material'
+import React from 'react'
+import { Box as Left, Box as Right, Box as Banner, BoxProps } from '@mui/material'
 import Typography, { TypographyProps } from '@mui/material/Typography'
 import { IntroBannerActionProps } from './IntroBannerAction'
 import { FONTS } from '@styles/fonts'

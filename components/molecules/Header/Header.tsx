@@ -1,6 +1,8 @@
 import React from 'react'
-import HeaderContainer from './HeaderContainer'
-const Header = () => {
+import HeaderContainer, { HeaderContainerProps } from './HeaderContainer'
+
+export type HeaderProps = {} & HeaderContainerProps
+const Header = ({}: HeaderProps) => {
   return <HeaderContainer />
 }
 

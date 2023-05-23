@@ -1,6 +1,10 @@
 import React from 'react'
-import AdBannerContainer from './AdBannerContainer'
-const AdBanner = () => {
+import AdBannerContainer, { AdBannerContainerProps } from './AdBannerContainer'
+import { AdBannerViewProps } from '@components/organisms/AdBanner/AdBannerView'
+
+export type AdBannerProps = {} & AdBannerContainerProps
+
+const AdBanner = ({}: AdBannerProps) => {
   return <AdBannerContainer />
 }
 

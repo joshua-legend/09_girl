@@ -1,36 +1,74 @@
-import React, { CSSProperties } from 'react'
-import { Box as Left, Box as Right, Box as Banner, BoxProps, ButtonProps } from '@mui/material'
-import Typography, { TypographyProps } from '@mui/material/Typography'
+import React from 'react'
+import { Box, Card, CardContent, CardMedia, CardMediaProps, CardProps, Chip, Typography as Title, Typography as SubTitle, TypographyProps } from '@mui/material'
 import { CardActionProps } from './CardAction'
-import { FONTS } from '@styles/fonts'
+import { COLORS } from '@styles/colors'
 
-type CardViewProps = {} & CardActionProps
+export type CardViewProps = {
+  image: string
+  title: string
+  subtitle: string
+} & CardActionProps
 
-const CardView = ({}: CardViewProps) => {
+const CardView = ({ image = 'static/test1.jpg', title = '문구를 넣어주세요.', subtitle = '문구를 넣어주세요.' }: CardViewProps) => {
   const uiConfig = {
-    Banner: {
+    Box: {
       sx: {
-        padding: '20px',
         display: 'flex',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        justifyContent: 'center',
       },
-    } as BoxProps,
-    Typo: {
-      variant: 'h6',
+    },
+    Card: {
+      sx: {
+        width: '290px',
+        height: '190px',
+      },
+      variant: 'elevation',
+    } as CardProps,
+    CardMedia: {
       style: {
-        fontFamily: FONTS.BANNER,
+        width: '100%',
+      },
+      component: 'img',
+      height: '100%',
+      image,
+      alt: 'static/alt.jpg',
+    } as CardMediaProps,
+    Title: {
+      component: 'h2',
+      sx: {
+        marginTop: '1rem',
+        textAlign: 'center',
+        fontFamily: 'Pretendard-Regular',
+        fontSize: '18px',
+        fontWeight: '700',
+      },
+    } as TypographyProps,
+    SubTitle: {
+      component: 'h4',
+      sx: {
+        textAlign: 'center',
+        marginTop: '6px',
+        fontFamily: 'Pretendard-Regular',
+        fontSize: '13px',
+        fontWeight: '500',
+        lineHeight: '1.15',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        color: COLORS.TEXT,
       },
     } as TypographyProps,
   }
 
   return (
-    <Banner {...uiConfig.Banner}>
-      <Left>
-        <Typography {...uiConfig.Typo}>안녕하세요.</Typography>
-        <Typography {...uiConfig.Typo}>공구하는 뇨자입니다.</Typography>
-      </Left>
-      <Right></Right>
-    </Banner>
+    <Box {...uiConfig.Box}>
+      <Card {...uiConfig.Card}>
+        <CardMedia {...uiConfig.CardMedia} />
+      </Card>
+      <Title {...uiConfig.Title}>{title}</Title>
+      <SubTitle {...uiConfig.SubTitle}>{subtitle}</SubTitle>
+    </Box>
   )
 }
 

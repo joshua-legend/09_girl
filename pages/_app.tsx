@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import { CssBaseline } from '@mui/material'
 import DefaultLayout from '../components/layouts/DefaultLayout/DefaultLayout'
+import '../public/fonts/style.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {

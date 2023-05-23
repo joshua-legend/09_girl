@@ -1,17 +1,15 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 import AppBar, { AppBarProps } from '@mui/material/AppBar'
 import { Box, Box as ImgBox, BoxProps, ButtonProps } from '@mui/material'
 import Toolbar from '@mui/material/Toolbar'
 import Typography, { TypographyProps } from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { styled } from '@mui/system'
 import { HeaderActionProps } from './HeaderAction'
 import { COLORS } from '@styles/colors'
-import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import { FONTS } from '@styles/fonts'
-import { SvgIconProps } from '@mui/material'
+import { IMAGES } from '@styles/images'
 
-type HeaderViewProps = {} & HeaderActionProps
+export type HeaderViewProps = {} & HeaderActionProps
 
 const HeaderView = ({}: HeaderViewProps) => {
   const uiConfig = {
@@ -30,7 +28,7 @@ const HeaderView = ({}: HeaderViewProps) => {
     } as BoxProps,
     ImgBox: {
       component: 'img',
-      src: '/static/09_girl.png',
+      src: IMAGES.GIRL,
       alt: 'The house from the offer.',
       style: {
         width: '100%',

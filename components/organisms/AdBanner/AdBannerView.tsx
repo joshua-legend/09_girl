@@ -1,36 +1,49 @@
-import React, { CSSProperties } from 'react'
-import { Box as Left, Box as Right, Box as Banner, BoxProps, ButtonProps } from '@mui/material'
-import Typography, { TypographyProps } from '@mui/material/Typography'
+import React from 'react'
+import { Box as Left, Box as Right, Box as AdBanner, BoxProps } from '@mui/material'
 import { AdBannerActionProps } from './AdBannerAction'
-import { FONTS } from '@styles/fonts'
+import { SwiperSlide, Swiper } from 'swiper/react'
+import 'swiper/css'
+import Card, { CardProps } from '@components/molecules/Card/Card'
 
-type AdBannerViewProps = {} & AdBannerActionProps
+export type AdBannerViewProps = {
+  cards: CardProps[]
+} & AdBannerActionProps
 
 const AdBannerView = ({}: AdBannerViewProps) => {
   const uiConfig = {
-    Banner: {
+    AdBanner: {
       sx: {
-        padding: '20px',
-        display: 'flex',
-        justifyContent: 'space-between',
+        height: '320px',
+        width: '100%',
       },
     } as BoxProps,
-    Typo: {
-      variant: 'h6',
+    Swiper: {
+      className: 'mySwiper',
       style: {
-        fontFamily: FONTS.BANNER,
+        height: '100%',
+        width: '100%',
       },
-    } as TypographyProps,
+      slidesPerView: 1,
+    },
+    SwiperSlide: {
+      style: {
+        display: 'flex',
+        justifyContent: 'center',
+      },
+    },
   }
 
   return (
-    <Banner {...uiConfig.Banner}>
-      <Left>
-        <Typography {...uiConfig.Typo}>안녕하세요.</Typography>
-        <Typography {...uiConfig.Typo}>공구하는 뇨자입니다.</Typography>
-      </Left>
-      <Right></Right>
-    </Banner>
+    <AdBanner {...uiConfig.AdBanner}>
+      <Swiper {...uiConfig.Swiper}>
+        <SwiperSlide {...uiConfig.SwiperSlide}>
+          <Card />
+        </SwiperSlide>
+        <SwiperSlide {...uiConfig.SwiperSlide}>Slide 2</SwiperSlide>
+        <SwiperSlide {...uiConfig.SwiperSlide}>Slide 3</SwiperSlide>
+        <SwiperSlide {...uiConfig.SwiperSlide}>Slide 4</SwiperSlide>
+      </Swiper>
+    </AdBanner>
   )
 }
 

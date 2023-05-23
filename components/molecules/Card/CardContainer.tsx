@@ -1,8 +1,10 @@
 import React from 'react'
-import CardView from './CardView'
-import CardAction from './CardAction'
+import CardView, { CardViewProps } from './CardView'
+import CardAction, { CardActionProps } from './CardAction'
 
-const CardContainer = () => {
+export type CardContainerProps = {} & CardViewProps
+
+const CardContainer = ({}: CardContainerProps) => {
   return <CardView {...CardAction} />
 }
 
