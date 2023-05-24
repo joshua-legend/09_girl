@@ -11,15 +11,8 @@ export type ItemCounterActionProps = {
 }
 
 const ItemCounterAction = ({ quantity, setQuantity }: ItemCounterActionProps): ItemCounterActionsResult => {
-  const onMinusClick = () =>
-    setQuantity((prevState) => {
-      if (prevState === 0) return prevState
-      else return prevState - 1
-    })
-  const onPlusClick = () =>
-    setQuantity((prevState) => {
-      return prevState + 1
-    })
+  const onMinusClick = () => setQuantity((prevState) => (prevState === 0 ? prevState : prevState - 1))
+  const onPlusClick = () => setQuantity((prevState) => prevState + 1)
 
   return {
     onMinusClick,
