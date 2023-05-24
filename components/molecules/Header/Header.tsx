@@ -1,9 +1,12 @@
 import React from 'react'
-import HeaderContainer, { HeaderContainerProps } from './HeaderContainer'
+import HeaderView, { HeaderViewProps } from './HeaderView'
+import HeaderAction, { HeaderActionProps } from './HeaderAction'
 
-export type HeaderProps = {} & HeaderContainerProps
-const Header = ({}: HeaderProps) => {
-  return <HeaderContainer />
+export type HeaderProps = {
+  head: HeaderViewProps
+}
+const Header = ({ head }: HeaderProps) => {
+  return <HeaderView {...HeaderAction} {...head} />
 }
 
 export default Header

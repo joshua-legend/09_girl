@@ -4,16 +4,12 @@ import { CardActionProps } from './CardAction'
 import { COLORS } from '@styles/colors'
 
 export type CardViewProps = {
-  card: {
-    image?: string
-    title?: string
-    subtitle?: string
-  }
+  image?: string
+  title?: string
+  subtitle?: string
 }
 
-const CardView = ({ card }: CardViewProps & CardActionProps) => {
-  console.log(card.image == '/static/test2.jpg')
-  const { image = 'static/test1.jpg', title = '문구를 넣어주세요.', subtitle = '문구를 넣어주세요.' } = card
+const CardView = ({ image = '/static/alt.jpg', title = '문구를 넣어주세요.', subtitle = '소문구를 넣어주세요.' }: CardViewProps & CardActionProps) => {
   const uiConfig = {
     Box: {
       sx: {
@@ -35,7 +31,7 @@ const CardView = ({ card }: CardViewProps & CardActionProps) => {
       },
       component: 'img',
       height: '100%',
-      image: card.image,
+      image,
       alt: 'static/alt.jpg',
     } as CardMediaProps,
     Title: {

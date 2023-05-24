@@ -1,10 +1,13 @@
 import React from 'react'
-import AdBannerContainer, { AdBannerContainerProps } from './AdBannerContainer'
+import AdBannerView, { AdBannerViewProps } from '@components/organisms/AdBanner/AdBannerView'
+import AdBannerAction from '@components/organisms/AdBanner/AdBannerAction'
 
-export type AdBannerProps = {} & AdBannerContainerProps
+export type AdBannerProps = {
+  adBanner: AdBannerViewProps
+}
 
-const AdBanner = ({ cards }: AdBannerProps) => {
-  return <AdBannerContainer cards={cards} />
+const AdBanner = ({ adBanner }: AdBannerProps) => {
+  return <AdBannerView {...AdBannerAction} {...adBanner} />
 }
 
 export default AdBanner

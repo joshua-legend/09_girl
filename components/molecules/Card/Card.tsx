@@ -1,11 +1,13 @@
 import React from 'react'
-import CardContainer, { CardContainerProps } from './CardContainer'
-import { CardViewProps } from '@components/molecules/Card/CardView'
+import CardView, { CardViewProps } from './CardView'
+import CardAction from './CardAction'
 
-export type CardProps = {} & CardContainerProps
+export type CardProps = {
+  card: CardViewProps
+}
 
 const Card = ({ card }: CardProps) => {
-  return <CardContainer card={card} />
+  return <CardView {...CardAction} {...card} />
 }
 
 export default Card

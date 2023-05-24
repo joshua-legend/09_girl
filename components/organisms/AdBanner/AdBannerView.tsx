@@ -1,15 +1,19 @@
 import React from 'react'
-import { Box as Left, Box as Right, Box as AdBanner, BoxProps } from '@mui/material'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import { Box as AdBanner, BoxProps, TypographyProps } from '@mui/material'
 import { AdBannerActionProps } from './AdBannerAction'
 import { SwiperSlide, Swiper } from 'swiper/react'
-import 'swiper/css'
+import { Navigation, Pagination } from 'swiper' // 추가
 import Card, { CardProps } from '@components/molecules/Card/Card'
+import Typography from '@mui/material/Typography'
+import { FONTS } from '@styles/fonts'
 
 export type AdBannerViewProps = {
   cards: CardProps[]
-} & AdBannerActionProps
+}
 
-const AdBannerView = ({ cards }: AdBannerViewProps) => {
+const AdBannerView = ({ cards }: AdBannerViewProps & AdBannerActionProps) => {
   const uiConfig = {
     AdBanner: {
       sx: {
@@ -17,13 +21,26 @@ const AdBannerView = ({ cards }: AdBannerViewProps) => {
         width: '100%',
       },
     } as BoxProps,
+    Title: {
+      sx: {
+        position: 'absolute',
+        paddingLeft: '20px',
+        fontFamily: FONTS.TITLE,
+        fontSize: '18px',
+        fontWeight: '500',
+      },
+    } as TypographyProps,
     Swiper: {
       className: 'mySwiper',
       style: {
         height: '100%',
         width: '100%',
       },
-      slidesPerView: 1,
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      pagination: {
+        clickable: true,
+      },
     },
     SwiperSlide: {
       style: {
@@ -32,13 +49,15 @@ const AdBannerView = ({ cards }: AdBannerViewProps) => {
       },
     },
   }
+
   return (
     <AdBanner {...uiConfig.AdBanner}>
-      <Swiper {...uiConfig.Swiper}>
-        {cards.map((value, idx) => {
+      <Typography {...uiConfig.Title}>Hurry! Event now!</Typography>
+      <Swiper {...uiConfig.Swiper} modules={[Pagination]}>
+        {cards.map((card, idx) => {
           return (
             <SwiperSlide key={idx} {...uiConfig.SwiperSlide}>
-              <Card {...value} />
+              <Card {...card} />
             </SwiperSlide>
           )
         })}

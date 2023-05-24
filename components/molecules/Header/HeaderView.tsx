@@ -9,9 +9,9 @@ import { COLORS } from '@styles/colors'
 import { FONTS } from '@styles/fonts'
 import { IMAGES } from '@styles/images'
 
-export type HeaderViewProps = {} & HeaderActionProps
+export type HeaderViewProps = {}
 
-const HeaderView = ({}: HeaderViewProps) => {
+const HeaderView = ({}: HeaderViewProps & HeaderActionProps) => {
   const uiConfig = {
     Appbar: {
       style: {

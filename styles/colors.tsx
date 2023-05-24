@@ -6,6 +6,6 @@ export const COLORS = {
   TEXT: '#666', // 텍스트 색상
   LINK: '#1976D2', // 링크 색상
   BUTTON: '#4CAF50', // 버튼 색상
-  BORDER: '#CCCCCC', // 테두리 색상
+  BORDER: '#DDDDDD', // 테두리 색상
   // 필요한 다른 색상 값들을 추가합니다.
 }

@@ -4,9 +4,9 @@ import Typography, { TypographyProps } from '@mui/material/Typography'
 import { IntroBannerActionProps } from './IntroBannerAction'
 import { FONTS } from '@styles/fonts'
 
-type IntroBannerViewProps = {} & IntroBannerActionProps
+export type IntroBannerViewProps = {}
 
-const IntroBannerView = ({}: IntroBannerViewProps) => {
+const IntroBannerView = ({}: IntroBannerViewProps & IntroBannerActionProps) => {
   const uiConfig = {
     Banner: {
       sx: {
@@ -27,7 +27,7 @@ const IntroBannerView = ({}: IntroBannerViewProps) => {
     <Banner {...uiConfig.Banner}>
       <Left>
         <Typography {...uiConfig.Typo}>안녕하세요.</Typography>
-        <Typography {...uiConfig.Typo}>공구하는 뇨자입니다.</Typography>
+        <Typography {...uiConfig.Typo}>고촌점 캐파점입니다.😍</Typography>
       </Left>
       <Right></Right>
     </Banner>
