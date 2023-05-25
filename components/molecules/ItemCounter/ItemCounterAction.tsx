@@ -1,4 +1,5 @@
-import React, { ComponentProps, Dispatch } from 'react'
+import React from 'react'
+import { ItemPickerBannerActionHandlers } from '@components/organisms/ItemPickerBanner/ItemPickerBannerAction'
 
 export type ItemCounterActionResult = {
   onMinusClick: () => void
@@ -6,13 +7,25 @@ export type ItemCounterActionResult = {
 }
 
 export type ItemCounterActionProps = {
-  quantity: number
+  price: number
   setQuantity: React.Dispatch<React.SetStateAction<number>>
 }
 
-const ItemCounterAction = ({ quantity, setQuantity }: ItemCounterActionProps): ItemCounterActionResult => {
-  const onMinusClick = () => setQuantity((prevState) => (prevState === 0 ? prevState : prevState - 1))
-  const onPlusClick = () => setQuantity((prevState) => prevState + 1)
+const ItemCounterAction = ({ price, setQuantity, onAdd, onSubtract }: ItemCounterActionProps & ItemPickerBannerActionHandlers): ItemCounterActionResult => {
+  const onMinusClick = () =>
+    setQuantity((prevQuantity) => {
+      if (prevQuantity === 0) return prevQuantity
+      else {
+        onSubtract(price)
+        return prevQuantity - 1
+      }
+    })
+  const onPlusClick = () => {
+    setQuantity((prevQuantity) => {
+      onAdd(price)
+      return prevQuantity + 1
+    })
+  }
 
   return {
     onMinusClick,

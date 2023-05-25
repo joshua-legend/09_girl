@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
 import ItemCounterView, { ItemCounterViewProps } from '@components/molecules/ItemCounter/ItemCounterView'
-import ItemCounterAction, { ItemCounterActionProps } from '@components/molecules/ItemCounter/ItemCounterAction'
+import ItemCounterAction, { ItemCounterActionProps, ItemCounterActionResult } from '@components/molecules/ItemCounter/ItemCounterAction'
+import { ItemPickerBannerActionHandlers } from '@components/organisms/ItemPickerBanner/ItemPickerBannerAction'
 
 export type ItemCounterProps = {
   item: ItemCounterViewProps
 }
 
-const ItemCounter = ({ item }: ItemCounterProps) => {
+const ItemCounter = ({ item, onAdd, onSubtract }: ItemCounterProps & ItemPickerBannerActionHandlers) => {
   const [quantity, setQuantity] = useState<number>(0)
-  const itemWithQuantity = { ...item, quantity }
-  const actionProps = {
+  const actionsHandlers = ItemCounterAction({ price: item.price ?? 0, setQuantity, onAdd, onSubtract })
+  const props = {
+    ...item,
     quantity,
-    setQuantity,
-  } as ItemCounterActionProps
-  const actions = ItemCounterAction(actionProps)
-  return <ItemCounterView {...actions} {...itemWithQuantity} />
+    ...actionsHandlers,
+  } as ItemCounterViewProps & ItemCounterActionResult
+
+  return <ItemCounterView {...props} />
 }
 
 export default ItemCounter

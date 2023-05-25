@@ -3,7 +3,6 @@ import { Box, BoxProps, ButtonGroup, ButtonGroupProps, ButtonProps, Chip, ChipPr
 import { ItemCounterActionResult } from './ItemCounterAction'
 import { COLORS } from '@styles/colors'
 import Button from '@mui/material/Button'
-import PriorityHighIcon from '@mui/icons-material/PriorityHigh'
 import { FONTS } from '@styles/fonts'
 
 export type ItemCounterViewProps = {
