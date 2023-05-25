@@ -4,7 +4,7 @@ import 'swiper/css/pagination'
 import { Box as AdBanner, BoxProps, TypographyProps } from '@mui/material'
 import { AdBannerActionProps } from './AdBannerAction'
 import { SwiperSlide, Swiper } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper' // 추가
+import { Autoplay, Pagination } from 'swiper' // 추가
 import Card, { CardProps } from '@components/molecules/Card/Card'
 import Typography from '@mui/material/Typography'
 import { FONTS } from '@styles/fonts'
@@ -36,6 +36,7 @@ const AdBannerView = ({ cards }: AdBannerViewProps & AdBannerActionProps) => {
         height: '100%',
         width: '100%',
       },
+      autoplay: false,
       slidesPerView: 'auto',
       centeredSlides: true,
       pagination: {
@@ -53,7 +54,7 @@ const AdBannerView = ({ cards }: AdBannerViewProps & AdBannerActionProps) => {
   return (
     <AdBanner {...uiConfig.AdBanner}>
       <Typography {...uiConfig.Title}>Hurry! Event now!</Typography>
-      <Swiper {...uiConfig.Swiper} modules={[Pagination]}>
+      <Swiper {...uiConfig.Swiper} modules={[Pagination, Autoplay]}>
         {cards.map((card, idx) => {
           return (
             <SwiperSlide key={idx} {...uiConfig.SwiperSlide}>

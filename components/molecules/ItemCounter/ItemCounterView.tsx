@@ -1,17 +1,26 @@
 import React from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Box, ButtonGroup, ButtonGroupProps, ButtonProps, Card, CardContent, CardMedia, CardMediaProps, CardProps, Chip, List, ListItem, ListItemProps, ListItemText, ListItemTextProps, Typography, Typography as Title, Typography as SubTitle, TypographyProps } from '@mui/material'
-import { ItemCounterActionsResult } from './ItemCounterActionsResult'
+import { Box, BoxProps, ButtonGroup, ButtonGroupProps, ButtonProps, Chip, ChipProps, IconButton, ListItem, ListItemProps, ListItemText, ListItemTextProps, Tooltip } from '@mui/material'
+import { ItemCounterActionResult } from './ItemCounterAction'
 import { COLORS } from '@styles/colors'
 import Button from '@mui/material/Button'
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh'
+import { FONTS } from '@styles/fonts'
 
 export type ItemCounterViewProps = {
   name?: string
   price?: number
   quantity?: number
+  isNeedOption?: boolean
 }
 
-const ItemCounterView = ({ name, price, quantity, onPlusClick, onMinusClick }: ItemCounterViewProps & ItemCounterActionsResult) => {
+const ItemCounterView = ({ name = 'Test 입니다.', price = 10000, quantity, isNeedOption = false, onPlusClick, onMinusClick }: ItemCounterViewProps & ItemCounterActionResult) => {
   const uiConfig = {
+    box: {
+      style: {
+        padding: '1rem',
+        border: `1px solid ${COLORS.TRANSPARENT_BLACK}`,
+      },
+    } as BoxProps,
     listItem: {
       disablePadding: true,
     } as ListItemProps,
@@ -22,6 +31,7 @@ const ItemCounterView = ({ name, price, quantity, onPlusClick, onMinusClick }: I
         style: {},
       },
     } as ListItemTextProps,
+    chip: {} as ChipProps,
     buttonGroup: {
       disableElevation: true,
       variant: 'outlined',
@@ -52,9 +62,10 @@ const ItemCounterView = ({ name, price, quantity, onPlusClick, onMinusClick }: I
     } as ButtonProps,
   }
   return (
-    <Box sx={{ margin: '1rem 0' }}>
+    <Box {...uiConfig.box}>
       <ListItem {...uiConfig.listItem}>
         <ListItemText {...uiConfig.listItemText} />
+        {isNeedOption ? <Chip size={'small'} sx={{ fontSize: '14px', margin: '0.5rem 0.5rem 0.5rem 0', fontFamily: FONTS.TITLE }} label='옵션주의!' /> : null}
         <ButtonGroup {...uiConfig.buttonGroup} aria-label='Disabled elevation buttons'>
           <Button {...uiConfig.minusButton}>-</Button>
           <Button {...uiConfig.quantityButton}>{quantity ?? 0}</Button>
