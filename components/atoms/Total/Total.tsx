@@ -1,12 +1,14 @@
 import React from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import TotalView, { TotalViewProps } from '@components/atoms/Total/TotalView'
+import TotalView from '@components/atoms/Total/TotalView'
 
-export type TotalProps = {} & TotalViewProps
+export type TotalProps = {
+  total: number
+}
 
-const Total = ({ total }: TotalProps) => {
-  return <TotalView total={total} />
+const Total = (props: TotalProps) => {
+  return <TotalView {...props} />
 }
 
 export default Total

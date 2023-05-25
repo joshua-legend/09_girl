@@ -5,10 +5,9 @@ import { Box as Total, BoxProps, Button, ButtonProps, TypographyProps } from '@m
 import Typography from '@mui/material/Typography'
 import { FONTS } from '@styles/fonts'
 import { COLORS } from '@styles/colors'
+import { TotalProps } from '@components/atoms/Total/Total'
 
-export type TotalViewProps = {
-  total: number
-}
+export type TotalViewProps = {} & TotalProps
 
 const TotalView = ({ total = 0 }: TotalViewProps) => {
   const uiConfig = {
