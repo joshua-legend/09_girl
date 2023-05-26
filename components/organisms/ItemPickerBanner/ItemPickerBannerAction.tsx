@@ -1,11 +1,12 @@
 import React from 'react'
 
+export type ItemPickerBannerActionProps = {
+  setTotal: React.Dispatch<React.SetStateAction<number>>
+}
+
 export type ItemPickerBannerActionHandlers = {
   onSubtract: (price: number) => void
   onAdd: (price: number) => void
-}
-export type ItemPickerBannerActionProps = {
-  setTotal: React.Dispatch<React.SetStateAction<number>>
 }
 
 const ItemPickerBannerAction = ({ setTotal }: ItemPickerBannerActionProps): ItemPickerBannerActionHandlers => {

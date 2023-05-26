@@ -4,10 +4,14 @@ import ItemCounterAction, { ItemCounterActionProps, ItemCounterActionResult } fr
 import { ItemPickerBannerActionHandlers } from '@components/organisms/ItemPickerBanner/ItemPickerBannerAction'
 
 export type ItemCounterProps = {
-  item: ItemCounterViewProps
-}
+  // item: ItemCounterViewProps
+  name?: string
+  price?: number
+  quantity?: number
+  isNeedOption?: boolean
+} & ItemPickerBannerActionHandlers
 
-const ItemCounter = ({ item, onAdd, onSubtract }: ItemCounterProps & ItemPickerBannerActionHandlers) => {
+const ItemCounter = ({ item, onAdd, onSubtract }: ItemCounterProps) => {
   const [quantity, setQuantity] = useState<number>(0)
   const actionsHandlers = ItemCounterAction({ price: item.price ?? 0, setQuantity, onAdd, onSubtract })
   const props = {
