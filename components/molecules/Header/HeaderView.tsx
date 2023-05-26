@@ -4,14 +4,14 @@ import { Box, Box as ImgBox, BoxProps, ButtonProps } from '@mui/material'
 import Toolbar from '@mui/material/Toolbar'
 import Typography, { TypographyProps } from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import { HeaderActionProps } from './HeaderAction'
 import { COLORS } from '@styles/colors'
 import { FONTS } from '@styles/fonts'
 import { IMAGES } from '@styles/images'
+import { HeaderProps } from '@components/molecules/Header/Header'
 
-export type HeaderViewProps = {}
+export type HeaderViewProps = {} & HeaderProps
 
-const HeaderView = ({}: HeaderViewProps & HeaderActionProps) => {
+const HeaderView = ({}: HeaderViewProps) => {
   const uiConfig = {
     Appbar: {
       style: {

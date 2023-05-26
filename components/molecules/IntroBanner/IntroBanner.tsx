@@ -1,14 +1,12 @@
 import React from 'react'
-import IntroBannerView, { IntroBannerViewProps } from '@components/molecules/IntroBanner/IntroBannerView'
-import IntroBannerAction from '@components/molecules/IntroBanner/IntroBannerAction'
-import { HeaderViewProps } from '@components/molecules/Header/HeaderView'
+import IntroBannerView from '@components/molecules/IntroBanner/IntroBannerView'
 
 export type IntroBannerProps = {
-  IntroBanner: IntroBannerViewProps
+  storeName?: string
 }
 
-const IntroBanner = ({ IntroBanner }: IntroBannerProps) => {
-  return <IntroBannerView {...IntroBannerAction} {...IntroBanner} />
+const IntroBanner = (props: IntroBannerProps) => {
+  return <IntroBannerView {...props} />
 }
 
 export default IntroBanner

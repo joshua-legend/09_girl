@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import IntroBanner from '@components/molecules/IntroBanner/IntroBanner'
+import IntroBanner, { IntroBannerProps } from '@components/molecules/IntroBanner/IntroBanner'
 import AdBanner, { AdBannerProps } from '@components/organisms/AdBanner/AdBanner'
 import { IMAGES } from '@styles/images'
 import React from 'react'
@@ -7,6 +7,10 @@ import ItemPickerBanner, { ItemPickerBannerProps } from '@components/organisms/I
 
 const Home: NextPage = () => {
   const props = {
+    introBanner: {
+      storeName: '고촌점 캐파점',
+    } as IntroBannerProps,
+
     adBanner: {
       cards: [{ card: { image: IMAGES.TEST1, title: '40년 정통 맛집, 무침회', subtitle: '납작만두 추가 원하시는분들 많아서 추가!' } }, { card: { image: IMAGES.TEST2, title: '패션후르츠청', subtitle: '인공색소, 인공향료, 보존료 3무 첨가로 건강하게!!' } }, { card: { image: IMAGES.TEST3 } }],
     } as AdBannerProps,
@@ -17,7 +21,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <IntroBanner />
+      <IntroBanner {...props} />
       <AdBanner {...props} />
       <ItemPickerBanner {...props} />
     </>

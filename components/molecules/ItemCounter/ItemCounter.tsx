@@ -4,7 +4,6 @@ import ItemCounterAction, { ItemCounterActionProps, ItemCounterActionResult } fr
 import { ItemPickerBannerActionHandlers } from '@components/organisms/ItemPickerBanner/ItemPickerBannerAction'
 
 export type ItemCounterProps = {
-  // item: ItemCounterViewProps
   name?: string
   price?: number
   quantity?: number

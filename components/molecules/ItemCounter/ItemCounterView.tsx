@@ -6,9 +6,9 @@ import Button from '@mui/material/Button'
 import { FONTS } from '@styles/fonts'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 
-export type ItemCounterViewProps = {} & ItemCounterProps
+export type ItemCounterViewProps = {} & ItemCounterProps & ItemCounterActionResult
 
-const ItemCounterView = ({ name = 'Test 입니다.', price = 10000, quantity, isNeedOption = false, onPlusClick, onMinusClick }: ItemCounterViewProps & ItemCounterActionResult) => {
+const ItemCounterView = ({ name = 'Test 입니다.', price = 10000, quantity, isNeedOption = false, onPlusClick, onMinusClick }: ItemCounterViewProps) => {
   const uiConfig = {
     box: {
       style: {
