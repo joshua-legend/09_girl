@@ -10,11 +10,9 @@ import Total, { TotalProps } from '@components/atoms/Total/Total'
 import { ItemPickerBannerProps } from '@components/organisms/ItemPickerBanner/ItemPickerBanner'
 import ItemCounter from '@components/molecules/ItemCounter/ItemCounter'
 
-export type ItemPickerBannerViewProps = {
-  total: TotalProps
-} & ItemPickerBannerProps
+export type ItemPickerBannerViewProps = {} & ItemPickerBannerProps
 
-const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBannerActionHandlers) => {
+const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBannerActionHandlers & TotalProps) => {
   const uiConfig = {
     Banner: {
       sx: {

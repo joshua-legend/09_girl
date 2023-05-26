@@ -1,10 +1,10 @@
 import React from 'react'
-import { DefaultLayoutActionProps } from './DefaultLayoutAction'
 import { Box as Main, BoxProps } from '@mui/material'
+import { DefaultLayoutProps } from '@components/layouts/DefaultLayout/DefaultLayout'
 
-type ButtonViewProps = {} & DefaultLayoutActionProps
+type DefaultLayoutViewProps = {} & DefaultLayoutProps
 
-const DefaultLayoutView = ({ children }: ButtonViewProps) => {
+const DefaultLayoutView = ({ children }: DefaultLayoutViewProps) => {
   const uiConfig = {
     Main: {
       component: 'main',

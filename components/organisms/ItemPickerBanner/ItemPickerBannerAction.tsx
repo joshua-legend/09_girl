@@ -10,8 +10,8 @@ export type ItemPickerBannerActionHandlers = {
 }
 
 const ItemPickerBannerAction = ({ setTotal }: ItemPickerBannerActionProps): ItemPickerBannerActionHandlers => {
-  const onSubtract = (price) => setTotal((prevTotal) => prevTotal - price)
-  const onAdd = (price) => setTotal((prevTotal) => prevTotal + price)
+  const onSubtract = (price: number) => setTotal((prevTotal) => prevTotal - price)
+  const onAdd = (price: number) => setTotal((prevTotal) => prevTotal + price)
   return {
     onSubtract,
     onAdd,

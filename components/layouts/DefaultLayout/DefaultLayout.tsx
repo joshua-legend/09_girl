@@ -1,12 +1,15 @@
-import React from 'react'
-import DefaultLayoutContainer from './DefaultLayoutContainer'
+import React, { ReactNode } from 'react'
 import Header from '../../molecules/Header/Header'
+import DefaultLayoutView from '@components/layouts/DefaultLayout/DefaultLayoutView'
 
-const DefaultLayout = ({ children }) => {
+export type DefaultLayoutProps = {
+  children: ReactNode
+}
+const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
     <>
       <Header />
-      <DefaultLayoutContainer>{children}</DefaultLayoutContainer>
+      <DefaultLayoutView>{children}</DefaultLayoutView>
     </>
   )
 }

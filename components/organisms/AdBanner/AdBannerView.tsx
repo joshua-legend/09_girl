@@ -35,7 +35,7 @@ const AdBannerView = ({ adCards }: AdBannerViewProps) => {
         width: '100%',
       },
       autoplay: false,
-      slidesPerView: 'auto',
+      slidesPerView: 1,
       centeredSlides: true,
       pagination: {
         clickable: true,
