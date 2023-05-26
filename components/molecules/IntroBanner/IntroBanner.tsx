@@ -1,8 +1,12 @@
 import React from 'react'
-import IntroBannerContainer from './IntroBannerContainer'
+import IntroBannerView from '@components/molecules/IntroBanner/IntroBannerView'
 
-const IntroBanner = () => {
-  return <IntroBannerContainer />
+export type IntroBannerProps = {
+  storeName?: string
+}
+
+const IntroBanner = (props: IntroBannerProps) => {
+  return <IntroBannerView {...props} />
 }
 
 export default IntroBanner

@@ -1,19 +1,11 @@
 import React from 'react'
 import { Box, Card, CardContent, CardMedia, CardMediaProps, CardProps, Chip, Typography as Title, Typography as SubTitle, TypographyProps } from '@mui/material'
-import { CardActionProps } from './CardAction'
 import { COLORS } from '@styles/colors'
+import { AdCardProps } from '@components/molecules/AdCard/AdCard'
 
-export type CardViewProps = {
-  card: {
-    image?: string
-    title?: string
-    subtitle?: string
-  }
-}
+export type AdCardViewProps = {} & AdCardProps
 
-const CardView = ({ card }: CardViewProps & CardActionProps) => {
-  console.log(card.image == '/static/test2.jpg')
-  const { image = 'static/test1.jpg', title = '문구를 넣어주세요.', subtitle = '문구를 넣어주세요.' } = card
+const AdCardView = ({ image = '/static/alt.jpg', title = '문구를 넣어주세요.', subtitle = '소문구를 넣어주세요.' }: AdCardViewProps) => {
   const uiConfig = {
     Box: {
       sx: {
@@ -35,7 +27,7 @@ const CardView = ({ card }: CardViewProps & CardActionProps) => {
       },
       component: 'img',
       height: '100%',
-      image: card.image,
+      image,
       alt: 'static/alt.jpg',
     } as CardMediaProps,
     Title: {
@@ -76,4 +68,4 @@ const CardView = ({ card }: CardViewProps & CardActionProps) => {
   )
 }
 
-export default CardView
+export default AdCardView

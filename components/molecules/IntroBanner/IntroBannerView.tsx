@@ -1,12 +1,12 @@
 import React from 'react'
 import { Box as Left, Box as Right, Box as Banner, BoxProps } from '@mui/material'
 import Typography, { TypographyProps } from '@mui/material/Typography'
-import { IntroBannerActionProps } from './IntroBannerAction'
 import { FONTS } from '@styles/fonts'
+import { IntroBannerProps } from '@components/molecules/IntroBanner/IntroBanner'
 
-type IntroBannerViewProps = {} & IntroBannerActionProps
+export type IntroBannerViewProps = {} & IntroBannerProps
 
-const IntroBannerView = ({}: IntroBannerViewProps) => {
+const IntroBannerView = ({ storeName }: IntroBannerViewProps) => {
   const uiConfig = {
     Banner: {
       sx: {
@@ -27,7 +27,7 @@ const IntroBannerView = ({}: IntroBannerViewProps) => {
     <Banner {...uiConfig.Banner}>
       <Left>
         <Typography {...uiConfig.Typo}>안녕하세요.</Typography>
-        <Typography {...uiConfig.Typo}>공구하는 뇨자입니다.</Typography>
+        <Typography {...uiConfig.Typo}>{storeName}입니다.😍</Typography>
       </Left>
       <Right></Right>
     </Banner>

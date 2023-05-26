@@ -1,15 +1,17 @@
 import React from 'react'
-import { Box as Left, Box as Right, Box as AdBanner, BoxProps } from '@mui/material'
-import { AdBannerActionProps } from './AdBannerAction'
-import { SwiperSlide, Swiper } from 'swiper/react'
 import 'swiper/css'
-import Card, { CardProps } from '@components/molecules/Card/Card'
+import 'swiper/css/pagination'
+import { Box as AdBanner, BoxProps, TypographyProps } from '@mui/material'
+import { SwiperSlide, Swiper } from 'swiper/react'
+import { Autoplay, Pagination } from 'swiper' // 추가
+import AdCard, { AdCardProps } from '@components/molecules/AdCard/AdCard'
+import Typography from '@mui/material/Typography'
+import { FONTS } from '@styles/fonts'
+import adBanner, { AdBannerProps } from '@components/organisms/AdBanner/AdBanner'
 
-export type AdBannerViewProps = {
-  cards: CardProps[]
-} & AdBannerActionProps
+export type AdBannerViewProps = {} & AdBannerProps
 
-const AdBannerView = ({ cards }: AdBannerViewProps) => {
+const AdBannerView = ({ adCards }: AdBannerViewProps) => {
   const uiConfig = {
     AdBanner: {
       sx: {
@@ -17,13 +19,27 @@ const AdBannerView = ({ cards }: AdBannerViewProps) => {
         width: '100%',
       },
     } as BoxProps,
+    Title: {
+      sx: {
+        position: 'absolute',
+        paddingLeft: '20px',
+        fontFamily: FONTS.TITLE,
+        fontSize: '18px',
+        fontWeight: '500',
+      },
+    } as TypographyProps,
     Swiper: {
       className: 'mySwiper',
       style: {
         height: '100%',
         width: '100%',
       },
+      autoplay: false,
       slidesPerView: 1,
+      centeredSlides: true,
+      pagination: {
+        clickable: true,
+      },
     },
     SwiperSlide: {
       style: {
@@ -34,11 +50,12 @@ const AdBannerView = ({ cards }: AdBannerViewProps) => {
   }
   return (
     <AdBanner {...uiConfig.AdBanner}>
-      <Swiper {...uiConfig.Swiper}>
-        {cards.map((value, idx) => {
+      <Typography {...uiConfig.Title}>Hurry! Event now!</Typography>
+      <Swiper {...uiConfig.Swiper} modules={[Pagination, Autoplay]}>
+        {adCards.map((item, idx) => {
           return (
             <SwiperSlide key={idx} {...uiConfig.SwiperSlide}>
-              <Card {...value} />
+              <AdCard {...item} />
             </SwiperSlide>
           )
         })}
