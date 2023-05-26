@@ -5,12 +5,12 @@ import { Box as AdBanner, BoxProps, TypographyProps } from '@mui/material'
 import { AdBannerActionProps } from './AdBannerAction'
 import { SwiperSlide, Swiper } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper' // 추가
-import Card, { CardProps } from '@components/molecules/Card/Card'
+import AdCard, { AdCardProps } from '@components/molecules/AdCard/AdCard'
 import Typography from '@mui/material/Typography'
 import { FONTS } from '@styles/fonts'
 
 export type AdBannerViewProps = {
-  cards: CardProps[]
+  cards: AdCardProps[]
 }
 
 const AdBannerView = ({ cards }: AdBannerViewProps & AdBannerActionProps) => {
@@ -58,7 +58,7 @@ const AdBannerView = ({ cards }: AdBannerViewProps & AdBannerActionProps) => {
         {cards.map((card, idx) => {
           return (
             <SwiperSlide key={idx} {...uiConfig.SwiperSlide}>
-              <Card {...card} />
+              <AdCard {...card} />
             </SwiperSlide>
           )
         })}
