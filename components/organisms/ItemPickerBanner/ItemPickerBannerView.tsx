@@ -5,15 +5,16 @@ import { Box as ItemCountersBox, Box as Banner, BoxProps, Button, ButtonProps, T
 import { ItemPickerBannerActionProps, ItemPickerBannerActionHandlers } from './ItemPickerBannerAction'
 import Typography from '@mui/material/Typography'
 import { FONTS } from '@styles/fonts'
-import ItemCounter, { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 import { COLORS } from '@styles/colors'
 import Total, { TotalProps } from '@components/atoms/Total/Total'
+import { ItemPickerBannerProps } from '@components/organisms/ItemPickerBanner/ItemPickerBanner'
+import ItemCounter from '@components/molecules/ItemCounter/ItemCounter'
 
 export type ItemPickerBannerViewProps = {
-  items: ItemCounterProps[]
-} & TotalProps
+  total: TotalProps
+} & ItemPickerBannerProps
 
-const ItemPickerBannerView = ({ items, total, onAdd, onSubtract }: ItemPickerBannerViewProps & ItemPickerBannerActionHandlers) => {
+const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBannerActionHandlers) => {
   const uiConfig = {
     Banner: {
       sx: {
@@ -60,10 +61,10 @@ const ItemPickerBannerView = ({ items, total, onAdd, onSubtract }: ItemPickerBan
     <Banner {...uiConfig.Banner}>
       <Typography {...uiConfig.Title}>원하는 공구템을 골라주세요!</Typography>
       <ItemCountersBox {...uiConfig.ItemBox}>
-        {items.map((value, index) => {
-          return <ItemCounter {...value} onAdd={onAdd} onSubtract={onSubtract} key={index} />
+        {props.items.map((item, index) => {
+          return <ItemCounter {...item} {...props} key={index} />
         })}
-        <Total total={total} />
+        <Total {...props} />
       </ItemCountersBox>
     </Banner>
   )

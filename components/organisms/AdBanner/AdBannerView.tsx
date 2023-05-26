@@ -2,18 +2,16 @@ import React from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Box as AdBanner, BoxProps, TypographyProps } from '@mui/material'
-import { AdBannerActionProps } from './AdBannerAction'
 import { SwiperSlide, Swiper } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper' // 추가
 import AdCard, { AdCardProps } from '@components/molecules/AdCard/AdCard'
 import Typography from '@mui/material/Typography'
 import { FONTS } from '@styles/fonts'
+import adBanner, { AdBannerProps } from '@components/organisms/AdBanner/AdBanner'
 
-export type AdBannerViewProps = {
-  cards: AdCardProps[]
-}
+export type AdBannerViewProps = {} & AdBannerProps
 
-const AdBannerView = ({ cards }: AdBannerViewProps & AdBannerActionProps) => {
+const AdBannerView = ({ adCards }: AdBannerViewProps) => {
   const uiConfig = {
     AdBanner: {
       sx: {
@@ -50,15 +48,14 @@ const AdBannerView = ({ cards }: AdBannerViewProps & AdBannerActionProps) => {
       },
     },
   }
-
   return (
     <AdBanner {...uiConfig.AdBanner}>
       <Typography {...uiConfig.Title}>Hurry! Event now!</Typography>
       <Swiper {...uiConfig.Swiper} modules={[Pagination, Autoplay]}>
-        {cards.map((card, idx) => {
+        {adCards.map((item, idx) => {
           return (
             <SwiperSlide key={idx} {...uiConfig.SwiperSlide}>
-              <AdCard {...card} />
+              <AdCard {...item} />
             </SwiperSlide>
           )
         })}
