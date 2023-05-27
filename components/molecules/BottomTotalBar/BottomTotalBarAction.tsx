@@ -1,17 +1,17 @@
 import React, { SyntheticEvent } from 'react'
 
-export type FooterActionProps = {
+export type BottomTotalBarActionProps = {
   setStore: React.Dispatch<React.SetStateAction<number>>
 }
-export type FooterActionHandlersResult = {
+export type BottomTotalBarActionHandlersResult = {
   onChange: (event: SyntheticEvent, value: number) => void
 }
 
-const FooterAction = ({ setStore }: FooterActionProps): FooterActionHandlersResult => {
+const BottomTotalBarAction = ({ setStore }: BottomTotalBarActionProps): BottomTotalBarActionHandlersResult => {
   const onChange = (event: SyntheticEvent, value: number) => setStore(value)
   return {
     onChange,
   }
 }
 
-export default FooterAction
+export default BottomTotalBarAction

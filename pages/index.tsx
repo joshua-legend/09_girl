@@ -30,7 +30,7 @@ const Home: NextPage = () => {
   return (
     <>
       <IntroBanner {...props.introBanner} />
-      <AdBanner {...props.adBanner} />
+      {/*<AdBanner {...props.adBanner} />*/}
       <ItemPickerBanner {...props.itemPickerBanner} />
     </>
   )

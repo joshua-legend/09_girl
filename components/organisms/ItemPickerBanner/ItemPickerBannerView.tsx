@@ -32,27 +32,6 @@ const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBanne
         margin: '1rem',
       },
     } as BoxProps,
-    Total: {
-      sx: {
-        display: 'flex',
-        alignItems: 'center',
-      },
-    } as BoxProps,
-    Button: {
-      variant: 'contained',
-      disableElevation: true,
-      style: {
-        width: '100%',
-        backgroundColor: COLORS.PRIMARY,
-      },
-    } as ButtonProps,
-    ButtonTitle: {
-      sx: {
-        fontFamily: FONTS.BUTTONTITLE,
-        fontSize: '18px',
-        fontWeight: '500',
-      },
-    } as TypographyProps,
   }
 
   return (
@@ -62,7 +41,7 @@ const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBanne
         {props.items.map((item, index) => {
           return <ItemCounter {...item} {...props} key={index} />
         })}
-        <Total {...props} />
+        {/*<Total {...props} />*/}
       </ItemCountersBox>
     </Banner>
   )

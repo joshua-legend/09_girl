@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import ItemPickerBannerView, { ItemPickerBannerViewProps } from '@components/organisms/ItemPickerBanner/ItemPickerBannerView'
-import ItemPickerBannerAction, { ItemPickerBannerActionHandlers, ItemPickerBannerActionProps } from '@components/organisms/ItemPickerBanner/ItemPickerBannerAction'
+import ItemPickerBannerAction, { ItemPickerBannerActionHandlers } from '@components/organisms/ItemPickerBanner/ItemPickerBannerAction'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
-import { TotalProps } from '@components/atoms/Total/Total'
+import { TotalProps } from '@components/atoms/Total/Total' 
 
 export type ItemPickerBannerProps = {
   items: ItemCounterProps[]

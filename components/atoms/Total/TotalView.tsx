@@ -23,11 +23,14 @@ const TotalView = ({ total = 0 }: TotalViewProps) => {
       style: {
         width: '100%',
         backgroundColor: COLORS.PRIMARY,
+        padding: '0.5rem 1.25rem',
+        height: '80%',
+        margin: '0.25rem',
       },
     } as ButtonProps,
-    ButtonTitle: {
+    ButtonTypo: {
       sx: {
-        fontFamily: FONTS.BUTTONTITLE,
+        fontFamily: FONTS.PRETENDARD,
         fontSize: '18px',
         fontWeight: '500',
       },
@@ -37,7 +40,7 @@ const TotalView = ({ total = 0 }: TotalViewProps) => {
   return (
     <Total {...uiConfig.Total}>
       <Button {...uiConfig.Button}>
-        <Typography {...uiConfig.ButtonTitle}>총가격 {total}원</Typography>
+        <Typography {...uiConfig.ButtonTypo}>{total}원 구매하기</Typography>
       </Button>
     </Total>
   )
