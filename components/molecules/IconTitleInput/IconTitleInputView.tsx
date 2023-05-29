@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box as IconWithTitle, Box as Text, BoxProps, Grid, Stack, StackProps, TextField, Typography } from '@mui/material'
+import { Box as IconWithTitle, Box as Text, BoxProps, Grid, Stack, StackProps, TextField, TextFieldProps, Typography } from '@mui/material'
 import { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
 import { AccountCircle } from '@mui/icons-material'
 
@@ -18,7 +18,16 @@ const IconTitleInputView = (props: IconTitleInputViewProps) => {
         marginBottom: '0.5rem',
       },
     } as BoxProps,
-    Text: {} as BoxProps,
+    Text: {
+      sx: {
+        width: '100%',
+      },
+    } as BoxProps,
+    TextField: {
+      sx: {
+        width: '100%',
+      },
+    } as TextFieldProps,
   }
 
   return (
@@ -27,8 +36,8 @@ const IconTitleInputView = (props: IconTitleInputViewProps) => {
         {props.icon}
         <Typography>{props.title}</Typography>
       </IconWithTitle>
-      <Text>
-        <TextField label={props.label} variant='outlined' />
+      <Text {...uiConfig.Text}>
+        <TextField {...uiConfig.TextField} />
       </Text>
     </Stack>
   )
