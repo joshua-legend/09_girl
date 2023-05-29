@@ -1,15 +1,17 @@
 import React from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Box as Banner, BoxProps, Button, ButtonProps, TypographyProps } from '@mui/material'
+import { Box as Banner, Box as IconTitleBox, BoxProps, TypographyProps } from '@mui/material'
 import { AddressInputBannerActionHandlers } from './AddressInputBannerAction'
 import Typography from '@mui/material/Typography'
 import { FONTS } from '@styles/fonts'
 import { AddressInputBannerProps } from '@components/organisms/AddressInputBanner/AddressInputBanner'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
-import PickupDeliveryRadioGroup from '@components/molecules/PickupDeliveryRadioGroup/PickupDeliveryRadioGroup'
+import IconTitleInput, { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
 
-export type AddressInputBannerViewProps = {} & AddressInputBannerProps
+export type AddressInputBannerViewProps = {
+  iconTitles: IconTitleInputProps[]
+} & AddressInputBannerProps
 
 const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInputBannerActionHandlers) => {
   const uiConfig = {
@@ -38,6 +40,11 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
         marginRight: '0.2rem',
       },
     },
+    IconTitleBox: {
+      sx: {
+        margin: '1rem 2rem',
+      },
+    } as BoxProps,
   }
 
   return (
@@ -45,11 +52,11 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
       <Typography {...uiConfig.Title}>
         <LocalShippingIcon {...uiConfig.Truck} /> 배송 정보 입력
       </Typography>
-      {/*<ItemCountersBox {...uiConfig.ItemBox}>*/}
-      {/*  {props.items.map((item, index) => {*/}
-      {/*    return <ItemCounter {...item} {...props} key={index} />*/}
-      {/*  })}*/}
-      {/*</ItemCountersBox>*/}
+      <IconTitleBox {...uiConfig.IconTitleBox}>
+        {props.iconTitles.map((iconTitle, index) => {
+          return <IconTitleInput {...iconTitle} key={index} />
+        })}
+      </IconTitleBox>
     </Banner>
   )
 }

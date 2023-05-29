@@ -1,20 +1,36 @@
 import React from 'react'
-import { Box as NavbarBox, Box as Footer, BoxProps, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
+import { Box as IconWithTitle, Box as Text, BoxProps, Grid, Stack, StackProps, TextField, Typography } from '@mui/material'
 import { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
+import { AccountCircle } from '@mui/icons-material'
 
 export type IconTitleInputViewProps = {} & IconTitleInputProps
 
 const IconTitleInputView = (props: IconTitleInputViewProps) => {
-  const uiConfig = {}
+  const uiConfig = {
+    Stack: {
+      sx: {
+        margin: '1rem 0',
+      },
+    } as StackProps,
+    IconWithTitle: {
+      sx: {
+        display: 'flex',
+        marginBottom: '0.5rem',
+      },
+    } as BoxProps,
+    Text: {} as BoxProps,
+  }
 
   return (
-    <FormControl>
-      <FormLabel>Gender</FormLabel>
-      <RadioGroup defaultValue='female'>
-        <FormControlLabel value='delivery' control={<Radio />} label='배달 받기' />
-        <FormControlLabel value='pickup' control={<Radio />} label='픽업 하기' />
-      </RadioGroup>
-    </FormControl>
+    <Stack {...uiConfig.Stack}>
+      <IconWithTitle {...uiConfig.IconWithTitle}>
+        {props.icon}
+        <Typography>{props.title}</Typography>
+      </IconWithTitle>
+      <Text>
+        <TextField label={props.label} variant='outlined' />
+      </Text>
+    </Stack>
   )
 }
 
