@@ -1,17 +1,18 @@
 import React from 'react'
+import useTotalStore from '../../../store/useTotalStore'
 
-export type ItemPickerBannerActionProps = {
-  setTotal: React.Dispatch<React.SetStateAction<number>>
-}
+export type ItemPickerBannerActionProps = {}
 
 export type ItemPickerBannerActionHandlers = {
   onSubtract: (price: number) => void
   onAdd: (price: number) => void
 }
 
-const ItemPickerBannerAction = ({ setTotal }: ItemPickerBannerActionProps): ItemPickerBannerActionHandlers => {
-  const onSubtract = (price: number) => setTotal((prevTotal) => prevTotal - price)
-  const onAdd = (price: number) => setTotal((prevTotal) => prevTotal + price)
+const ItemPickerBannerAction = (): ItemPickerBannerActionHandlers => {
+  const { total, add, subtract } = useTotalStore()
+
+  const onSubtract = (price: number) => subtract(price)
+  const onAdd = (price: number) => add(price)
   return {
     onSubtract,
     onAdd,

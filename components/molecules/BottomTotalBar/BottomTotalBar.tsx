@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
-import BottomTotalBarView from './BottomTotalBarView'
+import BottomTotalBarView, { BottomTotalBarViewProps } from './BottomTotalBarView'
 import BottomTotalBarAction from '@components/molecules/BottomTotalBar/BottomTotalBarAction'
+import { TotalProps } from '@components/atoms/Total/Total'
+import useTotalStore from '../../../store/useTotalStore'
 
 export type BottomTotalBarProps = {}
 const BottomTotalBar = (props: BottomTotalBarProps) => {
-  const [store, setStore] = useState(0)
-  const actions = BottomTotalBarAction({ setStore })
-  const newProps = {}
+  const { total } = useTotalStore()
+  const actions = BottomTotalBarAction()
+  const newProps = {
+    total,
+  } as BottomTotalBarViewProps & TotalProps
 
-  return <BottomTotalBarView {...props} />
+  return <BottomTotalBarView {...newProps} />
 }
 
 export default BottomTotalBar

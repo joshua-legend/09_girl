@@ -1,18 +1,16 @@
 import React from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Box as ItemCountersBox, Box as Banner, BoxProps, Button, ButtonProps, TypographyProps } from '@mui/material'
-import { ItemPickerBannerActionProps, ItemPickerBannerActionHandlers } from './ItemPickerBannerAction'
+import { Box as ItemCountersBox, Box as Banner, BoxProps, TypographyProps } from '@mui/material'
+import { ItemPickerBannerActionHandlers } from './ItemPickerBannerAction'
 import Typography from '@mui/material/Typography'
 import { FONTS } from '@styles/fonts'
-import { COLORS } from '@styles/colors'
-import Total, { TotalProps } from '@components/atoms/Total/Total'
 import { ItemPickerBannerProps } from '@components/organisms/ItemPickerBanner/ItemPickerBanner'
 import ItemCounter from '@components/molecules/ItemCounter/ItemCounter'
 
 export type ItemPickerBannerViewProps = {} & ItemPickerBannerProps
 
-const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBannerActionHandlers & TotalProps) => {
+const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBannerActionHandlers) => {
   const uiConfig = {
     Banner: {
       sx: {
@@ -29,7 +27,7 @@ const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBanne
     } as TypographyProps,
     ItemBox: {
       sx: {
-        margin: '1rem',
+        margin: '1rem 2rem',
       },
     } as BoxProps,
   }
@@ -41,7 +39,6 @@ const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBanne
         {props.items.map((item, index) => {
           return <ItemCounter {...item} {...props} key={index} />
         })}
-        {/*<Total {...props} />*/}
       </ItemCountersBox>
     </Banner>
   )

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ItemPickerBannerActionHandlers } from '@components/organisms/ItemPickerBanner/ItemPickerBannerAction'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
+import useTotalStore, { TotalStore } from '../../../store/useTotalStore'
 
 export type ItemCounterActionProps = {
   setQuantity: React.Dispatch<React.SetStateAction<number>>

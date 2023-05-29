@@ -7,4 +7,5 @@ export const COLORS = {
   LINK: '#1976D2', // 링크 색상
   BORDER: '#DDDDDD', // 테두리 색상
   TRANSPARENT_BLACK: 'rgba(0, 0, 0, 0.1)',
+  GRAY: '#BDBDBD',
 }

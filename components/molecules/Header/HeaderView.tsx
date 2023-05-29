@@ -58,7 +58,6 @@ const HeaderView = ({}: HeaderViewProps) => {
           <ImgBox {...uiConfig.ImgBox} />
         </Box>
         <Typography {...uiConfig.Typo}>공구하는 여자</Typography>
-        <Button {...uiConfig.Button}>Login</Button>
       </Toolbar>
     </AppBar>
   )

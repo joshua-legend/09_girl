@@ -4,6 +4,7 @@ import AdBanner, { AdBannerProps } from '@components/organisms/AdBanner/AdBanner
 import { IMAGES } from '@styles/images'
 import React from 'react'
 import ItemPickerBanner, { ItemPickerBannerProps } from '@components/organisms/ItemPickerBanner/ItemPickerBanner'
+import AddressInputBanner from '@components/organisms/AddressInputBanner/AddressInputBanner'
 
 const Home: NextPage = () => {
   const props = {
@@ -32,6 +33,7 @@ const Home: NextPage = () => {
       <IntroBanner {...props.introBanner} />
       {/*<AdBanner {...props.adBanner} />*/}
       <ItemPickerBanner {...props.itemPickerBanner} />
+      <AddressInputBanner />
     </>
   )
 }

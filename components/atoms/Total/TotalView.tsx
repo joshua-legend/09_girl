@@ -14,21 +14,17 @@ const TotalView = ({ total = 0 }: TotalViewProps) => {
     Total: {
       sx: {
         display: 'flex',
-        alignItems: 'center',
+        justifyContent: 'space-between'
       },
     } as BoxProps,
-    Button: {
-      variant: 'contained',
-      disableElevation: true,
-      style: {
-        width: '100%',
-        backgroundColor: COLORS.PRIMARY,
-        padding: '0.5rem 1.25rem',
-        height: '80%',
-        margin: '0.25rem',
+    BuyTypo: {
+      sx: {
+        fontFamily: FONTS.PRETENDARD,
+        fontSize: '18px',
+        fontWeight: '500',
       },
-    } as ButtonProps,
-    ButtonTypo: {
+    } as TypographyProps,
+    TotalTypo: {
       sx: {
         fontFamily: FONTS.PRETENDARD,
         fontSize: '18px',
@@ -39,9 +35,8 @@ const TotalView = ({ total = 0 }: TotalViewProps) => {
 
   return (
     <Total {...uiConfig.Total}>
-      <Button {...uiConfig.Button}>
-        <Typography {...uiConfig.ButtonTypo}>{total}원 구매하기</Typography>
-      </Button>
+      <Typography {...uiConfig.BuyTypo}>구매 금액</Typography>
+      <Typography {...uiConfig.TotalTypo}>{total}원</Typography>
     </Total>
   )
 }
