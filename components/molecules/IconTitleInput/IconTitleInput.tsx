@@ -7,6 +7,9 @@ export type IconTitleInputProps = {
   icon: ReactElement
   title: string
   label: string
+  placeholder: string
+  isNecessary: boolean
+  multiline: boolean
 }
 const IconTitleInput = (props: IconTitleInputProps) => {
   const actions = IconTitleInputAction()

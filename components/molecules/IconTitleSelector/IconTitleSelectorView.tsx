@@ -1,20 +1,13 @@
-import React, { useState } from 'react'
-import { Box as IconWithTitle, Box as Text, BoxProps, Chip, ChipProps, Grid, InputAdornment, Stack, StackProps, TextField, TextFieldProps, Typography, TypographyProps } from '@mui/material'
-import { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
+import React from 'react'
+import { Box as IconWithTitle, Box as Text, BoxProps, Chip, ChipProps, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, StackProps, TextField, TextFieldProps, Typography, TypographyProps } from '@mui/material'
+import { IconTitleSelectorProps } from '@components/molecules/IconTitleSelector/IconTitleSelector'
 import { AccountCircle } from '@mui/icons-material'
 import { COLORS } from '@styles/colors'
 import { FONTS } from '@styles/fonts'
 
-export type IconTitleInputViewProps = {} & IconTitleInputProps
+export type IconTitleSelectorViewProps = {} & IconTitleSelectorProps
 
-const IconTitleInputView = (props: IconTitleInputViewProps) => {
-  const [currentLength, setCurrentLength] = useState(0)
-
-  const handleChange = (event) => {
-    const { value } = event.target
-    setCurrentLength(value.length)
-  }
-
+const IconTitleSelectorView = (props: IconTitleSelectorViewProps) => {
   const uiConfig = {
     Stack: {
       sx: {
@@ -50,17 +43,13 @@ const IconTitleInputView = (props: IconTitleInputViewProps) => {
       },
       size: 'small',
       placeholder: props.placeholder,
-      multiline: props.multiline,
-      rows: 3,
-      onChange: handleChange,
-      InputProps: {
-        endAdornment: (
-          <InputAdornment position='end'>
-            {currentLength}/{50}
-          </InputAdornment>
-        ),
-      },
     } as TextFieldProps,
+  }
+
+  const [age, setAge] = React.useState('')
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value)
   }
 
   return (
@@ -70,10 +59,20 @@ const IconTitleInputView = (props: IconTitleInputViewProps) => {
         {props.isNecessary ? <Chip size={'small'} label='필수' sx={{ marginLeft: '4px', fontSize: '10px', fontFamily: FONTS.PRETENDARD, backgroundColor: COLORS.PRIMARY }} /> : null}
       </IconWithTitle>
       <Text {...uiConfig.Text}>
-        <TextField {...uiConfig.TextField} />
+        <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
+          <InputLabel id='demo-select-small-label'>주소입력</InputLabel>
+          <Select labelId='demo-select-small-label' id='demo-select-small' value={age} label='Age' onChange={handleChange}>
+            <MenuItem value=''>
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
       </Text>
     </Stack>
   )
 }
 
-export default IconTitleInputView
+export default IconTitleSelectorView

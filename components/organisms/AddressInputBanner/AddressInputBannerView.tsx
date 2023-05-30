@@ -1,16 +1,18 @@
 import React from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import { Box as Banner, Box as IconTitleBox, BoxProps, TypographyProps } from '@mui/material'
+import { Box as Banner, Box as IconTitleBox, Box as PickupDeliveryRadioGroupBox, BoxProps, TypographyProps } from '@mui/material'
 import { AddressInputBannerActionHandlers } from './AddressInputBannerAction'
 import Typography from '@mui/material/Typography'
 import { FONTS } from '@styles/fonts'
 import { AddressInputBannerProps } from '@components/organisms/AddressInputBanner/AddressInputBanner'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import IconTitleInput, { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
+import PickupDeliveryRadioGroup from '@components/molecules/PickupDeliveryRadioGroup/PickupDeliveryRadioGroup'
+import IconTitleSelector, { IconTitleSelectorProps } from '@components/molecules/IconTitleSelector/IconTitleSelector'
 
 export type AddressInputBannerViewProps = {
-  iconTitles: IconTitleInputProps[]
+  iconTitlesInputs: IconTitleInputProps[]
 } & AddressInputBannerProps
 
 const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInputBannerActionHandlers) => {
@@ -45,6 +47,11 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
         margin: '1rem 2rem',
       },
     } as BoxProps,
+    PickupDeliveryRadioGroupBox: {
+      sx: {
+        margin: '1rem 2rem',
+      },
+    } as BoxProps,
   }
 
   return (
@@ -53,10 +60,13 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
         <LocalShippingIcon {...uiConfig.Truck} /> 배송 정보 입력
       </Typography>
       <IconTitleBox {...uiConfig.IconTitleBox}>
-        {props.iconTitles.map((iconTitle, index) => {
+        {props.iconTitlesInputs.map((iconTitle, index) => {
           return <IconTitleInput {...iconTitle} key={index} />
         })}
       </IconTitleBox>
+      <PickupDeliveryRadioGroupBox {...uiConfig.PickupDeliveryRadioGroupBox}>
+        <PickupDeliveryRadioGroup />
+      </PickupDeliveryRadioGroupBox>
     </Banner>
   )
 }

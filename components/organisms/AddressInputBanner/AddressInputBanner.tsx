@@ -7,21 +7,28 @@ export type AddressInputBannerProps = {}
 
 const AddressInputBanner = (props: AddressInputBannerProps) => {
   const newProps = {
-    iconTitles: [
+    iconTitlesInputs: [
       {
-        icon: <PhoneIphoneIcon />,
+        icon: <PhoneIphoneIcon fontSize={'small'} />,
         title: '휴대폰 번호',
         label: '번호 입력',
+        placeholder: 'ex) 01012345678',
+        isNecessary: true,
+        multiline: false,
       },
       {
-        icon: <AccountCircle />,
+        icon: <AccountCircle fontSize={'small'} />,
         title: '닉네임 (이름)',
         label: '닉네임 입력',
+        isNecessary: true,
+        multiline: false,
       },
       {
-        icon: <HomeIcon />,
-        title: '주소',
-        label: '주소 입력',
+        icon: <AccountCircle fontSize={'small'} />,
+        title: '배달 요청사항',
+        label: '닉네임 입력',
+        isNecessary: false,
+        multiline: true,
       },
     ],
   } as AddressInputBannerViewProps
