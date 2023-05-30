@@ -13,6 +13,7 @@ import IconTitleSelector, { IconTitleSelectorProps } from '@components/molecules
 
 export type AddressInputBannerViewProps = {
   iconTitlesInputs: IconTitleInputProps[]
+  iconTitlesInputsAddress: IconTitleInputProps[]
 } & AddressInputBannerProps
 
 const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInputBannerActionHandlers) => {
@@ -66,6 +67,9 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
       </IconTitleBox>
       <PickupDeliveryRadioGroupBox {...uiConfig.PickupDeliveryRadioGroupBox}>
         <PickupDeliveryRadioGroup />
+        {props.iconTitlesInputsAddress.map((iconTitle, index) => {
+          return <IconTitleInput {...iconTitle} key={index} />
+        })}
       </PickupDeliveryRadioGroupBox>
     </Banner>
   )

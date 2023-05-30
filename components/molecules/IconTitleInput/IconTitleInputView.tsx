@@ -12,7 +12,11 @@ const IconTitleInputView = (props: IconTitleInputViewProps) => {
 
   const handleChange = (event) => {
     const { value } = event.target
-    setCurrentLength(value.length)
+    if (value.length <= 50) {
+      setCurrentLength(value.length)
+    } else {
+      event.target.value = value.substring(0, 50) // 50글자까지만 남기고 초과된 부분을 제거
+    }
   }
 
   const uiConfig = {
@@ -51,15 +55,17 @@ const IconTitleInputView = (props: IconTitleInputViewProps) => {
       size: 'small',
       placeholder: props.placeholder,
       multiline: props.multiline,
-      rows: 3,
+      rows: 4,
       onChange: handleChange,
-      InputProps: {
-        endAdornment: (
-          <InputAdornment position='end'>
-            {currentLength}/{50}
-          </InputAdornment>
-        ),
-      },
+      InputProps: props.multiline
+        ? {
+            endAdornment: (
+              <InputAdornment>
+                {currentLength}/{50}
+              </InputAdornment>
+            ),
+          }
+        : null,
     } as TextFieldProps,
   }
 

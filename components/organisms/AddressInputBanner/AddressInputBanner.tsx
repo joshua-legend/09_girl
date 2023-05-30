@@ -31,6 +31,31 @@ const AddressInputBanner = (props: AddressInputBannerProps) => {
         multiline: true,
       },
     ],
+    iconTitlesInputsAddress: [
+      {
+        icon: <PhoneIphoneIcon fontSize={'small'} />,
+        title: '주소 입력',
+        label: '주소 입력',
+        placeholder: 'ex) 101동',
+        isNecessary: true,
+        multiline: false,
+      },
+      {
+        icon: <AccountCircle fontSize={'small'} />,
+        title: '상세 주소 입력',
+        label: '상세 주소 입력',
+        placeholder: 'ex) 101호',
+        isNecessary: false,
+        multiline: false,
+      },
+      {
+        icon: <AccountCircle fontSize={'small'} />,
+        title: '공동현관문 출입 정보',
+        label: '',
+        isNecessary: false,
+        multiline: false,
+      },
+    ],
   } as AddressInputBannerViewProps
 
   return <AddressInputBannerView {...newProps} />
