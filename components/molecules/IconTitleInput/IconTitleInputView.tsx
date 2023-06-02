@@ -15,7 +15,7 @@ const IconTitleInputView = (props: IconTitleInputViewProps) => {
     if (value.length <= 50) {
       setCurrentLength(value.length)
     } else {
-      event.target.value = value.substring(0, 50) // 50글자까지만 남기고 초과된 부분을 제거
+      event.target.value = value.substring(0, 50)
     }
   }
 
@@ -60,7 +60,7 @@ const IconTitleInputView = (props: IconTitleInputViewProps) => {
       InputProps: props.multiline
         ? {
             endAdornment: (
-              <InputAdornment>
+              <InputAdornment position={'start'}>
                 {currentLength}/{50}
               </InputAdornment>
             ),

@@ -11,7 +11,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
     <>
       <Header />
       <DefaultLayoutView>{children}</DefaultLayoutView>
-      {/*<BottomTotalBar />*/}
+      <BottomTotalBar />
     </>
   )
 }
