@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Box as IconWithTitle, Box as Text, BoxProps, Chip, ChipProps, Grid, InputAdornment, Stack, StackProps, TextField, TextFieldProps, Typography, TypographyProps } from '@mui/material'
 import { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
 import { AccountCircle } from '@mui/icons-material'
@@ -10,7 +10,7 @@ export type IconTitleInputViewProps = {} & IconTitleInputProps
 const IconTitleInputView = (props: IconTitleInputViewProps) => {
   const [currentLength, setCurrentLength] = useState(0)
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = event.target
     if (value.length <= 50) {
       setCurrentLength(value.length)
