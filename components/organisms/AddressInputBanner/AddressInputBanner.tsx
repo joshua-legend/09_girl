@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import AddressInputBannerView, { AddressInputBannerViewProps } from '@components/organisms/AddressInputBanner/AddressInputBannerView'
 import { AccountCircle } from '@mui/icons-material'
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone'
-import HomeIcon from '@mui/icons-material/Home'
 export type AddressInputBannerProps = {}
 
 const AddressInputBanner = (props: AddressInputBannerProps) => {

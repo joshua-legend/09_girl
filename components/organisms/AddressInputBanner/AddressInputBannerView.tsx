@@ -8,8 +8,7 @@ import { FONTS } from '@styles/fonts'
 import { AddressInputBannerProps } from '@components/organisms/AddressInputBanner/AddressInputBanner'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
 import IconTitleInput, { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
-import PickupDeliveryRadioGroup from '@components/molecules/PickupDeliveryRadioGroup/PickupDeliveryRadioGroup'
-import IconTitleSelector, { IconTitleSelectorProps } from '@components/molecules/IconTitleSelector/IconTitleSelector'
+import PickupDeliveryForm from '@components/molecules/PickupDeliveryForm/PickupDeliveryForm'
 
 export type AddressInputBannerViewProps = {
   iconTitlesInputs: IconTitleInputProps[]
@@ -48,11 +47,6 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
         margin: '1rem 2rem',
       },
     } as BoxProps,
-    PickupDeliveryRadioGroupBox: {
-      sx: {
-        margin: '1rem 2rem',
-      },
-    } as BoxProps,
   }
 
   return (
@@ -65,12 +59,7 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
           return <IconTitleInput {...iconTitle} key={index} />
         })}
       </IconTitleBox>
-      <PickupDeliveryRadioGroupBox {...uiConfig.PickupDeliveryRadioGroupBox}>
-        <PickupDeliveryRadioGroup />
-        {props.iconTitlesInputsAddress.map((iconTitle, index) => {
-          return <IconTitleInput {...iconTitle} key={index} />
-        })}
-      </PickupDeliveryRadioGroupBox>
+      <PickupDeliveryForm />
     </Banner>
   )
 }

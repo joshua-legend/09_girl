@@ -10,6 +10,7 @@ const DefaultLayoutView = ({ children }: DefaultLayoutViewProps) => {
       component: 'main',
       sx: {
         margin: '60px 0',
+        paddingBottom: '100px',
       },
     } as BoxProps,
   }

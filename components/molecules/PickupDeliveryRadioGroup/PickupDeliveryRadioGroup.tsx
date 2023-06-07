@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
-import { TotalProps } from '@components/atoms/Total/Total'
 import PickupDeliveryRadioGroupView, { PickupDeliveryRadioGroupViewProps } from '@components/molecules/PickupDeliveryRadioGroup/PickupDeliveryRadioGroupView'
-import PickupDeliveryRadioGroupAction from '@components/molecules/PickupDeliveryRadioGroup/PickupDeliveryRadioGroupAction'
+import PickupDeliveryRadioGroupAction, { PickupDeliveryRadioGroupActionHandlersResult, PickupDeliveryRadioGroupActionProps } from '@components/molecules/PickupDeliveryRadioGroup/PickupDeliveryRadioGroupAction'
 
-export type PickupDeliveryRadioGroupProps = {}
+export type PickupDeliveryRadioGroupProps = {
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+} & PickupDeliveryRadioGroupActionProps
 const PickupDeliveryRadioGroup = (props: PickupDeliveryRadioGroupProps) => {
-  const actions = PickupDeliveryRadioGroupAction()
-  const newProps = {} as PickupDeliveryRadioGroupViewProps & TotalProps
+  const actions = PickupDeliveryRadioGroupAction({})
+  const newProps = {
+    ...props,
+    ...actions,
+  } as PickupDeliveryRadioGroupViewProps & PickupDeliveryRadioGroupActionHandlersResult
 
   return <PickupDeliveryRadioGroupView {...newProps} />
 }
