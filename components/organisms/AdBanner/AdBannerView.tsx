@@ -6,7 +6,7 @@ import { SwiperSlide, Swiper } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper' // 추가
 import AdCard, { AdCardProps } from '@components/molecules/AdCard/AdCard'
 import Typography from '@mui/material/Typography'
-import { FONTS } from '@styles/fonts'
+import { FONTS } from '../../../constants/fonts'
 import adBanner, { AdBannerProps } from '@components/organisms/AdBanner/AdBanner'
 
 export type AdBannerViewProps = {} & AdBannerProps

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Box, BoxProps, ButtonGroup, ButtonGroupProps, ButtonProps, Chip, ChipProps, IconButton, ListItem, ListItemProps, ListItemText, ListItemTextProps, Tooltip } from '@mui/material'
 import { ItemCounterActionResult } from './ItemCounterAction'
-import { COLORS } from '@styles/colors'
+import { COLORS } from '../../../constants/colors'
 import Button from '@mui/material/Button'
-import { FONTS } from '@styles/fonts'
+import { FONTS } from '../../../constants/fonts'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 
 export type ItemCounterViewProps = {

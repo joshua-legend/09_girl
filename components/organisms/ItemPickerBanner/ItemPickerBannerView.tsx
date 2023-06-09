@@ -4,7 +4,7 @@ import 'swiper/css/pagination'
 import { Box as ItemCountersBox, Box as Banner, BoxProps, TypographyProps } from '@mui/material'
 import { ItemPickerBannerActionHandlers } from './ItemPickerBannerAction'
 import Typography from '@mui/material/Typography'
-import { FONTS } from '@styles/fonts'
+import { FONTS } from '../../../constants/fonts'
 import { ItemPickerBannerProps } from '@components/organisms/ItemPickerBanner/ItemPickerBanner'
 import ItemCounter from '@components/molecules/ItemCounter/ItemCounter'
 

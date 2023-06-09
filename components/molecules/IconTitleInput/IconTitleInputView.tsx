@@ -2,8 +2,8 @@ import React, { ChangeEvent, useState } from 'react'
 import { Box as IconWithTitle, Box as Text, BoxProps, Chip, ChipProps, Grid, InputAdornment, Stack, StackProps, TextField, TextFieldProps, Typography, TypographyProps } from '@mui/material'
 import { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
 import { AccountCircle } from '@mui/icons-material'
-import { COLORS } from '@styles/colors'
-import { FONTS } from '@styles/fonts'
+import { COLORS } from '../../../constants/colors'
+import { FONTS } from '../../../constants/fonts'
 
 export type IconTitleInputViewProps = {} & IconTitleInputProps
 

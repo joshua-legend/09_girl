@@ -2,8 +2,8 @@ import React from 'react'
 import { Box as IconWithTitle, Box as Text, BoxProps, Chip, ChipProps, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, StackProps, TextField, TextFieldProps, Typography, TypographyProps } from '@mui/material'
 import { IconTitleSelectorProps } from '@components/molecules/IconTitleSelector/IconTitleSelector'
 import { AccountCircle } from '@mui/icons-material'
-import { COLORS } from '@styles/colors'
-import { FONTS } from '@styles/fonts'
+import { COLORS } from '../../../constants/colors'
+import { FONTS } from '../../../constants/fonts'
 
 export type IconTitleSelectorViewProps = {} & IconTitleSelectorProps
 

@@ -1,30 +1,32 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next'
 import React from 'react'
-import { Button, Container, TextField } from '@mui/material'
-import Typography from '@mui/material/Typography'
+import axios, { AxiosResponse } from 'axios'
+import { ResType } from '../../utils/axios'
+import PATH from '../../constants/path'
 
-const Index: NextPage = () => {
-  const props = {}
-
-  const handleLogin = (e) => {
-    e.preventDefault()
-    // 로그인 처리 로직 작성
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+  await axios.get('/isLoginCheck')
+  // const response: AxiosResponse<ResType> = await axios.get('http://localhost:8080/isLoginCheck', {})
+  // console.log(response.data)
+  // if (!response.data.success) {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: PATH.ADMIN_LOGIN_PAGE,
+  //     },
+  //   }
+  // }
+  return {
+    props: {},
   }
-
+}
+type ProcessProps = {
+  props: {}
+}
+const Index: NextPage<ProcessProps> = ({ props }: ProcessProps) => {
   return (
     <>
-      <Container maxWidth='sm'>
-        <Typography variant='h4' align='center' gutterBottom>
-          로그인
-        </Typography>
-        <form onSubmit={handleLogin}>
-          <TextField label='아이디' variant='outlined' fullWidth margin='normal' />
-          <TextField label='비밀번호' type='password' variant='outlined' fullWidth margin='normal' />
-          <Button type='submit' variant='contained' color='primary' fullWidth>
-            로그인
-          </Button>
-        </form>
-      </Container>
+      <div>로그인이다</div>
     </>
   )
 }

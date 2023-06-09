@@ -1,27 +1,36 @@
 import React, { SyntheticEvent, useState } from 'react'
-import { LoginBannerProps } from '@components/organisms/LoginBanner/LoginBanner'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
+import { ResType } from '../../../utils/axios'
+import { useRouter } from 'next/router'
 
-export type LoginBannerActionProps = {}
+export type LoginBannerActionProps = {
+  setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 export type LoginBannerActionHandlers = {
   handleLogin: ((event: SyntheticEvent) => void) | undefined
 }
 
-const LoginBannerAction = (props: LoginBannerProps): LoginBannerActionHandlers => {
+const LoginBannerAction = (props: LoginBannerActionProps): LoginBannerActionHandlers => {
+  const router = useRouter()
   const handleLogin = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
     const username = formData.get('username')
     const password = formData.get('password')
-    try {
-      const response = await axios.post('/login', {
+    axios
+      .post('http://localhost:8080/login', {
         username,
         password,
       })
-    } catch (error) {
-      console.error(error)
-    }
+      .then((response: AxiosResponse<ResType>) => {
+        if (response.data.success) {
+          router.push('/admin')
+        } else {
+          props.setIsSuccess(false)
+        }
+      })
+    // await axios.get('http://localhost:8080/isLoginCheck')
   }
 
   return {

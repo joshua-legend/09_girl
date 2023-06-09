@@ -3,8 +3,8 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Box as Total, BoxProps, Button, ButtonProps, TypographyProps } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import { FONTS } from '@styles/fonts'
-import { COLORS } from '@styles/colors'
+import { FONTS } from '../../../constants/fonts'
+import { COLORS } from '../../../constants/colors'
 import { TotalProps } from '@components/atoms/Total/Total'
 
 export type TotalViewProps = {} & TotalProps
@@ -14,7 +14,7 @@ const TotalView = ({ total = 0 }: TotalViewProps) => {
     Total: {
       sx: {
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
       },
     } as BoxProps,
     BuyTypo: {

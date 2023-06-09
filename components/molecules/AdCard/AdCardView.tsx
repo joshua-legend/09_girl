@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Card, CardContent, CardMedia, CardMediaProps, CardProps, Chip, Typography as Title, Typography as SubTitle, TypographyProps } from '@mui/material'
-import { COLORS } from '@styles/colors'
+import { COLORS } from '../../../constants/colors'
 import { AdCardProps } from '@components/molecules/AdCard/AdCard'
 
 export type AdCardViewProps = {} & AdCardProps

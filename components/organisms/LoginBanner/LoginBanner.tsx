@@ -4,9 +4,12 @@ import LoginBannerAction, { LoginBannerActionHandlers, LoginBannerActionProps } 
 export type LoginBannerProps = {}
 
 const LoginBanner = (props: LoginBannerProps) => {
-  const actionHandlers = LoginBannerAction({})
+  const [isSuccess, setIsSuccess] = useState(true)
+
+  const actionHandlers = LoginBannerAction({ setIsSuccess })
   const newProps = {
     handleLogin: actionHandlers.handleLogin,
+    isSuccess,
   } as LoginBannerViewProps & LoginBannerActionHandlers
   return <LoginBannerView {...newProps} />
 }

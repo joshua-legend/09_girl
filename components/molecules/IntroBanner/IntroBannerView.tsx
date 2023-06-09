@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box as Left, Box as Right, Box as Banner, BoxProps } from '@mui/material'
 import Typography, { TypographyProps } from '@mui/material/Typography'
-import { FONTS } from '@styles/fonts'
+import { FONTS } from '../../../constants/fonts'
 import { IntroBannerProps } from '@components/molecules/IntroBanner/IntroBanner'
 
 export type IntroBannerViewProps = {} & IntroBannerProps

@@ -3,9 +3,11 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Button, ButtonProps, Container, ContainerProps, TextField, TextFieldProps, TypographyProps } from '@mui/material'
 import Typography from '@mui/material/Typography'
+import { COLORS } from '../../../constants/colors'
 
 export type LoginBannerViewProps = {
   handleLogin: ((event: SyntheticEvent) => void) | undefined
+  isSuccess: boolean
 }
 
 const LoginBannerView = (props: LoginBannerViewProps) => {
@@ -20,6 +22,13 @@ const LoginBannerView = (props: LoginBannerViewProps) => {
       variant: 'h5',
       align: 'center',
       gutterBottom: true,
+    } as TypographyProps,
+    failTypo: {
+      align: 'center',
+      gutterBottom: true,
+      sx: {
+        color: COLORS['WARNING'],
+      },
     } as TypographyProps,
     idText: {
       label: '아이디',
@@ -50,6 +59,7 @@ const LoginBannerView = (props: LoginBannerViewProps) => {
       <form onSubmit={props.handleLogin}>
         <TextField {...uiConfig.idText} />
         <TextField {...uiConfig.pwText} />
+        {props.isSuccess ? null : <Typography {...uiConfig.failTypo}>아이디 또는 비밀번호를 다시 한번 확인해주세요.</Typography>}
         <Button {...uiConfig.loginBtn}>로그인</Button>
       </form>
     </Container>
