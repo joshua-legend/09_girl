@@ -25,12 +25,15 @@ const LoginBannerAction = (props: LoginBannerActionProps): LoginBannerActionHand
       })
       .then((response: AxiosResponse<ResType>) => {
         if (response.data.success) {
-          router.push('/admin')
+          // router.push('/admin')
+          console.log(response.data)
         } else {
           props.setIsSuccess(false)
         }
       })
-    // await axios.get('http://localhost:8080/isLoginCheck')
+      .catch((reason) => {
+        props.setIsSuccess(false)
+      })
   }
 
   return {

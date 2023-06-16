@@ -4,6 +4,8 @@ import 'swiper/css/pagination'
 import { Button, ButtonProps, Container, ContainerProps, TextField, TextFieldProps, TypographyProps } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import { COLORS } from '../../../constants/colors'
+import axios, { AxiosResponse } from 'axios'
+import { ResType } from '../../../utils/axios'
 
 export type LoginBannerViewProps = {
   handleLogin: ((event: SyntheticEvent) => void) | undefined
@@ -52,6 +54,17 @@ const LoginBannerView = (props: LoginBannerViewProps) => {
       fullWidth: true,
     } as ButtonProps,
   }
+  const handleLogin = async (e) => {
+    axios
+      .get(`${process.env.API_URL}/set-cookie`)
+      .then((response: AxiosResponse<ResType>) => {
+        console.log(response.data)
+        if (response.data.success) {
+        } else {
+        }
+      })
+      .catch((reason) => {})
+  }
 
   return (
     <Container {...uiConfig.container}>
@@ -62,6 +75,7 @@ const LoginBannerView = (props: LoginBannerViewProps) => {
         {props.isSuccess ? null : <Typography {...uiConfig.failTypo}>아이디 또는 비밀번호를 다시 한번 확인해주세요.</Typography>}
         <Button {...uiConfig.loginBtn}>로그인</Button>
       </form>
+      <button onClick={handleLogin}>로그인이다</button>
     </Container>
   )
 }
