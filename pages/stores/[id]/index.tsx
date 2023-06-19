@@ -14,8 +14,9 @@ const Index: NextPage<ParamsProps> = ({ id }: ParamsProps) => {
 }
 
 export async function getServerSideProps(context: { params: ParamsProps }) {
+  const { id } = context.params
   return {
-    props: { id: 123 }, // will be passed to the page component as props
+    props: { id }, // will be passed to the page component as props
   }
 }
 

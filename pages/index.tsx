@@ -3,7 +3,23 @@ import IntroBanner, { IntroBannerProps } from '@components/molecules/IntroBanner
 import React from 'react'
 import ItemPickerBanner, { ItemPickerBannerProps } from '@components/organisms/ItemPickerBanner/ItemPickerBanner'
 import AddressInputBanner from '@components/organisms/AddressInputBanner/AddressInputBanner'
-
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import axios from 'axios/index'
+//
+// export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+//   const response = await axios.get<any>(`${process.env.API_URL}/getItemsByStore`, {
+//     withCredentials: true,
+//   })
+//
+//   console.log(response.data)
+//
+//   return {
+//     props: {},
+//   }
+// }
+// type ProcessProps = {
+//   props: {}
+// }
 const Home: NextPage = () => {
   const props = {
     introBanner: {

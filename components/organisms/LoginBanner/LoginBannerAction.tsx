@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react'
+import React, { FormEvent, SyntheticEvent, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import { ResType } from '../../../utils/axios'
 import { useRouter } from 'next/router'
@@ -8,7 +8,7 @@ export type LoginBannerActionProps = {
 }
 
 export type LoginBannerActionHandlers = {
-  handleLogin: ((event: SyntheticEvent) => void) | undefined
+  handleLogin: ((event: FormEvent) => void) | undefined
 }
 
 const LoginBannerAction = (props: LoginBannerActionProps): LoginBannerActionHandlers => {
@@ -18,22 +18,25 @@ const LoginBannerAction = (props: LoginBannerActionProps): LoginBannerActionHand
     const formData = new FormData(e.target)
     const username = formData.get('username')
     const password = formData.get('password')
-    axios
-      .post('http://localhost:8080/login', {
-        username,
-        password,
-      })
-      .then((response: AxiosResponse<ResType>) => {
-        if (response.data.success) {
-          // router.push('/admin')
-          console.log(response.data)
-        } else {
-          props.setIsSuccess(false)
-        }
-      })
+    const res = await axios
+      .post(
+        `${process.env.API_URL}/login`,
+        {
+          username,
+          password,
+        },
+        { withCredentials: true }
+      )
       .catch((reason) => {
-        props.setIsSuccess(false)
+        // props.setIsSuccess(false)
       })
+
+    if (!res) {
+      props.setIsSuccess(true)
+      return
+    }
+    console.log(res.data)
+    res.data.success ? await router.push('/admin') : props.setIsSuccess(false)
   }
 
   return {

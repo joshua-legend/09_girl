@@ -6,9 +6,10 @@ import Typography from '@mui/material/Typography'
 import { COLORS } from '../../../constants/colors'
 import axios, { AxiosResponse } from 'axios'
 import { ResType } from '../../../utils/axios'
+import { router } from 'next/client'
 
 export type LoginBannerViewProps = {
-  handleLogin: ((event: SyntheticEvent) => void) | undefined
+  handleLogin: ((event: FormEvent) => void) | undefined
   isSuccess: boolean
 }
 
@@ -54,15 +55,11 @@ const LoginBannerView = (props: LoginBannerViewProps) => {
       fullWidth: true,
     } as ButtonProps,
   }
+
   const handleLogin = async (e) => {
     axios
-      .get(`${process.env.API_URL}/set-cookie`)
-      .then((response: AxiosResponse<ResType>) => {
-        console.log(response.data)
-        if (response.data.success) {
-        } else {
-        }
-      })
+      .get(`${process.env.API_URL}/checkAuthentication`, { withCredentials: true })
+      .then((response: AxiosResponse<ResType>) => {})
       .catch((reason) => {})
   }
 
@@ -75,7 +72,7 @@ const LoginBannerView = (props: LoginBannerViewProps) => {
         {props.isSuccess ? null : <Typography {...uiConfig.failTypo}>아이디 또는 비밀번호를 다시 한번 확인해주세요.</Typography>}
         <Button {...uiConfig.loginBtn}>로그인</Button>
       </form>
-      <button onClick={handleLogin}>로그인이다</button>
+      {/*<button onClick={handleLogin}>로그인이다</button>*/}
     </Container>
   )
 }
