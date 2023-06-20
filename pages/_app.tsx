@@ -3,8 +3,10 @@ import { useEffect } from 'react'
 import { CssBaseline } from '@mui/material'
 import DefaultLayout from '../components/layouts/DefaultLayout/DefaultLayout'
 import '../public/fonts/style.css'
+import TestLayout from '@components/layouts/DefaultLayout/TestLayout'
+import AdminLayout from '@components/layouts/AdminLayout/AdminLayout'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
     const setViewport = () => {
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -21,11 +23,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [])
 
+  const Layout = router.pathname === '/admin' ? AdminLayout : DefaultLayout
+
   return (
-    <DefaultLayout>
+    <Layout>
       <CssBaseline />
       <Component {...pageProps} />
-    </DefaultLayout>
+    </Layout>
   )
 }
 

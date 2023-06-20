@@ -1,6 +1,5 @@
 import React, { FormEvent, SyntheticEvent, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
-import { ResType } from '../../../utils/axios'
 import { useRouter } from 'next/router'
 
 export type LoginBannerActionProps = {
@@ -35,7 +34,6 @@ const LoginBannerAction = (props: LoginBannerActionProps): LoginBannerActionHand
       props.setIsSuccess(true)
       return
     }
-    console.log(res.data)
     res.data.success ? await router.push('/admin') : props.setIsSuccess(false)
   }
 

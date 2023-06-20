@@ -3,15 +3,15 @@ import AppBar, { AppBarProps } from '@mui/material/AppBar'
 import { Box, Box as ImgBox, BoxProps, ButtonProps } from '@mui/material'
 import Toolbar from '@mui/material/Toolbar'
 import Typography, { TypographyProps } from '@mui/material/Typography'
-import Button from '@mui/material/Button'
 import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
 import { IMAGES } from '../../../constants/images'
-import { HeaderProps } from '@components/molecules/Header/Header'
 
-export type HeaderViewProps = {} & HeaderProps
+export type HeaderViewProps = {
+  isAdmin: boolean
+}
 
-const HeaderView = ({}: HeaderViewProps) => {
+const HeaderView = ({ isAdmin = false }: HeaderViewProps) => {
   const uiConfig = {
     Appbar: {
       style: {
@@ -57,7 +57,7 @@ const HeaderView = ({}: HeaderViewProps) => {
         <Box {...uiConfig.Box}>
           <ImgBox {...uiConfig.ImgBox} />
         </Box>
-        <Typography {...uiConfig.Typo}>공구하는 여자</Typography>
+        <Typography {...uiConfig.Typo}>공구하는 여자 {isAdmin ? '관리자 페이지' : null}</Typography>
       </Toolbar>
     </AppBar>
   )
