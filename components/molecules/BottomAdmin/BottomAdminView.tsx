@@ -11,6 +11,7 @@ const BottomAdminView = ({ labels, store, onChange }: BottomAdminViewProps & Bot
   const uiConfig = {
     Footer: {
       sx: {
+        borderTop: '1px solid gainsboro',
         position: 'fixed',
         bottom: 0,
         left: 0,
