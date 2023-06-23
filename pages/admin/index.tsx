@@ -37,10 +37,14 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     withCredentials: true,
   })
 
+  const originData = responseItems.data.data.items.map((item) => ({
+    ...item,
+  }))
+
   return {
     props: {
       storeName: responseItems.data.data.storeName,
-      items: responseItems.data.data.items,
+      items: originData,
     },
   }
 }
@@ -52,16 +56,12 @@ type ProcessProps = {
 }
 
 const Index: NextPage<ProcessProps> = ({ items }: ProcessProps) => {
-  console.log(items)
   const columns: GridColDef[] = [
     { field: 'name', headerName: '제품명', flex: 1, headerAlign: 'center', align: 'center', disableColumnMenu: true, sortable: false },
     { field: 'price', headerName: '가격', flex: 1, headerAlign: 'center', align: 'center', disableColumnMenu: true, sortable: false, valueGetter: (params: GridValueGetterParams) => `${numeral(params.row.price).format('0,0')}` },
-    // {
-    //   description: 'This column has a value getter and is not sortable.',
-    //   valueGetter: (params: GridValueGetterParams) => `${params.row.name || ''} ${params.row.lastName || ''}`,
-    // },
   ]
 
+  const originData = items
   const [rows, setRows] = useState<Item[]>(items)
   const [name, setName] = useState<string>('')
   const [price, setPrice] = useState<string>('')
@@ -133,9 +133,15 @@ const Index: NextPage<ProcessProps> = ({ items }: ProcessProps) => {
   }
 
   const postButton = async () => {
-    const data = rows.map(({ _id, ...rest }) => rest)
-    const response = await axios.post(`${process.env.API_URL}/postItemsByStore/1`, data)
+    // const data = rows.map(({ _id, ...rest }) => rest)
+    // const response = await axios.post(`${process.env.API_URL}/postItemsByStore/1`, data)
+    // console.log(response)
+    const toBeDeletedData = originData.filter((originItem) => {
+      return !rows.some((rowItem) => rowItem._id === originItem._id)
+    })
+    const response = await axios.post(`${process.env.API_URL}/deleteItemsByStore/1`, toBeDeletedData)
     console.log(response)
+    // const deletedItems = originData.console.log(rows)
   }
 
   return (
@@ -173,18 +179,22 @@ const Index: NextPage<ProcessProps> = ({ items }: ProcessProps) => {
           }}
         />
         <Box {...uiConfig.buttonBox}>
-          <Button {...uiConfig.deleteBtn} onClick={refreshPage}>
-            복구하기
-          </Button>
+          {/*<Button {...uiConfig.deleteBtn} onClick={refreshPage}>*/}
+          {/*  복구하기*/}
+          {/*</Button>*/}
           <Button {...uiConfig.deleteBtn} onClick={deleteRows}>
             삭제하기
           </Button>
         </Box>
+        <Box {...uiConfig.buttonBox}>
+          <Button {...uiConfig.deleteBtn} onClick={refreshPage}>
+            복구하기
+          </Button>
+          <Button {...uiConfig.deleteBtn} onClick={postButton}>
+            확정하기
+          </Button>
+        </Box>
       </div>
-
-      <Button variant={'contained'} onClick={postButton}>
-        전송하기
-      </Button>
     </>
   )
 }
