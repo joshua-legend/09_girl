@@ -134,14 +134,21 @@ const Index: NextPage<ProcessProps> = ({ items }: ProcessProps) => {
 
   const postButton = async () => {
     // const data = rows.map(({ _id, ...rest }) => rest)
+    // console.log(data)
     // const response = await axios.post(`${process.env.API_URL}/postItemsByStore/1`, data)
     // console.log(response)
-    const toBeDeletedData = originData.filter((originItem) => {
-      return !rows.some((rowItem) => rowItem._id === originItem._id)
+
+    const newlyAddedData = rows.filter((rowItem) => {
+      return !originData.some((originItem) => originItem._id === rowItem._id)
     })
-    const response = await axios.post(`${process.env.API_URL}/deleteItemsByStore/1`, toBeDeletedData)
-    console.log(response)
-    // const deletedItems = originData.console.log(rows)
+
+    console.log(newlyAddedData)
+
+    // const toBeDeletedData = originData.filter((originItem) => {
+    //   return !rows.some((rowItem) => rowItem._id === originItem._id)
+    // })
+    // const response = await axios.post(`${process.env.API_URL}/deleteItemsByStore/1`, toBeDeletedData)
+    // console.log(response)
   }
 
   return (
