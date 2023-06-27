@@ -4,12 +4,14 @@ import axios, { AxiosResponse } from 'axios'
 import PATH from '../../constants/path'
 import { DataGrid, GridColDef, GridRowsProp, GridValueGetterParams, useGridApiRef } from '@mui/x-data-grid'
 import { IntroBannerProps } from '@components/molecules/IntroBanner/IntroBanner'
-import { Box, BoxProps, Button, ButtonProps, ContainerProps, TextField, TextFieldProps, TypographyProps } from '@mui/material'
+import { Box, BoxProps, Button, ButtonGroup, ButtonGroupProps, ButtonProps, ContainerProps, TextField, TextFieldProps, TypographyProps } from '@mui/material'
 import numeral from 'numeral'
 import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/router'
 import Typography from '@mui/material/Typography'
 import { FONTS } from '../../constants/fonts'
+import ItemInputForm from '@components/molecules/ItemInputForm/ItemInputForm'
+import DataGridForm from '@components/molecules/DataGridForm/DataGridForm'
 
 type CheckAuthenticationResponse = {
   success: boolean
@@ -96,17 +98,17 @@ const Index: NextPage<ProcessProps> = ({ items }: ProcessProps) => {
         setPrice(e.target.value)
       },
     } as TextFieldProps,
-    buttonBox: {
-      sx: {
-        display: 'flex',
-        marginTop: '1rem',
-        justifyContent: 'space-around',
-      },
-    } as BoxProps,
-    deleteBtn: {
+    buttonGroup: {
       variant: 'contained',
       sx: {
-        width: '45%',
+        width: '100%',
+        marginTop: '1rem',
+      },
+    } as ButtonGroupProps,
+    confirmBtn: {
+      variant: 'contained',
+      sx: {
+        width: '100%',
       },
     } as ButtonProps,
   }
@@ -133,39 +135,37 @@ const Index: NextPage<ProcessProps> = ({ items }: ProcessProps) => {
   }
 
   const postButton = async () => {
-    // const data = rows.map(({ _id, ...rest }) => rest)
-    // console.log(data)
-    // const response = await axios.post(`${process.env.API_URL}/postItemsByStore/1`, data)
-    // console.log(response)
+    const toBeDeletedData = originData.filter((originItem) => {
+      return !rows.some((rowItem) => rowItem._id === originItem._id)
+    })
 
     const newlyAddedData = rows.filter((rowItem) => {
       return !originData.some((originItem) => originItem._id === rowItem._id)
     })
 
-    console.log(newlyAddedData)
+    const responses = [await axios.post(`${process.env.API_URL}/deleteItemsByStore/1`, toBeDeletedData), await axios.post(`${process.env.API_URL}/postItemsByStore/1`, newlyAddedData)]
+    const allSuccessful = responses.every((response) => response.status === 200)
 
-    // const toBeDeletedData = originData.filter((originItem) => {
-    //   return !rows.some((rowItem) => rowItem._id === originItem._id)
-    // })
-    // const response = await axios.post(`${process.env.API_URL}/deleteItemsByStore/1`, toBeDeletedData)
-    // console.log(response)
+    if (!allSuccessful) {
+      console.log('실패')
+    } else console.log('성공')
   }
 
   return (
     <>
-      <Box sx={{ padding: '1rem' }}>
-        <Typography {...uiConfig.Typo}>아이템 추가</Typography>
-        <Box sx={{ display: 'flex' }}>
-          <Box>
-            <TextField {...uiConfig.item} />
-            <TextField {...uiConfig.price} />
-          </Box>
-          <Button variant={'contained'} onClick={addItem}>
-            추가하기
-          </Button>
-        </Box>
-      </Box>
-
+      {/*<Box sx={{ padding: '1rem' }}>*/}
+      {/*  <Typography {...uiConfig.Typo}>아이템 추가</Typography>*/}
+      {/*  <Box sx={{ display: 'flex' }}>*/}
+      {/*    <Box sx={{ flex: 4 }}>*/}
+      {/*      <TextField {...uiConfig.item} />*/}
+      {/*      <TextField {...uiConfig.price} />*/}
+      {/*    </Box>*/}
+      {/*    <Button variant={'contained'} onClick={addItem} sx={{ flex: 1 }}>*/}
+      {/*      추가하기*/}
+      {/*    </Button>*/}
+      {/*  </Box>*/}
+      {/*</Box>*/}
+      <ItemInputForm setRows={setRows} />
       <div style={{ padding: '1rem' }}>
         <DataGrid
           autoHeight
@@ -185,22 +185,19 @@ const Index: NextPage<ProcessProps> = ({ items }: ProcessProps) => {
             },
           }}
         />
-        <Box {...uiConfig.buttonBox}>
-          {/*<Button {...uiConfig.deleteBtn} onClick={refreshPage}>*/}
-          {/*  복구하기*/}
-          {/*</Button>*/}
-          <Button {...uiConfig.deleteBtn} onClick={deleteRows}>
+        {/*<DataGridForm/>*/}
+        <ButtonGroup {...uiConfig.buttonGroup}>
+          <Button {...uiConfig.confirmBtn} onClick={deleteRows}>
             삭제하기
           </Button>
-        </Box>
-        <Box {...uiConfig.buttonBox}>
-          <Button {...uiConfig.deleteBtn} onClick={refreshPage}>
+          <Button {...uiConfig.confirmBtn} onClick={refreshPage}>
             복구하기
           </Button>
-          <Button {...uiConfig.deleteBtn} onClick={postButton}>
+          <Button {...uiConfig.confirmBtn} onClick={postButton}>
             확정하기
           </Button>
-        </Box>
+        </ButtonGroup>
+        {/*<DataButtonGroup />*/}
       </div>
     </>
   )
