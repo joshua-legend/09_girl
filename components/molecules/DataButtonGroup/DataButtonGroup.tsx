@@ -6,12 +6,13 @@ import { Item } from '@components/molecules/DataGridForm/DataGridForm'
 import DataButtonGroupView, { DataButtonGroupViewProps } from '@components/molecules/DataButtonGroup/DataButtonGroupView'
 
 export type DataButtonGroupProps = {
+  rows: Item[]
+  setRows: React.Dispatch<React.SetStateAction<any>>
   storeID: number
   originData: Item[]
+  selectionModel: any
 }
-const DataButtonGroup = ({ storeID, originData }: DataButtonGroupProps) => {
-  const [rows, setRows] = useState<Item[]>(originData)
-  const [selectionModel, setSelectionModel] = useState([])
+const DataButtonGroup = ({ rows, setRows, storeID, originData, selectionModel }: DataButtonGroupProps) => {
   const actions = DataButtonGroupAction({ originData, rows, setRows, storeID, selectionModel })
   const newProps = {
     ...actions,

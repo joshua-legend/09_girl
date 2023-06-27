@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography'
 import { FONTS } from '../../constants/fonts'
 import ItemInputForm from '@components/molecules/ItemInputForm/ItemInputForm'
 import DataGridForm from '@components/molecules/DataGridForm/DataGridForm'
+import DataButtonGroup from '@components/molecules/DataButtonGroup/DataButtonGroup'
 
 type CheckAuthenticationResponse = {
   success: boolean
@@ -58,146 +59,14 @@ type ProcessProps = {
 }
 
 const Index: NextPage<ProcessProps> = ({ items }: ProcessProps) => {
-  const columns: GridColDef[] = [
-    { field: 'name', headerName: '제품명', flex: 1, headerAlign: 'center', align: 'center', disableColumnMenu: true, sortable: false },
-    { field: 'price', headerName: '가격', flex: 1, headerAlign: 'center', align: 'center', disableColumnMenu: true, sortable: false, valueGetter: (params: GridValueGetterParams) => `${numeral(params.row.price).format('0,0')}` },
-  ]
-
-  const originData = items
   const [rows, setRows] = useState<Item[]>(items)
-  const [name, setName] = useState<string>('')
-  const [price, setPrice] = useState<string>('')
   const [selectionModel, setSelectionModel] = useState([])
-
-  const uiConfig = {
-    Typo: {
-      variant: 'h6',
-      sx: {
-        marginBottom: '1rem',
-        fontFamily: FONTS.PRETENDARD,
-      },
-    } as TypographyProps,
-    item: {
-      placeholder: '제품명',
-      variant: 'outlined',
-      size: 'small',
-      value: name,
-      onChange: (e) => {
-        setName(e.target.value)
-      },
-      sx: {
-        marginBottom: '1rem',
-      },
-    } as TextFieldProps,
-    price: {
-      placeholder: '가격',
-      variant: 'outlined',
-      size: 'small',
-      value: price,
-      onChange: (e) => {
-        setPrice(e.target.value)
-      },
-    } as TextFieldProps,
-    buttonGroup: {
-      variant: 'contained',
-      sx: {
-        width: '100%',
-        marginTop: '1rem',
-      },
-    } as ButtonGroupProps,
-    confirmBtn: {
-      variant: 'contained',
-      sx: {
-        width: '100%',
-      },
-    } as ButtonProps,
-  }
-
-  const addItem = (e) => {
-    setRows((prevState) => [
-      ...prevState,
-      {
-        name: name,
-        price: parseInt(price) || 0,
-        _id: uuidv4(),
-      },
-    ])
-    setName('')
-    setPrice('')
-  }
-  const deleteRows = (e) => {
-    const filteredItems = rows.filter((item) => !selectionModel.includes(item._id))
-    setRows(filteredItems)
-  }
-  const router = useRouter()
-  const refreshPage = () => {
-    router.reload()
-  }
-
-  const postButton = async () => {
-    const toBeDeletedData = originData.filter((originItem) => {
-      return !rows.some((rowItem) => rowItem._id === originItem._id)
-    })
-
-    const newlyAddedData = rows.filter((rowItem) => {
-      return !originData.some((originItem) => originItem._id === rowItem._id)
-    })
-
-    const responses = [await axios.post(`${process.env.API_URL}/deleteItemsByStore/1`, toBeDeletedData), await axios.post(`${process.env.API_URL}/postItemsByStore/1`, newlyAddedData)]
-    const allSuccessful = responses.every((response) => response.status === 200)
-
-    if (!allSuccessful) {
-      console.log('실패')
-    } else console.log('성공')
-  }
-
   return (
     <>
-      {/*<Box sx={{ padding: '1rem' }}>*/}
-      {/*  <Typography {...uiConfig.Typo}>아이템 추가</Typography>*/}
-      {/*  <Box sx={{ display: 'flex' }}>*/}
-      {/*    <Box sx={{ flex: 4 }}>*/}
-      {/*      <TextField {...uiConfig.item} />*/}
-      {/*      <TextField {...uiConfig.price} />*/}
-      {/*    </Box>*/}
-      {/*    <Button variant={'contained'} onClick={addItem} sx={{ flex: 1 }}>*/}
-      {/*      추가하기*/}
-      {/*    </Button>*/}
-      {/*  </Box>*/}
-      {/*</Box>*/}
       <ItemInputForm setRows={setRows} />
       <div style={{ padding: '1rem' }}>
-        <DataGrid
-          autoHeight
-          getRowId={(row) => row._id}
-          rows={rows as GridRowsProp<any>}
-          columns={columns}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          onRowSelectionModelChange={(newSelectionModel) => {
-            const selectedRowsData = newSelectionModel.map((id) => rows.find((row) => row._id === id)).map((value) => value._id)
-            setSelectionModel(selectedRowsData)
-          }}
-          rowSelectionModel={selectionModel}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-        />
-        {/*<DataGridForm/>*/}
-        <ButtonGroup {...uiConfig.buttonGroup}>
-          <Button {...uiConfig.confirmBtn} onClick={deleteRows}>
-            삭제하기
-          </Button>
-          <Button {...uiConfig.confirmBtn} onClick={refreshPage}>
-            복구하기
-          </Button>
-          <Button {...uiConfig.confirmBtn} onClick={postButton}>
-            확정하기
-          </Button>
-        </ButtonGroup>
-        {/*<DataButtonGroup />*/}
+        <DataGridForm rows={rows} selectionModel={selectionModel} setSelectionModel={setSelectionModel} />
+        <DataButtonGroup storeID={1} originData={items} selectionModel={selectionModel} rows={rows} setRows={setRows} />
       </div>
     </>
   )

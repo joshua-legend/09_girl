@@ -4,11 +4,7 @@ import { useRouter } from 'next/router'
 import { Item } from '@components/molecules/DataGridForm/DataGridForm'
 import { DataButtonGroupProps } from '@components/molecules/DataButtonGroup/DataButtonGroup'
 
-export type DataButtonGroupActionProps = {
-  rows: Item[]
-  setRows: React.Dispatch<React.SetStateAction<any>>
-  selectionModel: any
-}
+export type DataButtonGroupActionProps = {}
 export type DataButtonGroupActionHandlersResult = {
   deleteRows: (event: React.ChangeEvent<MouseEventHandler<HTMLAnchorElement> | undefined | MouseEventHandler<HTMLButtonElement>>) => void
   refreshPage: (event: React.ChangeEvent<MouseEventHandler<HTMLAnchorElement> | undefined | MouseEventHandler<HTMLButtonElement>>) => void
