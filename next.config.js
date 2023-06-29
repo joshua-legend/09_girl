@@ -4,8 +4,12 @@ const nextConfig = {
   env: {
     API_URL: process.env.API_URL,
   },
-  async rewrites() {
+  rewrites() {
     return [
+      {
+        source: '/admin/:id*',
+        destination: '/admin/:id*',
+      },
       {
         source: '/stores/:id*',
         destination: '/stores/:id*',

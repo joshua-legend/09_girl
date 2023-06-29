@@ -5,6 +5,7 @@ import DefaultLayout from '../components/layouts/DefaultLayout/DefaultLayout'
 import '../public/fonts/style.css'
 import TestLayout from '@components/layouts/DefaultLayout/TestLayout'
 import AdminLayout from '@components/layouts/AdminLayout/AdminLayout'
+import LoginLayout from '@components/layouts/LoginLayout/LoginLayout'
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
@@ -23,8 +24,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     }
   }, [])
 
-  const Layout = router.pathname === '/admin' ? AdminLayout : DefaultLayout
-
+  //todo
+  const routerPath = router.asPath.split('/')[1] || 'stores' // default
+  const layouts = {
+    admin: AdminLayout,
+    login: LoginLayout,
+    stores: DefaultLayout,
+  }
+  const Layout = layouts[routerPath]
   return (
     <Layout>
       <CssBaseline />

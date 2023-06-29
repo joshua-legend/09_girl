@@ -34,7 +34,7 @@ const LoginBannerAction = (props: LoginBannerActionProps): LoginBannerActionHand
       props.setIsSuccess(true)
       return
     }
-    res.data.success ? await router.push('/admin') : props.setIsSuccess(false)
+    res.data.success ? await router.push('/admin/1') : props.setIsSuccess(false)
   }
 
   return {

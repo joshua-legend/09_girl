@@ -1,4 +1,5 @@
 import React, { SyntheticEvent } from 'react'
+import { useRouter } from 'next/router'
 
 export type BottomAdminActionProps = {
   setStore: React.Dispatch<React.SetStateAction<number>>
@@ -8,8 +9,11 @@ export type BottomAdminActionHandlersResult = {
 }
 
 const BottomAdminAction = ({ setStore }: BottomAdminActionProps): BottomAdminActionHandlersResult => {
+  const router = useRouter()
+
   const onChange = (event: React.SyntheticEvent, value: any) => {
-    setStore(value)
+    window.location.href = `/admin/${value + 1}`
+    // router.replace(`/admin/${value + 1}`)
   }
 
   return {

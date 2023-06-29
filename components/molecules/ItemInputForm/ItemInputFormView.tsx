@@ -3,6 +3,7 @@ import { Box, Box as PickupDeliveryRadioGroupBox, BoxProps, Button, ButtonProps,
 import Typography from '@mui/material/Typography'
 import { FONTS } from '../../../constants/fonts'
 import { ItemInputFormActionHandlersResult } from '@components/molecules/ItemInputForm/ItemInputFormAction'
+import { ItemInputFormProps } from '@components/molecules/ItemInputForm/ItemInputForm'
 
 export type ItemInputFormViewProps = {
   name: string
@@ -10,11 +11,21 @@ export type ItemInputFormViewProps = {
   addItem: () => void
 }
 
-const ItemInputFormView = ({ name, price, addItem, handleName, handlePrice }: ItemInputFormViewProps & ItemInputFormActionHandlersResult) => {
+const ItemInputFormView = ({ storeName, name, price, addItem, handleName, handlePrice }: ItemInputFormProps & ItemInputFormViewProps & ItemInputFormActionHandlersResult) => {
   const uiConfig = {
     FormBox: {
       sx: {
-        padding: '1rem',
+        paddingBottom: '1rem',
+      },
+    } as BoxProps,
+    InputBox: {
+      sx: {
+        display: 'flex',
+      },
+    } as BoxProps,
+    Box: {
+      sx: {
+        flex: '4',
       },
     } as BoxProps,
     Typo: {
@@ -44,14 +55,17 @@ const ItemInputFormView = ({ name, price, addItem, handleName, handlePrice }: It
     Add: {
       variant: 'contained',
       onClick: addItem,
+      sx: {
+        flex: '1',
+      },
     } as ButtonProps,
   }
 
   return (
     <Box {...uiConfig.FormBox}>
-      <Typography {...uiConfig.Typo}>아이템 추가</Typography>
-      <Box sx={{ display: 'flex' }}>
-        <Box>
+      <Typography {...uiConfig.Typo}>{storeName} 아이템 추가</Typography>
+      <Box {...uiConfig.InputBox}>
+        <Box {...uiConfig.Box}>
           <TextField {...uiConfig.Item} />
           <TextField {...uiConfig.Price} />
         </Box>

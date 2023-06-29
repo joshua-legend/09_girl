@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid'
 import { DataGridFormActionHandlersResult, DataGridFormActionProps } from '@components/molecules/DataGridForm/DataGridFormAction'
-import { Item } from '@components/molecules/DataGridForm/DataGridForm'
+import { Item } from '../../../pages/admin'
 
 export type DataGridFormViewProps = {
   rows: Item[]

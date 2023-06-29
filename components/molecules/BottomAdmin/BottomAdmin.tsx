@@ -4,9 +4,11 @@ import BottomAdminView, { BottomAdminViewProps } from '@components/molecules/Bot
 import BottomAdminAction, { BottomAdminActionHandlersResult } from '@components/molecules/BottomAdmin/BottomAdminAction'
 
 export type BottomAdminProps = {}
-const BottomAdmin = (props: BottomAdminProps) => {
-  const [store, setStore] = useState(0)
-  const router = useRouter()
+const BottomAdmin = ({}: BottomAdminProps) => {
+  const { asPath } = useRouter()
+  const idString = asPath.split('/admin/')[1] // '123'을 얻습니다
+  const idNumber = Number(idString) // 문자열 '123'을 숫자 123으로 변환합니
+  const [store, setStore] = useState(idNumber - 1)
   const handlers = BottomAdminAction({ setStore })
 
   const newProps = {

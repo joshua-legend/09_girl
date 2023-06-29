@@ -25,7 +25,6 @@ const BottomAdminView = ({ labels, store, onChange }: BottomAdminViewProps & Bot
       },
     },
   }
-
   return (
     <Footer {...uiConfig.Footer}>
       <BottomNavigation showLabels value={store} onChange={onChange}>

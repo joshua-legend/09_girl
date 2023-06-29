@@ -5,8 +5,7 @@ import DataGridFormView, { DataGridFormViewProps } from '@components/molecules/D
 import { GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
 import numeral from 'numeral'
 import DataGridFormAction, { DataGridFormActionProps } from '@components/molecules/DataGridForm/DataGridFormAction'
-
-export type Item = { name: string; price: number; _id: string }
+import { Item } from '../../../pages/admin'
 
 export type DataGridFormProps = {
   rows: Item[]
