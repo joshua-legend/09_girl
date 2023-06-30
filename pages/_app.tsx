@@ -32,11 +32,12 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     stores: DefaultLayout,
   }
   const Layout = layouts[routerPath]
+  console.log(routerPath)
   return (
-    <Layout>
+    <DefaultLayout>
       <CssBaseline />
       <Component {...pageProps} />
-    </Layout>
+    </DefaultLayout>
   )
 }
 

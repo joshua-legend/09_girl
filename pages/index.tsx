@@ -27,12 +27,29 @@ const Home: NextPage = ({ a }: ProcessProps) => {
       },
       sx: {},
     } as ButtonProps,
+    Logout: {
+      variant: 'contained',
+      onClick: async () => {
+        try {
+          const response = await axios.get(`${process.env.API_URL}/auth/naver/disconnect`)
+          if (response.status === 200) {
+            console.log('네이버 계정 연동 해제 성공')
+          } else {
+            console.log('네이버 계정 연동 해제 실패')
+          }
+        } catch (error) {
+          console.error(error)
+        }
+      },
+      sx: {},
+    } as ButtonProps,
   }
 
   return (
     <>
       <Box sx={{ display: 'flex' }}>
         <Button {...uiConfig.Confirm}>로그인 하기</Button>
+        <Button {...uiConfig.Logout}>로그아웃 하기</Button>
         <a href='http://localhost:8080/auth/naver'>test</a>
       </Box>
     </>
