@@ -10,6 +10,7 @@ import { auto, bottom } from '@popperjs/core'
 import { static } from 'express'
 import Footer from '@components/atoms/Footer/Footer'
 import MainPanel from '@components/atoms/MainPanel/MainPanel'
+import SNSLogins from '@components/molecules/SNSLogins/SNSLogins'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   return {
@@ -49,6 +50,7 @@ const Home: NextPage = ({}: ProcessProps) => {
   return (
     <>
       <MainPanel />
+      <SNSLogins />
       <Box {...uiConfig.Buttons}>
         <LoginButton sns={'네이버'} href={'/auth/naver'} bgColor={'#1EC800'} logo={'/images/logo/naver_logo.png'} />
         <LoginButton sns={'카카오'} href={'/auth/kakao'} color={'rgb(59, 29, 30)'} bgColor={'#FEE500'} logo={'/images/logo/kakao_logo.png'} />
