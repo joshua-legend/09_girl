@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 import { CssBaseline } from '@mui/material'
 import DefaultLayout from '../components/layouts/DefaultLayout/DefaultLayout'
 import '../public/fonts/style.css'
-import TestLayout from '@components/layouts/DefaultLayout/TestLayout'
 import AdminLayout from '@components/layouts/AdminLayout/AdminLayout'
 import LoginLayout from '@components/layouts/LoginLayout/LoginLayout'
+import UserLayout from '@components/layouts/UserLayout/UserLayout'
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
@@ -24,20 +24,19 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     }
   }, [])
 
-  //todo
-  const routerPath = router.asPath.split('/')[1] || 'stores' // default
+  const routerPath = router.asPath.split('/')[1] || 'default' // default
   const layouts = {
+    default: DefaultLayout,
     admin: AdminLayout,
+    stores: UserLayout,
     login: LoginLayout,
-    stores: DefaultLayout,
   }
   const Layout = layouts[routerPath]
-  console.log(routerPath)
   return (
-    <DefaultLayout>
+    <Layout>
       <CssBaseline />
       <Component {...pageProps} />
-    </DefaultLayout>
+    </Layout>
   )
 }
 
