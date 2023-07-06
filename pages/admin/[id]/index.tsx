@@ -6,12 +6,8 @@ import ItemInputForm, { ItemInputFormProps } from '@components/molecules/ItemInp
 import DataGridForm, { DataGridFormProps } from '@components/molecules/DataGridForm/DataGridForm'
 import DataButtonGroup, { DataButtonGroupProps } from '@components/molecules/DataButtonGroup/DataButtonGroup'
 import { Box } from '@mui/material'
-import PATH from '../../../constants/path'
 import { redirectIfError, redirectIfUnauthorized } from '../../../utils/redirects'
-
-type CheckAuthenticationResponse = {
-  success: boolean
-}
+import { CheckAuthenticationResponse } from '../index'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const { id } = context.query

@@ -6,12 +6,14 @@ import Typography, { TypographyProps } from '@mui/material/Typography'
 import { COLORS } from '../../../constants/colors'
 import { FONTS } from '../../../constants/fonts'
 import { IMAGES } from '../../../constants/images'
+import { HeaderProps } from '@components/molecules/Header/Header'
+import { useRouter } from 'next/router'
 
-export type HeaderViewProps = {
-  isAdmin: boolean
-}
+export type HeaderViewProps = {} & HeaderProps
 
-const HeaderView = ({ isAdmin = false }: HeaderViewProps) => {
+const HeaderView = ({ isAdmin = false, isStore = false }: HeaderViewProps) => {
+  const { push } = useRouter()
+
   const uiConfig = {
     Appbar: {
       style: {
@@ -24,6 +26,15 @@ const HeaderView = ({ isAdmin = false }: HeaderViewProps) => {
       sx: {
         width: '70px',
         height: '100%',
+      },
+    } as BoxProps,
+    xBox: {
+      sx: {
+        display: 'flex',
+        justifyContent: 'center',
+      },
+      onClick: () => {
+        push('/select')
       },
     } as BoxProps,
     ImgBox: {
@@ -57,7 +68,15 @@ const HeaderView = ({ isAdmin = false }: HeaderViewProps) => {
         <Box {...uiConfig.Box}>
           <ImgBox {...uiConfig.ImgBox} />
         </Box>
-        <Typography {...uiConfig.Typo}>공구하는 여자 {isAdmin ? '관리자 페이지' : null}</Typography>
+        <Typography {...uiConfig.Typo}>공구하는 뇨자 {isAdmin ? '관리자 페이지' : null}</Typography>
+        {isStore ? (
+          <Box {...uiConfig.xBox}>
+            <svg width='30' height='30' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <line x1='10' y1='10' x2='30' y2='30' stroke='black' strokeWidth='2' />
+              <line x1='30' y1='10' x2='10' y2='30' stroke='black' strokeWidth='2' />
+            </svg>
+          </Box>
+        ) : null}
       </Toolbar>
     </AppBar>
   )

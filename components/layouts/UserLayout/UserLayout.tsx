@@ -10,7 +10,7 @@ export type UserLayoutProps = {
 const UserLayout = ({ children }: UserLayoutProps) => {
   return (
     <>
-      <Header />
+      <Header isStore={true} />
       <UserLayoutView>{children}</UserLayoutView>
       <BottomTotalBar />
     </>

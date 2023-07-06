@@ -16,7 +16,7 @@ const SNSLogins = (props: SNSLoginsProps) => {
       {
         sns: '카카오',
         href: '/auth/kakao',
-        color: 'rgb(59, 29, 30),',
+        color: 'rgb(59, 29, 30)',
         bgColor: '#FEE500',
         logo: '/images/logo/kakao_logo.png',
       },

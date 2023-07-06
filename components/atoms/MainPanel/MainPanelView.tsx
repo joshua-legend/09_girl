@@ -5,6 +5,7 @@ import { Box, BoxProps, Button, ButtonProps, Typography } from '@mui/material'
 import { FooterProps } from '@components/atoms/Footer/Footer'
 import { TypographyProps } from '@mui/system'
 import { MainPanelProps } from '@components/atoms/MainPanel/MainPanel'
+import { FONTS } from '../../../constants/fonts'
 
 export type MainPanelViewProps = {} & MainPanelProps
 
@@ -25,8 +26,9 @@ const MainPanelView = ({}: MainPanelViewProps) => {
     } as BoxProps,
     MainTypo: {
       sx: {
-        marginTop: '10px',
+        marginTop: '20px',
         marginBottom: '8px',
+        fontFamily: FONTS.PRETENDARD,
         fontSize: '22px',
         lineHeight: '26px',
       },

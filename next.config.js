@@ -14,10 +14,10 @@ const nextConfig = {
         source: '/stores/:id*',
         destination: '/stores/:id*',
       },
-      {
-        source: '/:path*',
-        destination: 'http://localhost:8080/:path*',
-      },
+      // {
+      //   source: '/:path*',
+      //   destination: 'http://localhost:8080/:path*',
+      // },
     ]
   },
 }

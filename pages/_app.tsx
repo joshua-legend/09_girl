@@ -26,12 +26,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
 
   const routerPath = router.asPath.split('/')[1] || 'default' // default
   const layouts = {
+    404: DefaultLayout,
+    select: DefaultLayout,
     default: DefaultLayout,
     admin: AdminLayout,
     stores: UserLayout,
     login: LoginLayout,
   }
-  const Layout = layouts[routerPath]
+  const Layout = layouts[routerPath] || layouts.default
   return (
     <Layout>
       <CssBaseline />

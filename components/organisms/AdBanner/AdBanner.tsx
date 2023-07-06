@@ -1,9 +1,9 @@
 import React from 'react'
 import AdBannerView from '@components/organisms/AdBanner/AdBannerView'
-import { AdCardProps } from '@components/molecules/AdCard/AdCard'
+import { StoreCardProps } from '@components/molecules/StoreCard/StoreCard'
 
 export type AdBannerProps = {
-  adCards: AdCardProps[]
+  adCards: StoreCardProps[]
 }
 
 const AdBanner = (props: AdBannerProps) => {

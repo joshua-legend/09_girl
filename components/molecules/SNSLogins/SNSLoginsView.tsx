@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Card, CardContent, CardMedia, CardMediaProps, CardProps, Chip, Typography as Title, Typography as SubTitle, TypographyProps } from '@mui/material'
 import { COLORS } from '../../../constants/colors'
-import { AdCardProps } from '@components/molecules/AdCard/AdCard'
+import { StoreCardProps } from '@components/molecules/StoreCard/StoreCard'
 import { SNSLoginsProps } from '@components/molecules/SNSLogins/SNSLogins'
 import { mockSession } from 'next-auth/client/__tests__/helpers/mocks'
 import image = mockSession.user.image

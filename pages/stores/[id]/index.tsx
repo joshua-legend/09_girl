@@ -1,21 +1,18 @@
-import type { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next'
+import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult, NextPage } from 'next'
 import axios from 'axios'
 import IntroBanner, { IntroBannerProps } from '@components/molecules/IntroBanner/IntroBanner'
 import ItemPickerBanner, { ItemPickerBannerProps } from '@components/organisms/ItemPickerBanner/ItemPickerBanner'
 import AddressInputBanner from '@components/organisms/AddressInputBanner/AddressInputBanner'
 import React from 'react'
+import { verifyToken } from '../../../utils/verifyToken'
+import { requestData } from '../../../utils/requestData'
 
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { id } = context.query
-  const response = await axios.get(`${process.env.API_URL}/getItemsByStore/${id}`, {
-    withCredentials: true,
-  })
-
-  return {
-    props: {
-      ...response.data.data,
-    },
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<any>> => {
+  const isTokenValid = await verifyToken(context)
+  if (!isTokenValid) {
+    return { redirect: { destination: '/', permanent: false } }
   }
+  return await requestData('getItemsByStore', context)
 }
 
 type ProcessProps = {

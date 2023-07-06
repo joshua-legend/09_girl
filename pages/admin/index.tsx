@@ -7,10 +7,7 @@ import ItemInputForm from '@components/molecules/ItemInputForm/ItemInputForm'
 import DataGridForm from '@components/molecules/DataGridForm/DataGridForm'
 import DataButtonGroup from '@components/molecules/DataButtonGroup/DataButtonGroup'
 import { Box } from '@mui/material'
-
-type CheckAuthenticationResponse = {
-  success: boolean
-}
+import { CheckAuthenticationResponse } from '../../utils/verifyToken'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const clientCookie = context.req.headers.cookie ?? ''
