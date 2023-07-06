@@ -1,21 +1,28 @@
 import React, { ReactElement, useState } from 'react'
 import IconTitleInputView, { IconTitleInputViewProps } from '@components/molecules/IconTitleInput/IconTitleInputView'
-import IconTitleInputAction from '@components/molecules/IconTitleInput/IconTitleInputAction'
-import { AccountCircle, SvgIconComponent } from '@mui/icons-material'
+import IconTitleInputAction, { IconTitleInputActionHandlersResult } from '@components/molecules/IconTitleInput/IconTitleInputAction'
 
 export type IconTitleInputProps = {
   icon: ReactElement
+  text: string
+  type?: string
   title: string
   label: string
   placeholder: string
   isNecessary: boolean
   multiline: boolean
+  limitLength: number
 }
 const IconTitleInput = (props: IconTitleInputProps) => {
-  const actions = IconTitleInputAction()
+  const [text, setText] = useState(props.text ?? '')
+  const [currentLength, setCurrentLength] = useState(text.length)
+  const { limitLength } = props
+  const actions = IconTitleInputAction({ setCurrentLength, setText, limitLength })
   const newProps = {
     ...props,
-  } as IconTitleInputViewProps
+    currentLength,
+    ...actions,
+  } as IconTitleInputViewProps & IconTitleInputActionHandlersResult
 
   return <IconTitleInputView {...newProps} />
 }

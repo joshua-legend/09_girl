@@ -6,8 +6,6 @@ import Button from '@mui/material/Button'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 
 export type ItemCounterViewProps = {
-  name: string
-  price: number
   quantity?: number
 }
 

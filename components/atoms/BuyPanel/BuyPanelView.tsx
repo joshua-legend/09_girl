@@ -9,7 +9,7 @@ import { BuyPanelProps } from '@components/atoms/BuyPanel/BuyPanel'
 
 export type BuyPanelViewProps = {} & BuyPanelProps
 
-const BuyPanelView = (props: BuyPanelViewProps) => {
+const BuyPanelView = ({ onClick }: BuyPanelViewProps) => {
   const uiConfig = {
     Total: {
       sx: {
@@ -21,6 +21,7 @@ const BuyPanelView = (props: BuyPanelViewProps) => {
     Button: {
       variant: 'contained',
       disableElevation: true,
+      onClick,
       style: {
         width: '100%',
         backgroundColor: COLORS.PRIMARY,

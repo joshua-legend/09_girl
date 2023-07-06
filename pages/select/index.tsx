@@ -16,8 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   const { req } = context
   const JWT_SECRET = process.env.JWT_SECRET
   try {
-    console.log('test')
-    const token = req.cookies.token // Assuming token is stored in cookies
+    const token = req.cookies.token
     const payload = jwt.verify(token, JWT_SECRET)
     return { props: { payload } }
   } catch (error) {
@@ -28,7 +27,6 @@ type ProcessProps = {
   payload: any
 }
 const Index: NextPage = ({ payload }: ProcessProps) => {
-  console.log(payload)
   const uiConfig = {
     Container: {
       sx: {

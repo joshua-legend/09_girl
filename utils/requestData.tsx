@@ -1,7 +1,7 @@
 // utils/requestData.ts
 
 import axios from 'axios'
-import { GetServerSidePropsContext } from 'next'
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import { handleError } from './handleError'
 
 export const requestData = async (url: string, context: GetServerSidePropsContext) => {
@@ -11,9 +11,7 @@ export const requestData = async (url: string, context: GetServerSidePropsContex
       withCredentials: true,
     })
     return {
-      props: {
-        ...response.data.data,
-      },
+      ...response.data.data,
     }
   } catch (error) {
     return handleError(error)

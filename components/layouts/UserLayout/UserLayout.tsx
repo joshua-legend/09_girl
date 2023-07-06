@@ -12,7 +12,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     <>
       <Header isStore={true} />
       <UserLayoutView>{children}</UserLayoutView>
-      <BottomTotalBar />
+      {/*<BottomTotalBar />*/}
     </>
   )
 }

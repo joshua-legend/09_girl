@@ -48,7 +48,6 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
       },
     } as BoxProps,
   }
-
   return (
     <Banner {...uiConfig.Banner}>
       <Typography {...uiConfig.Title}>
@@ -59,7 +58,7 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
           return <IconTitleInput {...iconTitle} key={index} />
         })}
       </IconTitleBox>
-      <PickupDeliveryForm />
+      <PickupDeliveryForm {...props} />
     </Banner>
   )
 }

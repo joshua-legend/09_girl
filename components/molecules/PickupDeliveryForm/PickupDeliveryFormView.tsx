@@ -6,7 +6,7 @@ import PickupDeliveryRadioGroup, { PickupDeliveryRadioGroupProps } from '@compon
 import IconTitleInput, { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
 
 export type PickupDeliveryFormViewProps = {
-  iconTitlesInputsAddress: IconTitleInputProps[]
+  // iconTitlesInputsAddress: IconTitleInputProps[]
 } & PickupDeliveryFormProps &
   PickupDeliveryFormActionHandlersResult &
   PickupDeliveryRadioGroupProps

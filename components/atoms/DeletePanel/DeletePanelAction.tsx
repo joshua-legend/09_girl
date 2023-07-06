@@ -1,5 +1,4 @@
 import React, { SyntheticEvent } from 'react'
-import useTotalStore from '../../../store/useTotalStore'
 
 export type DeletePanelActionProps = {}
 export type DeletePanelActionHandlersResult = {
@@ -7,8 +6,9 @@ export type DeletePanelActionHandlersResult = {
 }
 
 const DeletePanelAction = (): DeletePanelActionHandlersResult => {
-  const { deleteAll } = useTotalStore()
-  const onDelete = () => deleteAll()
+  const onDelete = () => {
+    console.log('asd')
+  }
 
   return {
     onDelete,

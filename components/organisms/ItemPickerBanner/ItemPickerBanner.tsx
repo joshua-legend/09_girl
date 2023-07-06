@@ -11,8 +11,6 @@ const ItemPickerBanner = (props: ItemPickerBannerProps) => {
   const actionHandlers = ItemPickerBannerAction()
   const newProps = {
     items: props.items,
-    onAdd: actionHandlers.onAdd,
-    onSubtract: actionHandlers.onSubtract,
   } as ItemPickerBannerViewProps & ItemPickerBannerActionHandlers
   return <ItemPickerBannerView {...newProps} />
 }

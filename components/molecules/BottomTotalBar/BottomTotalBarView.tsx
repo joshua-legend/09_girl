@@ -5,10 +5,12 @@ import { BottomTotalBarProps } from '@components/molecules/BottomTotalBar/Bottom
 import Total, { TotalProps } from '@components/atoms/Total/Total'
 import BuyPanel from '@components/atoms/BuyPanel/BuyPanel'
 import DeletePanel from '@components/atoms/DeletePanel/DeletePanel'
+import { BottomTotalBarActionHandlersResult } from '@components/molecules/BottomTotalBar/BottomTotalBarAction'
 
 export type BottomTotalBarViewProps = {
   isAdminPage: boolean
-} & BottomTotalBarProps
+} & BottomTotalBarProps &
+  BottomTotalBarActionHandlersResult
 
 const BottomTotalBarView = (props: BottomTotalBarViewProps & TotalProps) => {
   const uiConfig = {
@@ -40,11 +42,11 @@ const BottomTotalBarView = (props: BottomTotalBarViewProps & TotalProps) => {
   return (
     <Footer {...uiConfig.Footer}>
       <NavbarBox {...uiConfig.NavbarBox}>
-        <Total {...props} />
+        <Total />
       </NavbarBox>
       <NavbarBox {...uiConfig.TotalCountBox}>
         <DeletePanel />
-        <BuyPanel />
+        <BuyPanel onClick={props.onClick} />
       </NavbarBox>
     </Footer>
   )
