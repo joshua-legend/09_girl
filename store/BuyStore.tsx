@@ -11,7 +11,7 @@ export type Item = {
 
 export type BuyStoreType = {
   itemsStore: Item[]
-  setItems: (items: ItemCounterProps[] | undefined) => void
+  setItems: (items: Item[]) => void
   increaseQuantity: (_id: any) => void
   decreaseQuantity: (_id: any) => void
 }

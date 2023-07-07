@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 type ProcessProps = {
   props: {}
 }
-const Index: NextPage = ({}: ProcessProps) => {
+const Index: NextPage = () => {
   const [isLogin, setIsLogin] = useState<boolean>(false)
   const [phoneNumber, setPhoneNumber] = useState<string>('')
 

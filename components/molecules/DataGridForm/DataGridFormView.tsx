@@ -22,7 +22,7 @@ const DataGridFormView = ({ rows, columns, selectionModel, setSelectionModel }: 
       pageSizeOptions={[5, 10]}
       checkboxSelection
       onRowSelectionModelChange={(newSelectionModel) => {
-        const selectedRowsData = newSelectionModel.map((id) => rows.find((row) => row._id === id)).map((value) => value._id)
+        const selectedRowsData = newSelectionModel.map((id) => rows.find((row) => row._id === id)?._id || '0')
         setSelectionModel(selectedRowsData)
       }}
       rowSelectionModel={selectionModel}

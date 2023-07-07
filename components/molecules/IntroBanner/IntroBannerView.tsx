@@ -21,7 +21,7 @@ const IntroBannerView = ({ storeName }: IntroBannerViewProps) => {
       },
     } as BoxProps,
     Main: {
-      variant: 'div',
+      variant: 'subtitle1',
       sx: {
         fontFamily: FONTS.PRETENDARD,
         fontSize: '24px',
@@ -32,7 +32,7 @@ const IntroBannerView = ({ storeName }: IntroBannerViewProps) => {
       },
     } as TypographyProps,
     Sub: {
-      variant: 'div',
+      variant: 'subtitle2',
       sx: {
         fontFamily: FONTS.PRETENDARD,
         fontSize: '15px',

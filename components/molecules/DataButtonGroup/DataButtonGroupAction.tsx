@@ -5,22 +5,22 @@ import { DataButtonGroupProps } from '@components/molecules/DataButtonGroup/Data
 
 export type DataButtonGroupActionProps = {}
 export type DataButtonGroupActionHandlersResult = {
-  deleteRows: (event: React.ChangeEvent<MouseEventHandler<HTMLAnchorElement> | undefined | MouseEventHandler<HTMLButtonElement>>) => void
-  refreshPage: (event: React.ChangeEvent<MouseEventHandler<HTMLAnchorElement> | undefined | MouseEventHandler<HTMLButtonElement>>) => void
-  postRows: (event: React.ChangeEvent<MouseEventHandler<HTMLAnchorElement> | undefined | MouseEventHandler<HTMLButtonElement>>) => void
+  deleteRows: (event: React.MouseEvent<HTMLButtonElement>) => void
+  refreshPage: (event: React.MouseEvent<HTMLButtonElement>) => void
+  postRows: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const DataButtonGroupAction = ({ storeID, originData, rows, setRows, selectionModel }: DataButtonGroupProps & DataButtonGroupActionProps): DataButtonGroupActionHandlersResult => {
   const router = useRouter()
 
-  const deleteRows = () => {
+  const deleteRows = (event: React.MouseEvent<HTMLButtonElement>) => {
     const filteredItems = rows.filter((item) => !selectionModel.includes(item._id))
     setRows(filteredItems)
   }
 
-  const refreshPage = () => router.reload()
+  const refreshPage = (event: React.MouseEvent<HTMLButtonElement>) => router.reload()
 
-  const postRows = async () => {
+  const postRows = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const toBeDeletedData = originData.filter((originItem) => {
       return !rows.some((rowItem) => rowItem._id === originItem._id)
     })

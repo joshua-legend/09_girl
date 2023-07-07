@@ -7,7 +7,7 @@ import DataGridForm, { DataGridFormProps } from '@components/molecules/DataGridF
 import DataButtonGroup, { DataButtonGroupProps } from '@components/molecules/DataButtonGroup/DataButtonGroup'
 import { Box } from '@mui/material'
 import { redirectIfError, redirectIfUnauthorized } from '../../../utils/redirects'
-import { CheckAuthenticationResponse } from '../index'
+import { CheckAuthenticationResponse } from '../../../utils/verifyToken'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const { id } = context.query
@@ -44,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     withCredentials: true,
   })
 
-  const originData = responseItems.data.data.items.map((item) => ({
+  const originData = responseItems.data.data.items.map((item: any) => ({
     ...item,
   }))
   return {
@@ -64,7 +64,7 @@ type ProcessProps = {
 
 const Index: NextPage<ProcessProps> = ({ id, storeName, items }: ProcessProps) => {
   const [rows, setRows] = useState<Item[]>(items)
-  const [selectionModel, setSelectionModel] = useState([])
+  const [selectionModel, setSelectionModel] = useState<any[]>([])
   const props = {
     input: { storeName, setRows } as ItemInputFormProps,
     grid: {

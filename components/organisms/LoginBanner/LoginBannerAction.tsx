@@ -12,7 +12,7 @@ export type LoginBannerActionHandlers = {
 
 const LoginBannerAction = (props: LoginBannerActionProps): LoginBannerActionHandlers => {
   const router = useRouter()
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault()
     const formData = new FormData(e.target)
     const username = formData.get('username')

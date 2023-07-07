@@ -56,7 +56,7 @@ const LoginBannerView = (props: LoginBannerViewProps) => {
     } as ButtonProps,
   }
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: any) => {
     axios
       .get(`${process.env.API_URL}/checkAuthentication`, { withCredentials: true })
       .then((response: AxiosResponse<ResType>) => {})

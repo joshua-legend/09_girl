@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 type ProcessProps = {
   props: {}
 }
-const Home: NextPage = ({}: ProcessProps) => {
+const Home: NextPage = () => {
   return (
     <>
       <MainPanel />

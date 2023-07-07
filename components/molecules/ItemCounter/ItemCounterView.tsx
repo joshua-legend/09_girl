@@ -7,7 +7,7 @@ import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 
 export type ItemCounterViewProps = {
   quantity?: number
-}
+} & ItemCounterProps
 
 const ItemCounterView = ({ name = 'Test 입니다.', price = 0, quantity, onPlusClick, onMinusClick }: ItemCounterViewProps & ItemCounterActionResult) => {
   const uiConfig = {

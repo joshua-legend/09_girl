@@ -21,14 +21,17 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   const getData = await requestData('getItemsByStore', context)
   const JWT_SECRET = process.env.JWT_SECRET
-  const token = context.req.cookies.token
+  if (!JWT_SECRET) {
+    throw new Error('Missing JWT_SECRET environment variable')
+  }
+  const token = context.req.cookies.token as string
   const payload = await jwt.verify(token, JWT_SECRET)
   const data = { props: { ...getData, payload } }
   return data
 }
 
 type ProcessProps = {
-  storeName?: IntroBannerProps
+  storeName: IntroBannerProps
   items?: ItemCounterProps[]
   payload?: any
 }
@@ -54,7 +57,7 @@ const Index: NextPage<ProcessProps> = ({ storeName, items, payload }: ProcessPro
 
   const data = {
     introBanner: {
-      storeName,
+      storeName: storeName.storeName,
     } as IntroBannerProps,
     addInputBanner: {
       mobile: payload.mobile.replace(/-/g, ''),

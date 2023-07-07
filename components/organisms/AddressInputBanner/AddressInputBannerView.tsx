@@ -20,6 +20,7 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
     Banner: {
       sx: {
         width: '100%',
+        marginTop: '10px',
       },
     } as BoxProps,
     Title: {

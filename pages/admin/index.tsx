@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     withCredentials: true,
   })
 
-  const originData = responseItems.data.data.items.map((item) => ({
+  const originData = responseItems.data.data.items.map((item: any) => ({
     ...item,
   }))
 
@@ -44,16 +44,16 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 export type Item = { name: string; price: number; _id: string }
 type ProcessProps = {
-  storeName?: IntroBannerProps
+  storeName: IntroBannerProps
   items: Item[]
 }
 
-const Index: NextPage<ProcessProps> = ({ items }: ProcessProps) => {
+const Index: NextPage<ProcessProps> = ({ items, storeName }: ProcessProps) => {
   const [rows, setRows] = useState<Item[]>(items)
-  const [selectionModel, setSelectionModel] = useState([])
+  const [selectionModel, setSelectionModel] = useState<any[]>([])
   return (
     <Box sx={{ padding: '1rem' }}>
-      <ItemInputForm setRows={setRows} />
+      <ItemInputForm storeName={storeName.storeName} setRows={setRows} />
       <DataGridForm rows={rows} selectionModel={selectionModel} setSelectionModel={setSelectionModel} />
       <DataButtonGroup storeID={1} originData={items} selectionModel={selectionModel} rows={rows} setRows={setRows} />
     </Box>

@@ -7,7 +7,7 @@ export type ItemCounterProps = {
   _id: any
   name: string
   price: number
-} & ItemCounterViewProps
+}
 
 const ItemCounter = (props: ItemCounterProps & ItemPickerBannerActionHandlers) => {
   const [quantity, setQuantity] = useState<number>(0)
@@ -17,7 +17,7 @@ const ItemCounter = (props: ItemCounterProps & ItemPickerBannerActionHandlers) =
     ...props,
     onPlusClick: actionsHandlers.onPlusClick,
     onMinusClick: actionsHandlers.onMinusClick,
-  } as ItemCounterViewProps & ItemCounterActionResult
+  } as ItemCounterProps & ItemCounterActionResult
   return <ItemCounterView {...newProps} />
 }
 

@@ -20,6 +20,7 @@ const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBanne
     Banner: {
       sx: {
         width: '100%',
+        marginTop: '10px',
       },
     } as BoxProps,
     Title: {
@@ -52,7 +53,6 @@ const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBanne
             return <ItemCounter {...item} {...props} key={index} />
           })}
         </ItemCountersBox>
-        <Divider />
       </Banner>
       <Divider />
     </>
