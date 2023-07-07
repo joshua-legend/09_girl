@@ -12,9 +12,11 @@ export type ItemCounterViewProps = {
 const ItemCounterView = ({ name = 'Test 입니다.', price = 0, quantity, onPlusClick, onMinusClick }: ItemCounterViewProps & ItemCounterActionResult) => {
   const uiConfig = {
     box: {
-      style: {
-        padding: '1rem',
+      sx: {
         border: `1px solid ${COLORS.TRANSPARENT_BLACK}`,
+        padding: '18px',
+        boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0.1)',
+        borderRadius: '10px',
       },
     } as BoxProps,
     listItem: {

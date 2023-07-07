@@ -36,20 +36,26 @@ const ItemPickerBannerView = (props: ItemPickerBannerViewProps & ItemPickerBanne
     ItemBox: {
       sx: {
         margin: '1rem 2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '15px',
       },
     } as BoxProps,
   }
 
   return (
-    <Banner {...uiConfig.Banner}>
-      <Typography {...uiConfig.Title}>원하는 공구템을 골라주세요!</Typography>
-      <ItemCountersBox {...uiConfig.ItemBox}>
-        {props.items.map((item, index) => {
-          return <ItemCounter {...item} {...props} key={index} />
-        })}
-      </ItemCountersBox>
+    <>
+      <Banner {...uiConfig.Banner}>
+        <Typography {...uiConfig.Title}>원하는 공구템을 골라주세요!</Typography>
+        <ItemCountersBox {...uiConfig.ItemBox}>
+          {props.items.map((item, index) => {
+            return <ItemCounter {...item} {...props} key={index} />
+          })}
+        </ItemCountersBox>
+        <Divider />
+      </Banner>
       <Divider />
-    </Banner>
+    </>
   )
 }
 

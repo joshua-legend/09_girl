@@ -13,7 +13,7 @@ const IntroBannerView = ({ storeName }: IntroBannerViewProps) => {
   const uiConfig = {
     Banner: {
       sx: {
-        padding: '20px',
+        padding: '20px 20px 10px',
         display: 'flex',
         flexDirection: 'column',
         gap: '5px',

@@ -24,12 +24,13 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
     } as BoxProps,
     Title: {
       sx: {
-        display: 'flex',
-        alignItems: 'center',
         paddingLeft: '20px',
         fontFamily: FONTS.PRETENDARD,
-        fontSize: '18px',
-        fontWeight: '500',
+        fontSize: '17px',
+        lineHeight: '115%',
+        fontWeight: '700',
+        letterSpacing: '-0.2px',
+        color: 'rgb(88, 89, 91)',
       },
     } as TypographyProps,
     ItemBox: {
@@ -51,7 +52,8 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
   return (
     <Banner {...uiConfig.Banner}>
       <Typography {...uiConfig.Title}>
-        <LocalShippingIcon {...uiConfig.Truck} /> 배송 정보 입력
+        {/*<LocalShippingIcon {...uiConfig.Truck} /> */}
+        배송 정보 입력
       </Typography>
       <IconTitleBox {...uiConfig.IconTitleBox}>
         {props.iconTitlesInputs.map((iconTitle, index) => {
