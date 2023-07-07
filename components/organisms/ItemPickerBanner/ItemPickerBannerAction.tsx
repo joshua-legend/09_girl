@@ -4,7 +4,7 @@ export type ItemPickerBannerActionProps = {}
 
 export type ItemPickerBannerActionHandlers = {}
 
-const ItemPickerBannerAction = (): ItemPickerBannerActionHandlers => {
+const ItemPickerBannerAction = ({}: ItemPickerBannerActionProps): ItemPickerBannerActionHandlers => {
   return {}
 }
 

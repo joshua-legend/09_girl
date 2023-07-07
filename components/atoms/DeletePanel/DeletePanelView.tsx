@@ -13,6 +13,7 @@ export type DeletePanelViewProps = {} & DeletePanelProps
 const DeletePanelView = (props: DeletePanelViewProps & DeletePanelActionHandlersResult) => {
   const uiConfig = {
     Delete: {
+      onClick: props.onDelete,
       sx: {
         display: 'flex',
         alignItems: 'center',
@@ -21,7 +22,6 @@ const DeletePanelView = (props: DeletePanelViewProps & DeletePanelActionHandlers
     Button: {
       variant: 'contained',
       disableElevation: true,
-      onClick: props.onDelete,
       style: {
         width: '100%',
         backgroundColor: COLORS.GRAY,

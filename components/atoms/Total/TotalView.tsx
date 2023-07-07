@@ -12,14 +12,14 @@ export type TotalViewProps = {} & TotalProps
 
 const TotalView = ({}: TotalViewProps) => {
   const [total, setTotal] = useState(0)
-  const { items } = BuyStore()
+  const { itemsStore } = BuyStore()
 
   useEffect(() => {
-    const total = items.reduce((accumulator, item) => {
+    const total = itemsStore.reduce((accumulator, item) => {
       return accumulator + item.price * item.quantity
     }, 0)
     setTotal(total)
-  }, [items])
+  }, [itemsStore])
 
   const uiConfig = {
     Total: {

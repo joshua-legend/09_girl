@@ -4,12 +4,9 @@ import { PICKUP_DELIVERY_CONSTANTS, PickupDeliveryFormProps } from '@components/
 import { PickupDeliveryFormActionHandlersResult } from '@components/molecules/PickupDeliveryForm/PickupDeliveryFormAction'
 import PickupDeliveryRadioGroup, { PickupDeliveryRadioGroupProps } from '@components/molecules/PickupDeliveryRadioGroup/PickupDeliveryRadioGroup'
 import IconTitleInput, { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
+import { Box } from '@mui/system'
 
-export type PickupDeliveryFormViewProps = {
-  // iconTitlesInputsAddress: IconTitleInputProps[]
-} & PickupDeliveryFormProps &
-  PickupDeliveryFormActionHandlersResult &
-  PickupDeliveryRadioGroupProps
+export type PickupDeliveryFormViewProps = {} & PickupDeliveryFormProps & PickupDeliveryFormActionHandlersResult & PickupDeliveryRadioGroupProps
 
 const PickupDeliveryFormView = (props: PickupDeliveryFormViewProps) => {
   const uiConfig = {
@@ -18,11 +15,20 @@ const PickupDeliveryFormView = (props: PickupDeliveryFormViewProps) => {
         margin: '1rem 2rem',
       },
     } as BoxProps,
+    PickupDeliveryInputFormBox: {
+      sx: {
+        display: props.value === PICKUP_DELIVERY_CONSTANTS.DELIVERY ? 'block' : 'none',
+      },
+    },
   }
   return (
     <PickupDeliveryRadioGroupBox {...uiConfig.PickupDeliveryFormBox}>
       <PickupDeliveryRadioGroup {...props} />
-      {props.value === PICKUP_DELIVERY_CONSTANTS.DELIVERY && props.iconTitlesInputsAddress.map((iconTitle, index) => <IconTitleInput {...iconTitle} key={index} />)}
+      <Box {...uiConfig.PickupDeliveryInputFormBox}>
+        {props.iconTitlesInputsAddress.map((iconTitle, index) => (
+          <IconTitleInput {...iconTitle} key={index} />
+        ))}
+      </Box>
     </PickupDeliveryRadioGroupBox>
   )
 }

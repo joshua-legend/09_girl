@@ -11,6 +11,8 @@ import test from 'node:test'
 import BuyStore from '../../../store/BuyStore'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 import BottomTotalBar from '@components/molecules/BottomTotalBar/BottomTotalBar'
+import AddressStore from '../../../store/AddressStore'
+import Snackbar from '@components/atoms/Snackbar/Snackbar'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<any>> => {
   const isTokenValid = await verifyToken(context)
@@ -43,13 +45,17 @@ const Index: NextPage<ProcessProps> = ({ storeName, items, payload }: ProcessPro
     }
   }, [items, setItems])
 
+  const { setAddress, addressInfo } = AddressStore()
+  useEffect(() => {
+    const { mobile, nickname, require, address, detail, common } = payload
+    const mobileReg = mobile.replace(/-/g, '')
+    setAddress({ mobile: mobileReg, nickname, require, address, detail, common })
+  }, [payload])
+
   const data = {
     introBanner: {
       storeName,
     } as IntroBannerProps,
-    itemPickerBanner: {
-      items,
-    } as ItemPickerBannerProps,
     addInputBanner: {
       mobile: payload.mobile.replace(/-/g, ''),
       nickname: payload.nickname,
@@ -59,9 +65,10 @@ const Index: NextPage<ProcessProps> = ({ storeName, items, payload }: ProcessPro
   return (
     <>
       <IntroBanner {...data.introBanner} />
-      <ItemPickerBanner {...data.itemPickerBanner} />
+      <ItemPickerBanner />
       <AddressInputBanner {...data.addInputBanner} />
       <BottomTotalBar />
+      <Snackbar />
     </>
   )
 }

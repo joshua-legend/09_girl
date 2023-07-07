@@ -16,10 +16,11 @@ export type IconTitleInputProps = {
 const IconTitleInput = (props: IconTitleInputProps) => {
   const [text, setText] = useState(props.text ?? '')
   const [currentLength, setCurrentLength] = useState(text.length)
-  const { limitLength } = props
-  const actions = IconTitleInputAction({ setCurrentLength, setText, limitLength })
+  const { limitLength, label } = props
+  const actions = IconTitleInputAction({ setCurrentLength, setText, limitLength, label })
   const newProps = {
     ...props,
+    text,
     currentLength,
     ...actions,
   } as IconTitleInputViewProps & IconTitleInputActionHandlersResult

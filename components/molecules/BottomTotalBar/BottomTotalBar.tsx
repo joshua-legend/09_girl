@@ -8,14 +8,13 @@ import BuyStore from '../../../store/BuyStore'
 export type BottomTotalBarProps = {}
 const BottomTotalBar = (props: BottomTotalBarProps) => {
   const router = useRouter()
-  const { items } = BuyStore()
+  const { itemsStore } = BuyStore()
+  useEffect(() => {}, [itemsStore])
 
-  useEffect(() => {}, [items])
-
-  const actions = BottomTotalBarAction({ items })
+  const actions = BottomTotalBarAction({ itemsStore })
   const newProps = {
-    items: items,
-    ...actions,
+    items: itemsStore,
+    onClick: actions.onClick,
     isAdminPage: router.pathname.includes('/admin'),
   } as BottomTotalBarViewProps & BottomTotalBarActionHandlersResult & TotalProps
 

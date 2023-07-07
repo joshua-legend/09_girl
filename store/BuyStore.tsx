@@ -1,6 +1,5 @@
 import { create } from 'zustand'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
-import { set } from 'zod'
 
 export type Item = {
   _id: any
@@ -11,24 +10,24 @@ export type Item = {
 }
 
 export type BuyStoreType = {
-  items: Item[]
+  itemsStore: Item[]
   setItems: (items: ItemCounterProps[] | undefined) => void
   increaseQuantity: (_id: any) => void
   decreaseQuantity: (_id: any) => void
 }
 
 const BuyStore = create<BuyStoreType>((set) => ({
-  items: [],
-  setItems: (items) => set(() => ({ items: items })),
+  itemsStore: [],
+  setItems: (items) => set(() => ({ itemsStore: items })),
   increaseQuantity: (id: any) =>
     set((state) => {
-      const newItems = state.items.map((i) => (i._id === id ? { ...i, quantity: i.quantity + 1 } : i))
-      return { items: newItems }
+      const newItems = state.itemsStore.map((i) => (i._id === id ? { ...i, quantity: i.quantity + 1 } : i))
+      return { itemsStore: newItems }
     }),
   decreaseQuantity: (id: any) =>
     set((state) => {
-      const newItems = state.items.map((i) => (i._id === id && i.quantity > 0 ? { ...i, quantity: i.quantity - 1 } : i))
-      return { items: newItems }
+      const newItems = state.itemsStore.map((i) => (i._id === id && i.quantity > 0 ? { ...i, quantity: i.quantity - 1 } : i))
+      return { itemsStore: newItems }
     }),
 }))
 

@@ -13,7 +13,7 @@ const AddressInputBanner = (props: AddressInputBannerProps) => {
       {
         icon: <PhoneIphoneIcon fontSize={'small'} />,
         title: '휴대폰 번호',
-        label: '번호 입력',
+        label: 'mobile',
         text: props.mobile,
         type: 'number',
         placeholder: 'ex) 01012345678',
@@ -24,7 +24,7 @@ const AddressInputBanner = (props: AddressInputBannerProps) => {
       {
         icon: <AccountCircle fontSize={'small'} />,
         title: '닉네임 (이름)',
-        label: '닉네임 입력',
+        label: 'nickname',
         text: props.nickname,
         isNecessary: true,
         multiline: false,
@@ -33,7 +33,7 @@ const AddressInputBanner = (props: AddressInputBannerProps) => {
       {
         icon: <AccountCircle fontSize={'small'} />,
         title: '배달 요청사항',
-        label: '배달 요청',
+        label: 'require',
         isNecessary: false,
         multiline: true,
         limitLength: 50,
@@ -43,7 +43,7 @@ const AddressInputBanner = (props: AddressInputBannerProps) => {
       {
         icon: <PhoneIphoneIcon fontSize={'small'} />,
         title: '주소 입력',
-        label: '주소 입력',
+        label: 'address',
         placeholder: 'ex) 101동',
         isNecessary: true,
         multiline: false,
@@ -52,7 +52,7 @@ const AddressInputBanner = (props: AddressInputBannerProps) => {
       {
         icon: <AccountCircle fontSize={'small'} />,
         title: '상세 주소 입력',
-        label: '상세 주소 입력',
+        label: 'detail',
         placeholder: 'ex) 101호',
         isNecessary: true,
         multiline: false,
@@ -61,7 +61,7 @@ const AddressInputBanner = (props: AddressInputBannerProps) => {
       {
         icon: <AccountCircle fontSize={'small'} />,
         title: '공동현관문 출입 정보',
-        label: '',
+        label: 'common',
         isNecessary: false,
         multiline: false,
         limitLength: 30,

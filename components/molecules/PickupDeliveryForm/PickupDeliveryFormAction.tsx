@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React from 'react'
 
 export type PickupDeliveryFormActionProps = {
   setValue: React.Dispatch<React.SetStateAction<string>>
