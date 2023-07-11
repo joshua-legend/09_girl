@@ -2,29 +2,22 @@ import React, { useEffect, useState } from 'react'
 import ItemCounterView, { ItemCounterViewProps } from '@components/molecules/ItemCounter/ItemCounterView'
 import ItemCounterAction, { ItemCounterActionProps, ItemCounterActionResult } from '@components/molecules/ItemCounter/ItemCounterAction'
 import { ItemPickerBannerActionHandlers } from '@components/organisms/ItemPickerBanner/ItemPickerBannerAction'
-import useTotalStore from '../../../store/useTotalStore'
 
 export type ItemCounterProps = {
-  name?: string
-  price?: number
-  isNeedOption?: boolean
+  _id: any
+  name: string
+  price: number
 }
 
 const ItemCounter = (props: ItemCounterProps & ItemPickerBannerActionHandlers) => {
-  const { total } = useTotalStore()
   const [quantity, setQuantity] = useState<number>(0)
   const actionsHandlers = ItemCounterAction({ setQuantity, ...props })
-  const { name, price, isNeedOption } = props
   const newProps = {
-    name,
-    price,
-    isNeedOption,
     quantity,
-    ...actionsHandlers,
-  } as ItemCounterViewProps & ItemCounterActionResult
-  useEffect(() => {
-    if (total === 0) setQuantity(0)
-  }, [total])
+    ...props,
+    onPlusClick: actionsHandlers.onPlusClick,
+    onMinusClick: actionsHandlers.onMinusClick,
+  } as ItemCounterProps & ItemCounterActionResult
   return <ItemCounterView {...newProps} />
 }
 

@@ -1,5 +1,5 @@
 import React, { SyntheticEvent } from 'react'
-import useTotalStore from '../../../store/useTotalStore'
+import BuyStore from '../../../store/BuyStore'
 
 export type DeletePanelActionProps = {}
 export type DeletePanelActionHandlersResult = {
@@ -7,8 +7,15 @@ export type DeletePanelActionHandlersResult = {
 }
 
 const DeletePanelAction = (): DeletePanelActionHandlersResult => {
-  const { deleteAll } = useTotalStore()
-  const onDelete = () => deleteAll()
+  const { setItems, itemsStore } = BuyStore()
+
+  const onDelete = () => {
+    const itemsWithQuantity = itemsStore.map((item) => ({
+      ...item,
+      quantity: 0,
+    }))
+    setItems(itemsWithQuantity)
+  }
 
   return {
     onDelete,

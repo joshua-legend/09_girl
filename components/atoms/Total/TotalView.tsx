@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Box as Total, BoxProps, Button, ButtonProps, TypographyProps } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import { FONTS } from '@styles/fonts'
-import { COLORS } from '@styles/colors'
-import { TotalProps } from '@components/atoms/Total/Total'
+import { FONTS } from '../../../constants/fonts'
+import { COLORS } from '../../../constants/colors'
+import total, { TotalProps } from '@components/atoms/Total/Total'
+import BuyStore from '../../../store/BuyStore'
 
 export type TotalViewProps = {} & TotalProps
 
-const TotalView = ({ total = 0 }: TotalViewProps) => {
+const TotalView = ({}: TotalViewProps) => {
+  const [total, setTotal] = useState(0)
+  const { itemsStore } = BuyStore()
+
+  useEffect(() => {
+    const total = itemsStore.reduce((accumulator, item) => {
+      return accumulator + item.price * item.quantity
+    }, 0)
+    setTotal(total)
+  }, [itemsStore])
+
   const uiConfig = {
     Total: {
       sx: {
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
       },
     } as BoxProps,
     BuyTypo: {

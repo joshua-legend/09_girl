@@ -1,24 +1,15 @@
 import React, { ChangeEvent, useState } from 'react'
 import { Box as IconWithTitle, Box as Text, BoxProps, Chip, ChipProps, Grid, InputAdornment, Stack, StackProps, TextField, TextFieldProps, Typography, TypographyProps } from '@mui/material'
 import { IconTitleInputProps } from '@components/molecules/IconTitleInput/IconTitleInput'
-import { AccountCircle } from '@mui/icons-material'
-import { COLORS } from '@styles/colors'
-import { FONTS } from '@styles/fonts'
+import { COLORS } from '../../../constants/colors'
+import { FONTS } from '../../../constants/fonts'
+import { IconTitleInputActionHandlersResult } from '@components/molecules/IconTitleInput/IconTitleInputAction'
 
-export type IconTitleInputViewProps = {} & IconTitleInputProps
+export type IconTitleInputViewProps = {
+  currentLength: number
+} & IconTitleInputProps
 
-const IconTitleInputView = (props: IconTitleInputViewProps) => {
-  const [currentLength, setCurrentLength] = useState(0)
-
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = event.target
-    if (value.length <= 50) {
-      setCurrentLength(value.length)
-    } else {
-      event.target.value = value.substring(0, 50)
-    }
-  }
-
+const IconTitleInputView = (props: IconTitleInputViewProps & IconTitleInputActionHandlersResult) => {
   const uiConfig = {
     Stack: {
       sx: {
@@ -56,12 +47,14 @@ const IconTitleInputView = (props: IconTitleInputViewProps) => {
       placeholder: props.placeholder,
       multiline: props.multiline,
       rows: 4,
-      onChange: handleChange,
+      type: props.type ?? 'text',
+      value: props.text,
+      onChange: props.handleChange,
       InputProps: props.multiline
         ? {
             endAdornment: (
               <InputAdornment position={'start'}>
-                {currentLength}/{50}
+                {props.currentLength}/{props.limitLength}
               </InputAdornment>
             ),
           }

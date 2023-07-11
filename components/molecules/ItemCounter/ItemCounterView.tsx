@@ -1,22 +1,22 @@
 import React from 'react'
 import { Box, BoxProps, ButtonGroup, ButtonGroupProps, ButtonProps, Chip, ChipProps, IconButton, ListItem, ListItemProps, ListItemText, ListItemTextProps, Tooltip } from '@mui/material'
 import { ItemCounterActionResult } from './ItemCounterAction'
-import { COLORS } from '@styles/colors'
+import { COLORS } from '../../../constants/colors'
 import Button from '@mui/material/Button'
-import { FONTS } from '@styles/fonts'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 
 export type ItemCounterViewProps = {
-  quantity: number
-} & ItemCounterProps &
-  ItemCounterActionResult
+  quantity?: number
+} & ItemCounterProps
 
-const ItemCounterView = ({ name = 'Test 입니다.', price = 10000, quantity, isNeedOption = false, onPlusClick, onMinusClick }: ItemCounterViewProps) => {
+const ItemCounterView = ({ name = 'Test 입니다.', price = 0, quantity, onPlusClick, onMinusClick }: ItemCounterViewProps & ItemCounterActionResult) => {
   const uiConfig = {
     box: {
-      style: {
-        padding: '1rem',
+      sx: {
         border: `1px solid ${COLORS.TRANSPARENT_BLACK}`,
+        padding: '18px',
+        boxShadow: '0 3px 5px 2px rgba(0, 0, 0, 0.1)',
+        borderRadius: '10px',
       },
     } as BoxProps,
     listItem: {
@@ -63,7 +63,6 @@ const ItemCounterView = ({ name = 'Test 입니다.', price = 10000, quantity, is
     <Box {...uiConfig.box}>
       <ListItem {...uiConfig.listItem}>
         <ListItemText {...uiConfig.listItemText} />
-        {isNeedOption ? <Chip size={'small'} sx={{ fontSize: '14px', margin: '0.5rem 0.5rem 0.5rem 0', fontFamily: FONTS.TITLE }} label='옵션주의!' /> : null}
         <ButtonGroup {...uiConfig.buttonGroup} aria-label='Disabled elevation buttons'>
           <Button {...uiConfig.minusButton}>-</Button>
           <Button {...uiConfig.quantityButton}>{quantity ?? 0}</Button>

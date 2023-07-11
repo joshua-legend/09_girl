@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { ItemPickerBannerActionHandlers } from '@components/organisms/ItemPickerBanner/ItemPickerBannerAction'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
-import useTotalStore, { TotalStore } from '../../../store/useTotalStore'
+import BuyStore, { Item } from '../../../store/BuyStore'
 
 export type ItemCounterActionProps = {
   setQuantity: React.Dispatch<React.SetStateAction<number>>
@@ -12,18 +12,20 @@ export type ItemCounterActionResult = {
   onPlusClick: () => void
 }
 
-const ItemCounterAction = ({ price, setQuantity, onAdd, onSubtract }: ItemCounterActionProps): ItemCounterActionResult => {
+const ItemCounterAction = ({ setQuantity, _id }: ItemCounterActionProps): ItemCounterActionResult => {
+  const { increaseQuantity, decreaseQuantity } = BuyStore()
+
   const onMinusClick = () =>
     setQuantity((prevQuantity) => {
       if (prevQuantity === 0) return prevQuantity
       else {
-        onSubtract(price ?? 0)
+        decreaseQuantity(_id)
         return prevQuantity - 1
       }
     })
   const onPlusClick = () => {
     setQuantity((prevQuantity) => {
-      onAdd(price ?? 0)
+      increaseQuantity(_id)
       return prevQuantity + 1
     })
   }

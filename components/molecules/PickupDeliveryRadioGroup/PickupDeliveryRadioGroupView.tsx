@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box as NavbarBox, Box as Footer, BoxProps, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, RadioGroupProps } from '@mui/material'
 import { PickupDeliveryRadioGroupProps } from '@components/molecules/PickupDeliveryRadioGroup/PickupDeliveryRadioGroup'
-import { FONTS } from '@styles/fonts'
+import { FONTS } from '../../../constants/fonts'
 import { PickupDeliveryRadioGroupActionHandlersResult } from '@components/molecules/PickupDeliveryRadioGroup/PickupDeliveryRadioGroupAction'
 import { PICKUP_DELIVERY_CONSTANTS } from '@components/molecules/PickupDeliveryForm/PickupDeliveryForm'
 

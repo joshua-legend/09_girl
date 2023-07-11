@@ -3,13 +3,13 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { Box as Total, BoxProps, Button, ButtonProps, TypographyProps } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import { FONTS } from '@styles/fonts'
-import { COLORS } from '@styles/colors'
+import { FONTS } from '../../../constants/fonts'
+import { COLORS } from '../../../constants/colors'
 import { BuyPanelProps } from '@components/atoms/BuyPanel/BuyPanel'
 
 export type BuyPanelViewProps = {} & BuyPanelProps
 
-const BuyPanelView = (props: BuyPanelViewProps) => {
+const BuyPanelView = ({ onClick }: BuyPanelViewProps) => {
   const uiConfig = {
     Total: {
       sx: {
@@ -21,6 +21,7 @@ const BuyPanelView = (props: BuyPanelViewProps) => {
     Button: {
       variant: 'contained',
       disableElevation: true,
+      onClick,
       style: {
         width: '100%',
         backgroundColor: COLORS.PRIMARY,

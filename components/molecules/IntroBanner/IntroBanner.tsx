@@ -1,7 +1,7 @@
 import IntroBannerView from '@components/molecules/IntroBanner/IntroBannerView'
 
 export type IntroBannerProps = {
-  storeName?: string
+  storeName: string
 }
 
 const IntroBanner = (props: IntroBannerProps) => {
