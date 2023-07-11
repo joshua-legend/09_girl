@@ -1,4 +1,3 @@
-import React from 'react'
 import IntroBannerView from '@components/molecules/IntroBanner/IntroBannerView'
 
 export type IntroBannerProps = {

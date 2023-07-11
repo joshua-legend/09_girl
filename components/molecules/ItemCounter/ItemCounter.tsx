@@ -12,10 +12,6 @@ export type ItemCounterProps = {
 
 const ItemCounter = (props: ItemCounterProps & ItemPickerBannerActionHandlers) => {
   const { total } = useTotalStore()
-  useEffect(() => {
-    if (total === 0) setQuantity(0)
-  }, [total])
-
   const [quantity, setQuantity] = useState<number>(0)
   const actionsHandlers = ItemCounterAction({ setQuantity, ...props })
   const { name, price, isNeedOption } = props
@@ -26,6 +22,9 @@ const ItemCounter = (props: ItemCounterProps & ItemPickerBannerActionHandlers) =
     quantity,
     ...actionsHandlers,
   } as ItemCounterViewProps & ItemCounterActionResult
+  useEffect(() => {
+    if (total === 0) setQuantity(0)
+  }, [total])
   return <ItemCounterView {...newProps} />
 }
 
