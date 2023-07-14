@@ -1,36 +1,23 @@
 import type { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
+import PATH from '../../constants/path'
 import { IntroBannerProps } from '@components/molecules/IntroBanner/IntroBanner'
-import ItemInputForm, { ItemInputFormProps } from '@components/molecules/ItemInputForm/ItemInputForm'
-import DataGridForm, { DataGridFormProps } from '@components/molecules/DataGridForm/DataGridForm'
-import DataButtonGroup, { DataButtonGroupProps } from '@components/molecules/DataButtonGroup/DataButtonGroup'
+import ItemInputForm from '@components/molecules/ItemInputForm/ItemInputForm'
+import DataGridForm from '@components/molecules/DataGridForm/DataGridForm'
+import DataButtonGroup from '@components/molecules/DataButtonGroup/DataButtonGroup'
 import { Box } from '@mui/material'
-import { redirectIfError, redirectIfUnauthorized } from '../../../utils/redirects'
-import { CheckAuthenticationResponse } from '../../../utils/verifyToken'
+import { CheckAuthenticationResponse } from '../../utils/verifyToken'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { id } = context.query
-  if (![1, 2, 3].includes(parseInt(String(id)) || 0)) return redirectIfError()
-
-  // if ([1, 2, 3].includes(parseInt(String(!!id)) || 0)) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: PATH.ERROR404,
-  //     },
-  //   }
-  // }
-
-  const clientCookie = context.req.headers.cookie ?? ''
-  const response = await axios.get<CheckAuthenticationResponse>(`${process.env.API_URL}/checkAuthentication`, {
-    headers: {
-      ...(clientCookie && { Cookie: clientCookie }),
-    },
-    withCredentials: true,
-  })
-
-  if (!response?.data.success) redirectIfUnauthorized()
+  // const clientCookie = context.req.headers.cookie ?? ''
+  // const response = await axios.get<CheckAuthenticationResponse>(`${process.env.API_URL}/checkAuthentication`, {
+  //   headers: {
+  //     ...(clientCookie && { Cookie: clientCookie }),
+  //   },
+  //   withCredentials: true,
+  // })
+  //
   // if (!response?.data.success) {
   //   return {
   //     redirect: {
@@ -40,16 +27,16 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   //   }
   // }
 
-  const responseItems = await axios.get(`${process.env.API_URL}/getItemsByStore/${id}`, {
+  const responseItems = await axios.get(`${process.env.API_URL}/getItemsByStore/1`, {
     withCredentials: true,
   })
 
   const originData = responseItems.data.data.items.map((item: any) => ({
     ...item,
   }))
+
   return {
     props: {
-      id,
       storeName: responseItems.data.data.storeName,
       items: originData,
     },
@@ -57,34 +44,18 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 export type Item = { name: string; price: number; _id: string }
 type ProcessProps = {
-  id: number
-  storeName?: string
+  storeName: IntroBannerProps
   items: Item[]
 }
 
-const Index: NextPage<ProcessProps> = ({ id, storeName, items }: ProcessProps) => {
+const Index: NextPage<ProcessProps> = ({ items, storeName }: ProcessProps) => {
   const [rows, setRows] = useState<Item[]>(items)
   const [selectionModel, setSelectionModel] = useState<any[]>([])
-  const props = {
-    input: { storeName, setRows } as ItemInputFormProps,
-    grid: {
-      rows,
-      selectionModel,
-      setSelectionModel,
-    } as DataGridFormProps,
-    buttons: {
-      rows,
-      setRows,
-      storeID: id,
-      originData: items,
-      selectionModel,
-    } as DataButtonGroupProps,
-  }
   return (
     <Box sx={{ padding: '1rem' }}>
-      <ItemInputForm {...props.input} />
-      <DataGridForm {...props.grid} />
-      <DataButtonGroup {...props.buttons} />
+      <ItemInputForm storeName={storeName.storeName} setRows={setRows} />
+      <DataGridForm rows={rows} selectionModel={selectionModel} setSelectionModel={setSelectionModel} />
+      <DataButtonGroup storeID={1} originData={items} selectionModel={selectionModel} rows={rows} setRows={setRows} />
     </Box>
   )
 }
