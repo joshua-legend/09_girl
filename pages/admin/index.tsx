@@ -8,6 +8,9 @@ import DataGridForm from '@components/molecules/DataGridForm/DataGridForm'
 import DataButtonGroup from '@components/molecules/DataButtonGroup/DataButtonGroup'
 import { Box } from '@mui/material'
 import { CheckAuthenticationResponse } from '../../utils/verifyToken'
+import EventInputForm from '@components/molecules/EventInputForm/EventInputForm'
+import SendButton from '@components/molecules/SendButton/SendButton'
+import PageGridForm from '@components/molecules/PageGridForm/PageGridForm'
 import PageInputForm from '@components/molecules/PageInputForm/PageInputForm'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -28,37 +31,66 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   //   }
   // }
 
-  const responseItems = await axios.get(`${process.env.API_URL}/getItemsByStore/1`, {
+  const unyangItems = await axios.get(`${process.env.API_URL}/getPagesByStore/1`, {
+    withCredentials: true,
+  })
+  const janggiItems = await axios.get(`${process.env.API_URL}/getPagesByStore/2`, {
+    withCredentials: true,
+  })
+  const gochunItems = await axios.get(`${process.env.API_URL}/getPagesByStore/3`, {
     withCredentials: true,
   })
 
-  const originData = responseItems.data.data.items.map((item: any) => ({
-    ...item,
-  }))
-
+  const unyangData = unyangItems.data.data.items
+  const janggiData = janggiItems.data.data.items
+  const gochonData = gochunItems.data.data.items
   return {
     props: {
-      storeName: responseItems.data.data.storeName,
-      items: originData,
+      unyangData,
+      janggiData,
+      gochonData,
     },
   }
 }
-export type Item = { name: string; price: number; _id: string }
-type ProcessProps = {
-  storeName: IntroBannerProps
+
+export type PageType = {
+  _id: string
+  title: string
+  startDay: Date | string
+  endDay: Date | string
+  store: string
   items: Item[]
 }
 
-const Index: NextPage<ProcessProps> = ({ items, storeName }: ProcessProps) => {
-  const [rows, setRows] = useState<Item[]>(items)
-  const [selectionModel, setSelectionModel] = useState<any[]>([])
+export type Item = { name: string; price: number; _id: string }
+type ProcessProps = {
+  unyangData: PageType[]
+  janggiData: PageType[]
+  gochonData: PageType[]
+}
+
+const Index: NextPage<ProcessProps> = ({ unyangData, janggiData, gochonData }: ProcessProps) => {
+  const [unyangRows, setUnyangRows] = useState<PageType[]>(unyangData)
+  const [unyangModel, setUnyangModel] = useState<any[]>([])
+  const [janggiRows, setJanggiRows] = useState<PageType[]>(janggiData)
+  const [janggiModel, setJanggiModel] = useState<any[]>([])
+  const [gochonRows, setGochonRows] = useState<PageType[]>(gochonData)
+  const [gochonModel, setGochonModel] = useState<any[]>([])
   return (
-    <Box sx={{ padding: '1rem 3rem' }}>
-      <PageInputForm storeName={storeName.storeName} setRows={setRows} />
-      <ItemInputForm storeName={storeName.storeName} setRows={setRows} />
-      <DataGridForm rows={rows} selectionModel={selectionModel} setSelectionModel={setSelectionModel} />
-      <DataButtonGroup storeID={1} originData={items} selectionModel={selectionModel} rows={rows} setRows={setRows} />
-    </Box>
+    <>
+      <Box sx={{ padding: '3rem' }}>
+        <PageInputForm name={'고촌점'} setRows={setGochonRows} rows={gochonRows} selectionModel={gochonModel} />
+        <PageGridForm rows={gochonRows} selectionModel={gochonModel} setSelectionModel={setGochonModel} />
+      </Box>
+      <Box sx={{ padding: '3rem' }}>
+        <PageInputForm name={'장기점'} setRows={setJanggiRows} rows={janggiRows} selectionModel={janggiModel} />
+        <PageGridForm rows={janggiRows} selectionModel={janggiModel} setSelectionModel={setJanggiModel} />
+      </Box>
+      <Box sx={{ padding: '3rem' }}>
+        <PageInputForm name={'운양점'} setRows={setUnyangRows} rows={unyangRows} selectionModel={unyangModel} />
+        <PageGridForm rows={unyangRows} selectionModel={unyangModel} setSelectionModel={setUnyangModel} />
+      </Box>
+    </>
   )
 }
 

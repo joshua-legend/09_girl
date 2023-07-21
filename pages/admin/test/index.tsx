@@ -10,8 +10,8 @@ import { redirectIfError, redirectIfUnauthorized } from '../../../utils/redirect
 import { CheckAuthenticationResponse } from '../../../utils/verifyToken'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { id } = context.query
-  if (![1, 2, 3].includes(parseInt(String(id)) || 0)) return redirectIfError()
+  // const { id } = context.query
+  // if (![1, 2, 3].includes(parseInt(String(id)) || 0)) return redirectIfError()
 
   // if ([1, 2, 3].includes(parseInt(String(!!id)) || 0)) {
   //   return {
@@ -22,15 +22,15 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   //   }
   // }
 
-  const clientCookie = context.req.headers.cookie ?? ''
-  const response = await axios.get<CheckAuthenticationResponse>(`${process.env.API_URL}/checkAuthentication`, {
-    headers: {
-      ...(clientCookie && { Cookie: clientCookie }),
-    },
-    withCredentials: true,
-  })
-
-  if (!response?.data.success) redirectIfUnauthorized()
+  // const clientCookie = context.req.headers.cookie ?? ''
+  // const response = await axios.get<CheckAuthenticationResponse>(`${process.env.API_URL}/checkAuthentication`, {
+  //   headers: {
+  //     ...(clientCookie && { Cookie: clientCookie }),
+  //   },
+  //   withCredentials: true,
+  // })
+  //
+  // if (!response?.data.success) redirectIfUnauthorized()
   // if (!response?.data.success) {
   //   return {
   //     redirect: {
@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   //   }
   // }
 
-  const responseItems = await axios.get(`${process.env.API_URL}/getItemsByStore/${id}`, {
+  const responseItems = await axios.get(`${process.env.API_URL}/getItemsByStore/1`, {
     withCredentials: true,
   })
 
@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }))
   return {
     props: {
-      id,
+      id: 1,
       storeName: responseItems.data.data.storeName,
       items: originData,
     },
@@ -58,15 +58,15 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 export type Item = { name: string; price: number; _id: string }
 type ProcessProps = {
   id: number
-  storeName?: string
+  title?: string
   items: Item[]
 }
 
-const Index: NextPage<ProcessProps> = ({ id, storeName, items }: ProcessProps) => {
+const Index: NextPage<ProcessProps> = ({ id, title, items }: ProcessProps) => {
   const [rows, setRows] = useState<Item[]>(items)
   const [selectionModel, setSelectionModel] = useState<any[]>([])
   const props = {
-    input: { storeName, setRows } as ItemInputFormProps,
+    input: { title: title, setRows } as ItemInputFormProps,
     grid: {
       rows,
       selectionModel,

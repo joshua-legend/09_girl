@@ -1,24 +1,22 @@
 import React, { useState } from 'react'
-import { ItemInputFormViewProps } from '@components/molecules/ItemInputForm/ItemInputFormView'
-import { ItemInputFormActionHandlersResult } from '@components/molecules/ItemInputForm/ItemInputFormAction'
-import { Item } from '../../../pages/admin'
-import PageInputFormView from '@components/molecules/PageInputForm/PageInputFormView'
+import ItemInputFormView, { ItemInputFormViewProps } from '@components/molecules/ItemInputForm/ItemInputFormView'
+import ItemInputFormAction, { ItemInputFormActionHandlersResult } from '@components/molecules/ItemInputForm/ItemInputFormAction'
+import { Item, PageType } from '../../../pages/admin'
 import PageInputFormAction from '@components/molecules/PageInputForm/PageInputFormAction'
+import PageInputFormView from '@components/molecules/PageInputForm/PageInputFormView'
 
 export type PageInputFormProps = {
-  setRows: React.Dispatch<React.SetStateAction<Item[]>>
-  storeName: string
+  name: string
+  rows: PageType[]
+  setRows: React.Dispatch<React.SetStateAction<PageType[]>>
+  selectionModel: any
 }
-const PageInputForm = ({ setRows, storeName }: PageInputFormProps) => {
-  const [name, setName] = useState<string>('')
-  const [price, setPrice] = useState<string>('')
-  const actions = PageInputFormAction({ name, setName, price, setPrice, setRows, storeName })
+const PageInputForm = ({ name, rows, setRows, selectionModel }: PageInputFormProps) => {
+  const actions = PageInputFormAction({ rows, setRows, selectionModel })
   const newProps = {
     name,
-    price,
-    storeName,
     ...actions,
-  } as PageInputFormProps & ItemInputFormViewProps & ItemInputFormActionHandlersResult
+  } as PageInputFormProps
 
   return <PageInputFormView {...newProps} />
 }

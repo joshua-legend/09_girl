@@ -9,7 +9,7 @@ import Divider from '@components/atoms/Divider/Divider'
 
 export type IntroBannerViewProps = {} & IntroBannerProps
 
-const IntroBannerView = ({ storeName }: IntroBannerViewProps) => {
+const IntroBannerView = ({ title }: IntroBannerViewProps) => {
   const uiConfig = {
     Banner: {
       sx: {
@@ -44,11 +44,13 @@ const IntroBannerView = ({ storeName }: IntroBannerViewProps) => {
     } as TypographyProps,
   }
 
+  //title로 변경해라
+
   return (
     <>
       <Banner {...uiConfig.Banner}>
-        <Typography {...uiConfig.Main}>공구하는 뇨자 {storeName}</Typography>
-        <Typography {...uiConfig.Sub}>김포시 고촌읍 수기로 136 캐파2단지 상가 502-2동 201호</Typography>
+        <Typography {...uiConfig.Main}>{title}</Typography>
+        <Typography {...uiConfig.Sub}>고촌점</Typography>
       </Banner>
       <Divider />
     </>

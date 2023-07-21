@@ -1,11 +1,11 @@
 import type { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
-import axios, { AxiosResponse } from 'axios'
-import { IntroBannerProps } from '@components/molecules/IntroBanner/IntroBanner'
 import ItemInputForm from '@components/molecules/ItemInputForm/ItemInputForm'
 import DataGridForm from '@components/molecules/DataGridForm/DataGridForm'
-import DataButtonGroup from '@components/molecules/DataButtonGroup/DataButtonGroup'
-import { Box, TextField } from '@mui/material'
+import { Box } from '@mui/material'
+import EventInputForm from '@components/molecules/EventInputForm/EventInputForm'
+import SendButton from '@components/molecules/SendButton/SendButton'
+import axios from 'axios'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   // const clientCookie = context.req.headers.cookie ?? ''
@@ -25,35 +25,54 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   //   }
   // }
 
-  const responseItems = await axios.get(`${process.env.API_URL}/getItemsByStore/1`, {
+  // const responseItems = await axios.get(`${process.env.API_URL}/getItemsByStore/1`, {
+  //   withCredentials: true,
+  // })
+  //
+  // const originData = responseItems.data.data.items.map((item: any) => ({
+  //   ...item,
+  // }))
+
+  const posts = await axios.get(`${process.env.API_URL}/getBandPosts`, {
     withCredentials: true,
   })
 
-  const originData = responseItems.data.data.items.map((item: any) => ({
-    ...item,
-  }))
-
   return {
     props: {
-      storeName: responseItems.data.data.storeName,
-      items: originData,
+      items: [],
+      posts: posts.data.data,
     },
   }
 }
-export type Item = { name: string; price: number; _id: string }
-type ProcessProps = {
-  title: IntroBannerProps
-  items: Item[]
+
+export type EventInfo = {
+  title: string
+  startDay: Date | string
+  endDay: Date | string
+  store: string
+  post_key: string
 }
 
-const Index: NextPage<ProcessProps> = ({ items, title }: ProcessProps) => {
+export type Item = { name: string; price: number; _id: string }
+export type BandPost = {
+  content: string
+  post_key: string
+}
+type ProcessProps = {
+  items: Item[]
+  posts: BandPost[]
+}
+
+const Index: NextPage<ProcessProps> = ({ items, posts }: ProcessProps) => {
+  const [info, setInfo] = useState<EventInfo>({ title: '', startDay: '', endDay: '', store: 'gochon_pages', post_key: '' })
   const [rows, setRows] = useState<Item[]>(items)
   const [selectionModel, setSelectionModel] = useState<any[]>([])
   return (
-    <Box sx={{ padding: '1rem' }}>
-      <ItemInputForm storeName={title.title} setRows={setRows} />
+    <Box sx={{ padding: '3rem' }}>
+      <EventInputForm info={info} setInfo={setInfo} post={posts} />
+      <ItemInputForm setRows={setRows} rows={rows} selectionModel={selectionModel} />
       <DataGridForm rows={rows} selectionModel={selectionModel} setSelectionModel={setSelectionModel} />
-      <DataButtonGroup storeID={1} originData={items} selectionModel={selectionModel} rows={rows} setRows={setRows} />
+      <SendButton rows={rows} info={info} />
     </Box>
   )
 }

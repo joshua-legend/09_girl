@@ -1,44 +1,31 @@
 import React, { SyntheticEvent } from 'react'
+import { Item, PageType } from '../../../pages/admin'
 import { v4 as uuidv4 } from 'uuid'
-import { ItemInputFormProps } from '@components/molecules/ItemInputForm/ItemInputForm'
+import { useRouter } from 'next/router'
 
 export type PageInputFormActionProps = {
-  name: string
-  setName: React.Dispatch<React.SetStateAction<string>>
-  price: string
-  setPrice: React.Dispatch<React.SetStateAction<string>>
+  rows: PageType[]
+  setRows: React.Dispatch<React.SetStateAction<PageType[]>>
+  selectionModel: any
 }
 export type PageInputFormActionHandlersResult = {
   addItem: () => void
-  handleName: (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
-  handlePrice: (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
+  deleteRows: (event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const PageInputFormAction = ({ name, setName, price, setPrice, setRows }: ItemInputFormProps & PageInputFormActionProps): PageInputFormActionHandlersResult => {
+const PageInputFormAction = ({ rows, setRows, selectionModel }: PageInputFormActionProps): PageInputFormActionHandlersResult => {
+  const router = useRouter()
+
   const addItem = () => {
-    setRows((prevState) => [
-      ...prevState,
-      {
-        name,
-        price: parseInt(price) || 0,
-        _id: uuidv4(),
-      },
-    ])
-    setName('')
-    setPrice('')
+    router.push('/admin/register')
   }
-
-  const handleName = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setName(event.target.value)
+  const deleteRows = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const filteredItems = rows.filter((item) => !selectionModel.includes(item._id))
+    setRows(filteredItems)
   }
-  const handlePrice = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    setPrice(event.target.value)
-  }
-
   return {
     addItem,
-    handleName,
-    handlePrice,
+    deleteRows,
   }
 }
 

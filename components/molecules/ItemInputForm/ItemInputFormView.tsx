@@ -11,7 +11,7 @@ export type ItemInputFormViewProps = {
   addItem: () => void
 }
 
-const ItemInputFormView = ({ storeName, name, price, addItem, handleName, handlePrice }: ItemInputFormProps & ItemInputFormViewProps & ItemInputFormActionHandlersResult) => {
+const ItemInputFormView = ({ name, price, addItem, deleteRows, handleName, handlePrice }: ItemInputFormProps & ItemInputFormViewProps & ItemInputFormActionHandlersResult) => {
   const uiConfig = {
     FormBox: {
       sx: {
@@ -42,6 +42,7 @@ const ItemInputFormView = ({ storeName, name, price, addItem, handleName, handle
       value: name,
       onChange: handleName,
       sx: {
+        marginRight: '1rem',
         marginBottom: '1rem',
       },
     } as TextFieldProps,
@@ -51,25 +52,35 @@ const ItemInputFormView = ({ storeName, name, price, addItem, handleName, handle
       size: 'small',
       value: price,
       onChange: handlePrice,
+      sx: {
+        marginRight: '1rem',
+        marginBottom: '1rem',
+      },
     } as TextFieldProps,
     Add: {
       variant: 'contained',
       onClick: addItem,
       sx: {
-        flex: '1',
+        marginRight: '1rem',
       },
+    } as ButtonProps,
+    Delete: {
+      variant: 'contained',
+      onClick: deleteRows,
+      sx: {},
     } as ButtonProps,
   }
 
   return (
     <Box {...uiConfig.FormBox}>
-      <Typography {...uiConfig.Typo}>{storeName} 아이템 추가</Typography>
+      <Typography {...uiConfig.Typo}>아이템 추가</Typography>
       <Box {...uiConfig.InputBox}>
         <Box {...uiConfig.Box}>
           <TextField {...uiConfig.Item} />
           <TextField {...uiConfig.Price} />
+          <Button {...uiConfig.Add}>추가하기</Button>
+          <Button {...uiConfig.Delete}>삭제하기</Button>
         </Box>
-        <Button {...uiConfig.Add}>추가하기</Button>
       </Box>
     </Box>
   )

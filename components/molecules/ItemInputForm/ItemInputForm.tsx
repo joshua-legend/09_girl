@@ -4,17 +4,17 @@ import ItemInputFormAction, { ItemInputFormActionHandlersResult } from '@compone
 import { Item } from '../../../pages/admin'
 
 export type ItemInputFormProps = {
+  rows: Item[]
   setRows: React.Dispatch<React.SetStateAction<Item[]>>
-  storeName: string
+  selectionModel: any
 }
-const ItemInputForm = ({ setRows, storeName }: ItemInputFormProps) => {
+const ItemInputForm = ({ rows, setRows, selectionModel }: ItemInputFormProps) => {
   const [name, setName] = useState<string>('')
   const [price, setPrice] = useState<string>('')
-  const actions = ItemInputFormAction({ name, setName, price, setPrice, setRows, storeName })
+  const actions = ItemInputFormAction({ name, setName, price, setPrice, rows, setRows, selectionModel })
   const newProps = {
     name,
     price,
-    storeName,
     ...actions,
   } as ItemInputFormProps & ItemInputFormViewProps & ItemInputFormActionHandlersResult
 

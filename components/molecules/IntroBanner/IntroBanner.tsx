@@ -2,7 +2,7 @@ import React from 'react'
 import IntroBannerView from '@components/molecules/IntroBanner/IntroBannerView'
 
 export type IntroBannerProps = {
-  storeName: string
+  title: string
 }
 
 const IntroBanner = (props: IntroBannerProps) => {

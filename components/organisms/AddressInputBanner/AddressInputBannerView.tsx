@@ -52,10 +52,7 @@ const AddressInputBannerView = (props: AddressInputBannerViewProps & AddressInpu
   }
   return (
     <Banner {...uiConfig.Banner}>
-      <Typography {...uiConfig.Title}>
-        {/*<LocalShippingIcon {...uiConfig.Truck} /> */}
-        배송 정보 입력
-      </Typography>
+      <Typography {...uiConfig.Title}>배송 정보 입력</Typography>
       <IconTitleBox {...uiConfig.IconTitleBox}>
         {props.iconTitlesInputs.map((iconTitle, index) => {
           return <IconTitleInput {...iconTitle} key={index} />
