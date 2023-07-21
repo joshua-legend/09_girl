@@ -4,14 +4,14 @@ import { DataGridFormActionHandlersResult, DataGridFormActionProps } from '@comp
 import { Item } from '../../../pages/admin'
 import { Stack } from '@mui/system'
 
-export type DataGridFormViewProps = {
+export type PageGridFormViewProps = {
   rows: Item[]
   columns: GridColDef[]
   selectionModel: any[]
   setSelectionModel: (selectedRowsData: string[]) => void
 }
 
-const DataGridFormView = ({ rows, columns, selectionModel, setSelectionModel }: DataGridFormViewProps & DataGridFormActionHandlersResult) => {
+const PageGridFormView = ({ rows, columns, selectionModel, setSelectionModel }: PageGridFormViewProps & DataGridFormActionHandlersResult) => {
   const uiConfig = {}
 
   return (
@@ -29,13 +29,13 @@ const DataGridFormView = ({ rows, columns, selectionModel, setSelectionModel }: 
       rowSelectionModel={selectionModel}
       initialState={{
         pagination: {
-          paginationModel: { page: 0, pageSize: 10 },
+          paginationModel: { page: 0, pageSize: 5 },
         },
       }}
       components={{
         NoRowsOverlay: () => (
           <Stack height='100%' alignItems='center' justifyContent='center'>
-            상품을 등록해 주세요.
+            등록된 페이지가 없습니다.
           </Stack>
         ),
         NoResultsOverlay: () => (
@@ -48,4 +48,4 @@ const DataGridFormView = ({ rows, columns, selectionModel, setSelectionModel }: 
   )
 }
 
-export default DataGridFormView
+export default PageGridFormView

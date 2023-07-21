@@ -55,7 +55,7 @@ const Index: NextPage = () => {
     <>
       {isLogin ? (
         <>
-          <IntroBanner storeName={'환영'} />
+          <IntroBanner title={'환영'} />
           <Button {...uiConfig.LogOut}>로그아웃</Button>
           {/*<Box sx={{ display: 'flex' }}>*/}
           {/*  <TextField {...uiConfig.Phone} />*/}
@@ -64,7 +64,7 @@ const Index: NextPage = () => {
         </>
       ) : (
         <>
-          <IntroBanner storeName={'공구하는 뇨자'} />
+          <IntroBanner title={'공구하는 뇨자'} />
           <Box sx={{ display: 'flex' }}>
             <TextField {...uiConfig.Phone} />
             <Button {...uiConfig.Confirm}>로그인 하기</Button>

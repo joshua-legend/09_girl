@@ -4,14 +4,14 @@ import IntroBanner, { IntroBannerProps } from '@components/molecules/IntroBanner
 import ItemPickerBanner, { ItemPickerBannerProps } from '@components/organisms/ItemPickerBanner/ItemPickerBanner'
 import AddressInputBanner, { AddressInputBannerProps } from '@components/organisms/AddressInputBanner/AddressInputBanner'
 import React, { useEffect } from 'react'
-import { verifyToken } from '../../../utils/verifyToken'
-import { requestData } from '../../../utils/requestData'
+import { verifyToken } from '../../../../utils/verifyToken'
+import { requestData } from '../../../../utils/requestData'
 import jwt from 'jsonwebtoken'
 import test from 'node:test'
-import BuyStore from '../../../store/BuyStore'
+import BuyStore from '../../../../store/BuyStore'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 import BottomTotalBar from '@components/molecules/BottomTotalBar/BottomTotalBar'
-import AddressStore from '../../../store/AddressStore'
+import AddressStore from '../../../../store/AddressStore'
 import Snackbar from '@components/atoms/Snackbar/Snackbar'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<any>> => {
@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   const token = context.req.cookies.token as string
   const payload = await jwt.verify(token, JWT_SECRET)
-  const data = { props: { ...getData, payload } }
+  const data = { props: { title: getData.items.title, items: getData.items.items, payload } }
   return data
 }
 
@@ -48,16 +48,15 @@ const Index: NextPage<ProcessProps> = ({ title, items, payload }: ProcessProps) 
     }
   }, [items, setItems])
 
-  const { setAddress, addressInfo } = AddressStore()
+  const { setAddress } = AddressStore()
   useEffect(() => {
-    const { mobile, nickname, require, address, detail, common } = payload
+    const { mobile, nickname, require, address, detail, common, id } = payload
     const mobileReg = mobile.replace(/-/g, '')
-    setAddress({ mobile: mobileReg, nickname, require, address, detail, common })
+    setAddress({ mobile: mobileReg, id, nickname, require, address, detail, common })
   }, [payload])
-
   const data = {
     introBanner: {
-      title: title.title,
+      title,
     } as IntroBannerProps,
     addInputBanner: {
       mobile: payload.mobile.replace(/-/g, ''),

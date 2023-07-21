@@ -29,7 +29,8 @@ const MyApp = ({ pageProps, router, Component }: AppProps) => {
     404: DefaultLayout,
     select: DefaultLayout,
     default: DefaultLayout,
-    admin: AdminLayout,
+    done: DefaultLayout,
+    admin: DefaultLayout,
     stores: UserLayout,
     login: LoginLayout,
   }

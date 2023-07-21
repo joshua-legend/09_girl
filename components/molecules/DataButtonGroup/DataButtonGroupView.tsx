@@ -26,12 +26,12 @@ const DataButtonGroupView = ({ refreshPage, postRows, deleteRows }: DataButtonGr
       <Button {...uiConfig.confirmBtn} onClick={deleteRows}>
         삭제하기
       </Button>
-      <Button {...uiConfig.confirmBtn} onClick={refreshPage}>
-        복구하기
-      </Button>
-      <Button {...uiConfig.confirmBtn} onClick={postRows}>
-        확정하기
-      </Button>
+      {/*<Button {...uiConfig.confirmBtn} onClick={refreshPage}>*/}
+      {/*  복구하기*/}
+      {/*</Button>*/}
+      {/*<Button {...uiConfig.confirmBtn} onClick={postRows}>*/}
+      {/*  확정하기*/}
+      {/*</Button>*/}
     </ButtonGroup>
   )
 }

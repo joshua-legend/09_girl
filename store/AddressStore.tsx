@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 
 export type Address = {
+  id?: string
   mobile?: string
   nickname?: string
   require?: string
@@ -18,6 +19,7 @@ export type AddressGeneric = {
 
 const AddressStore = create<AddressGeneric>((set) => ({
   addressInfo: {
+    id: '',
     mobile: '',
     nickname: '',
     require: '',
