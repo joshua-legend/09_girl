@@ -8,6 +8,7 @@ export type CheckAuthenticationResponse = {
 
 export const verifyToken = async (context: GetServerSidePropsContext): Promise<boolean> => {
   const { req } = context
+  console.log(req.cookies)
   const token = req.cookies.token
 
   try {
@@ -17,6 +18,7 @@ export const verifyToken = async (context: GetServerSidePropsContext): Promise<b
       },
       withCredentials: true,
     })
+    console.log(response.data)
     return response.data.success
   } catch (error) {
     console.error('Failed to verify token', error)

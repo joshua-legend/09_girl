@@ -4,6 +4,7 @@ import 'swiper/css/pagination'
 import { Box, BoxProps, Button, ButtonProps } from '@mui/material'
 import { LoginButtonProps } from '@components/atoms/LoginButton/LoginButton'
 import { FONTS } from '../../../constants/fonts'
+import axios from 'axios'
 
 export type LoginButtonViewProps = {} & LoginButtonProps
 
@@ -19,12 +20,12 @@ const LoginButtonView = ({ sns, href, bgColor, logo, color = 'white' }: LoginBut
     Confirm: {
       variant: 'contained',
       onClick: () => {
-        window.location.href = `${process.env.API_URL}${href}`
+        const redirectUrl = encodeURIComponent(window.location.href) // 현재 URL을 인코딩합니다.
+        window.location.href = `${process.env.API_URL}${href}?redirectUrl=${redirectUrl}` // 리다이렉트 URL을 쿼리 파라미터로 추가합니다.
       },
       sx: {
         backgroundColor: `${bgColor}`,
         color: `${color}`,
-        // border: '1px solid #4285F4',
         width: '100%',
         height: '50px',
         margin: '0.5rem 0',
