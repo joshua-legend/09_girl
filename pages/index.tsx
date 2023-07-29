@@ -5,11 +5,14 @@ import Footer from '@components/atoms/Footer/Footer'
 import MainPanel from '@components/atoms/MainPanel/MainPanel'
 import SNSLogins from '@components/molecules/SNSLogins/SNSLogins'
 import { verifyToken } from '../utils/verifyToken'
+import cookies from 'next-cookies'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+  const allCookies = cookies(context)
+  console.log(allCookies.mycookie)
   const isTokenValid = await verifyToken(context)
   if (isTokenValid) {
-    return { redirect: { destination: '/select', permanent: false } }
+    return { redirect: { destination: '/404', permanent: false } }
   }
   return {
     props: {},

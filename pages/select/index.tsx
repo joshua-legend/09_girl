@@ -8,6 +8,10 @@ import Typography from '@mui/material/Typography'
 import { FONTS } from '../../constants/fonts'
 import { verifyToken } from '../../utils/verifyToken'
 import Divider from '@components/atoms/Divider/Divider'
+import PageInputForm from '@components/molecules/PageInputForm/PageInputForm'
+import PageGridForm from '@components/molecules/PageGridForm/PageGridForm'
+import { PageType } from '../admin'
+import axios from 'axios'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const isTokenValid = await verifyToken(context)
@@ -16,18 +20,40 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   const { req } = context
   const JWT_SECRET = process.env.JWT_SECRET || 'defaultSecret'
+
+  const gochunItems = await axios.get(`${process.env.API_URL}/getPagesByStore/3`, {
+    withCredentials: true,
+  })
+
+  const gochonData = gochunItems.data.data.items
+
   try {
     const token = req.cookies.token as string
     const payload = jwt.verify(token, JWT_SECRET)
-    return { props: { payload } }
+    return {
+      props: {
+        gochonData,
+      },
+    }
   } catch (error) {
     return { redirect: { destination: '/', permanent: false } }
   }
 }
-type ProcessProps = {
-  payload: any
+export type PageType = {
+  _id: string
+  title: string
+  startDay: Date | string
+  endDay: Date | string
+  store: string
+  items: Item[]
 }
-const Index: NextPage = () => {
+export type Item = { name: string; price: number; _id: string }
+type ProcessProps = {
+  gochonData: PageType[]
+}
+const Index: NextPage = ({ gochonData }: ProcessProps) => {
+  const [gochonRows, setGochonRows] = useState<PageType[]>(gochonData)
+  const [gochonModel, setGochonModel] = useState<any[]>([])
   const uiConfig = {
     Container: {
       sx: {
@@ -52,11 +78,10 @@ const Index: NextPage = () => {
   return (
     <>
       <Box {...uiConfig.Container}>
-        <Typography {...uiConfig.Title}>지점 선택</Typography>
-        <Divider />
-        <StoreCard image={'/static/gurae.png'} title={'운양점'} location={'1'} />
-        <StoreCard image={'/static/janggi.png'} title={'장기점'} location={'2'} />
-        <StoreCard image={'/static/gochun.jpg'} title={'고촌 캐파점'} location={'3'} />
+        <Box sx={{ padding: '3rem' }}>
+          <PageInputForm name={'고촌점'} setRows={setGochonRows} rows={gochonRows} selectionModel={gochonModel} />
+          <PageGridForm rows={gochonRows} selectionModel={gochonModel} setSelectionModel={setGochonModel} />
+        </Box>
       </Box>
     </>
   )

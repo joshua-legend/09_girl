@@ -37,7 +37,7 @@ const Custom404 = () => {
     Button: {
       variant: 'contained',
       onClick: () => {
-        push('/select')
+        push('https://band.us/band/78819150')
       },
       sx: {
         marginTop: '1rem',

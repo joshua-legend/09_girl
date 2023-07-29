@@ -28,9 +28,6 @@ const SNSLoginsView = ({ loginButtons }: SNSLoginsViewProps) => {
       {loginButtons.map((value, index) => {
         return <LoginButton key={index} {...value} />
       })}
-      {/*<LoginButton sns={'네이버'} href={'/auth/naver'} bgColor={'#1EC800'} logo={'/images/logo/naver_logo.png'} />*/}
-      {/*<LoginButton sns={'카카오'} href={'/auth/kakao'} color={'rgb(59, 29, 30)'} bgColor={'#FEE500'} logo={'/images/logo/kakao_logo.png'} />*/}
-      {/*<LoginButton sns={'구글'} href={'/auth/naver'} color={'rgb(59, 29, 30)'} bgColor={'white'} logo={'/images/logo/google_logo.png'} />*/}
     </Box>
   )
 }

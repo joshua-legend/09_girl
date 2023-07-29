@@ -7,19 +7,24 @@ import React, { useEffect } from 'react'
 import { verifyToken } from '../../../../utils/verifyToken'
 import { requestData } from '../../../../utils/requestData'
 import jwt from 'jsonwebtoken'
-import test from 'node:test'
 import BuyStore from '../../../../store/BuyStore'
 import { ItemCounterProps } from '@components/molecules/ItemCounter/ItemCounter'
 import BottomTotalBar from '@components/molecules/BottomTotalBar/BottomTotalBar'
 import AddressStore from '../../../../store/AddressStore'
 import Snackbar from '@components/atoms/Snackbar/Snackbar'
+import { redirectIfError } from '../../../../utils/redirects'
+import { isDateExpired } from '../../../../utils/isDateExpired'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<any>> => {
   const isTokenValid = await verifyToken(context)
   if (!isTokenValid) {
-    return { redirect: { destination: '/', permanent: false } }
+    const redirectUrl = encodeURIComponent(context.req.url as string)
+    return { redirect: { destination: `/?redirectUrl=${redirectUrl}`, permanent: false } }
   }
   const getData = await requestData('getItemsByStore', context)
+  if (!isDateExpired(getData.items.endDay)) {
+    return redirectIfError()
+  }
   const JWT_SECRET = process.env.JWT_SECRET
   if (!JWT_SECRET) {
     throw new Error('Missing JWT_SECRET environment variable')
