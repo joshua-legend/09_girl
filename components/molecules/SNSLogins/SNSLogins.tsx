@@ -9,7 +9,7 @@ const SNSLogins = (props: SNSLoginsProps) => {
     loginButtons: [
       {
         sns: '네이버',
-        href: '/auth/naver',
+        href: '/auth/naver/callback',
         bgColor: '#1EC800',
         logo: '/images/logo/naver_logo.png',
       },

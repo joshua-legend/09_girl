@@ -14,10 +14,10 @@ import { PageType } from '../admin'
 import axios from 'axios'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const isTokenValid = await verifyToken(context)
-  if (!isTokenValid) {
-    return { redirect: { destination: '/', permanent: false } }
-  }
+  // const isTokenValid = await verifyToken(context)
+  // if (!isTokenValid) {
+  //   return { redirect: { destination: '/', permanent: false } }
+  // }
   const { req } = context
   const JWT_SECRET = process.env.JWT_SECRET || 'defaultSecret'
 

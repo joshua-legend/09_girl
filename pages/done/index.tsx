@@ -9,35 +9,32 @@ import { verifyToken } from '../../utils/verifyToken'
 import { Button, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 import { COLORS } from '../../constants/colors'
 import axios from 'axios'
-import { end } from '@popperjs/core'
+import { useRouter } from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const isTokenValid = await verifyToken(context)
-  if (!isTokenValid) {
-    return { redirect: { destination: '/', permanent: false } }
-  }
-  const JWT_SECRET = process.env.JWT_SECRET
-  if (!JWT_SECRET) {
-    throw new Error('Missing JWT_SECRET environment variable')
-  }
-  const token = context.req.cookies.token as string
-  const payload = await jwt.verify(token, JWT_SECRET)
-  const { id } = payload
-  const response = await axios.get(`${process.env.API_URL}/getReceipt/${id}`, {
-    withCredentials: true,
-  })
-  const receipt = response.data.receipt
-  receipt.purchased_items = receipt.purchased_items.map((item) => `${item.name} ${item.quantity}개`)
-  delete receipt.userId
+  // const isTokenValid = await verifyToken(context)
+  // if (!isTokenValid) {
+  //   return { redirect: { destination: '/', permanent: false } }
+  // }
+  // const JWT_SECRET = process.env.JWT_SECRET
+  // if (!JWT_SECRET) {
+  //   throw new Error('Missing JWT_SECRET environment variable')
+  // }
+  // const token = context.req.cookies.token as string
+  // const payload = await jwt.verify(token, JWT_SECRET)
+  // const { id } = payload
+  // const response = await axios.get(`${process.env.API_URL}/getReceipt/${id}`, {
+  //   withCredentials: true,
+  // })
+  // const receipt = response.data.receipt
+  // receipt.purchased_items = receipt.purchased_items.map((item) => `${item.name} ${item.quantity}개`)
+  // delete receipt.userId
 
-  const data = { props: { payload, receipt } }
+  const data = { props: {} }
   return data
 }
-type ProcessProps = {
-  receipt: any
-  payload: any
-}
-const Index: NextPage = ({ receipt, payload }: ProcessProps) => {
+type ProcessProps = {}
+const Index: NextPage = () => {
   const uiConfig = {
     Container: {
       sx: {
@@ -98,18 +95,39 @@ const Index: NextPage = ({ receipt, payload }: ProcessProps) => {
     },
   }
 
-  const keyMap = {
-    '구매 항목': receipt.purchased_items,
-    '총 금액': receipt.total,
-    '구매 날짜': receipt.purchaseDate,
-    닉네임: receipt.nickname,
-    '휴대폰 번호': receipt.mobile,
-    '배송 여부': receipt.isDelivery ? '집으로 배달' : '픽업하기',
-    주소: receipt.isDelivery ? receipt.address : null,
-    '상세 주소': receipt.isDelivery ? receipt.detail : null,
-  }
+  const [receiptData, setReceiptData] = useState({})
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const id = localStorage.getItem('09_girl_token_id')
+        const response = await axios.get(`${process.env.API_URL}/getReceipt/${id}`, {
+          withCredentials: true,
+        })
+        const receipt = response.data.receipt
+        receipt.purchased_items = receipt.purchased_items.map((item) => `${item.name} ${item.quantity}개`)
+        delete receipt.userId
+        const keyMap = {
+          '구매 항목': receipt.purchased_items,
+          '총 금액': receipt.total,
+          '구매 날짜': receipt.purchaseDate,
+          닉네임: receipt.nickname,
+          '휴대폰 번호': receipt.mobile,
+          '배송 여부': receipt.isDelivery ? '집으로 배달' : '픽업하기',
+          주소: receipt.isDelivery ? receipt.address : null,
+          '상세 주소': receipt.isDelivery ? receipt.detail : null,
+        }
+        setReceiptData(keyMap)
+      } catch (error) {
+        console.error('Failed to fetch receipt:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   const keys = ['구매 항목', '총 금액', '구매 날짜', '닉네임', '휴대폰 번호', '배송 여부', '주소', '상세 주소']
+  const { push } = useRouter()
 
   return (
     <>
@@ -121,19 +139,25 @@ const Index: NextPage = ({ receipt, payload }: ProcessProps) => {
               <ListItemButton {...uiConfig.ListItemButton}>
                 <Typography {...uiConfig.Typos}>{value}</Typography>
                 <Box {...uiConfig.TyposValue}>
-                  {Array.isArray(keyMap[value])
-                    ? keyMap[value].map((item, i) => (
+                  {Array.isArray(receiptData[value])
+                    ? receiptData[value].map((item, i) => (
                         <React.Fragment key={i}>
                           <Typography {...uiConfig.TyposArray}>{item}</Typography>
                         </React.Fragment>
                       ))
-                    : keyMap[value]}
+                    : receiptData[value]}
                 </Box>
               </ListItemButton>
             </ListItem>
           ))}
         </Box>
-        <Button variant='contained' color='primary'>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={() => {
+            push('https://band.us/band/78819150')
+          }}
+        >
           밴드로 돌아가기
         </Button>
       </Box>

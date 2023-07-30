@@ -9,6 +9,14 @@ import axios from 'axios'
 export type LoginButtonViewProps = {} & LoginButtonProps
 
 const LoginButtonView = ({ sns, href, bgColor, logo, color = 'white' }: LoginButtonViewProps) => {
+  const fetchTokenData = async () => {
+    try {
+      const response = await axios.get(`${process.env.API_URL}/auth/naver/callback`)
+      return response.data
+    } catch (error) {
+      console.error('Error:', error)
+    }
+  }
   const uiConfig = {
     Buttons: {
       sx: {
@@ -20,8 +28,13 @@ const LoginButtonView = ({ sns, href, bgColor, logo, color = 'white' }: LoginBut
     Confirm: {
       variant: 'contained',
       onClick: () => {
-        const redirectUrl = encodeURIComponent(window.location.href) // 현재 URL을 인코딩합니다.
-        window.location.href = `${process.env.API_URL}${href}?redirectUrl=${redirectUrl}` // 리다이렉트 URL을 쿼리 파라미터로 추가합니다.
+        // window.location.href = `${process.env.API_URL}${href}`
+        const redirectURI = encodeURIComponent('http://localhost:3001/test') // 여기에 앱의 콜백 URL을 입력합니다.
+        let naverLoginUrl = 'https://nid.naver.com/oauth2.0/authorize?response_type=code'
+        naverLoginUrl += '&client_id=' + 'xepzSwvaERHPUsbzSaVP'
+        naverLoginUrl += '&redirect_uri=' + redirectURI
+        naverLoginUrl += '&state=' + 'false' // 이 함수는 랜덤한 문자열을 반환해야 합니다. 이 문자열은 공격을 방어하기 위한 CSRF 토큰 역할을 합니다.
+        window.location.href = naverLoginUrl
       },
       sx: {
         backgroundColor: `${bgColor}`,

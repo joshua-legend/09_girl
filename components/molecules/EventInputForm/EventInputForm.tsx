@@ -33,7 +33,7 @@ const EventInputForm = ({ info, post, setInfo }: EventInputFormProps) => {
         sx: {
           width: {
             xs: '80%',
-            md: '10%',
+            md: '40%',
           },
         },
       },
@@ -46,7 +46,7 @@ const EventInputForm = ({ info, post, setInfo }: EventInputFormProps) => {
         sx: {
           width: {
             xs: '80%',
-            md: '10%',
+            md: '40%',
           },
         },
       },

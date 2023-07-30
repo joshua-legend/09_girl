@@ -1,11 +1,8 @@
 import type { NextPage } from 'next'
 import React, { useState } from 'react'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import Footer from '@components/atoms/Footer/Footer'
-import MainPanel from '@components/atoms/MainPanel/MainPanel'
-import SNSLogins from '@components/molecules/SNSLogins/SNSLogins'
+import axios from 'axios'
 import { verifyToken } from '../utils/verifyToken'
-import NaverLogin from '@components/atoms/NaverLogin/NaverLogin'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   // const isTokenValid = await verifyToken(context)
@@ -19,14 +16,13 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 type ProcessProps = {
   props: {}
 }
-const Home: NextPage = () => {
+const Abc: NextPage = ({ props }: ProcessProps) => {
+  console.log(props)
   return (
     <>
-      <MainPanel />
-      <SNSLogins />
-      <Footer />
+      <div>abc</div>
     </>
   )
 }
 
-export default Home
+export default Abc
