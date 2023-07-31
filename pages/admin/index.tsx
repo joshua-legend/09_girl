@@ -70,10 +70,10 @@ type ProcessProps = {
 }
 
 const Index: NextPage<ProcessProps> = ({ unyangData, janggiData, gochonData }: ProcessProps) => {
-  const [unyangRows, setUnyangRows] = useState<PageType[]>(unyangData)
-  const [unyangModel, setUnyangModel] = useState<any[]>([])
-  const [janggiRows, setJanggiRows] = useState<PageType[]>(janggiData)
-  const [janggiModel, setJanggiModel] = useState<any[]>([])
+  // const [unyangRows, setUnyangRows] = useState<PageType[]>(unyangData)
+  // const [unyangModel, setUnyangModel] = useState<any[]>([])
+  // const [janggiRows, setJanggiRows] = useState<PageType[]>(janggiData)
+  // const [janggiModel, setJanggiModel] = useState<any[]>([])
   const [gochonRows, setGochonRows] = useState<PageType[]>(gochonData)
   const [gochonModel, setGochonModel] = useState<any[]>([])
   return (
@@ -82,14 +82,14 @@ const Index: NextPage<ProcessProps> = ({ unyangData, janggiData, gochonData }: P
         <PageInputForm name={'고촌점'} setRows={setGochonRows} rows={gochonRows} selectionModel={gochonModel} />
         <PageGridForm rows={gochonRows} selectionModel={gochonModel} setSelectionModel={setGochonModel} />
       </Box>
-      <Box sx={{ padding: '3rem' }}>
-        <PageInputForm name={'장기점'} setRows={setJanggiRows} rows={janggiRows} selectionModel={janggiModel} />
-        <PageGridForm rows={janggiRows} selectionModel={janggiModel} setSelectionModel={setJanggiModel} />
-      </Box>
-      <Box sx={{ padding: '3rem' }}>
-        <PageInputForm name={'운양점'} setRows={setUnyangRows} rows={unyangRows} selectionModel={unyangModel} />
-        <PageGridForm rows={unyangRows} selectionModel={unyangModel} setSelectionModel={setUnyangModel} />
-      </Box>
+      {/*<Box sx={{ padding: '3rem' }}>*/}
+      {/*  <PageInputForm name={'장기점'} setRows={setJanggiRows} rows={janggiRows} selectionModel={janggiModel} />*/}
+      {/*  <PageGridForm rows={janggiRows} selectionModel={janggiModel} setSelectionModel={setJanggiModel} />*/}
+      {/*</Box>*/}
+      {/*<Box sx={{ padding: '3rem' }}>*/}
+      {/*  <PageInputForm name={'운양점'} setRows={setUnyangRows} rows={unyangRows} selectionModel={unyangModel} />*/}
+      {/*  <PageGridForm rows={unyangRows} selectionModel={unyangModel} setSelectionModel={setUnyangModel} />*/}
+      {/*</Box>*/}
     </>
   )
 }

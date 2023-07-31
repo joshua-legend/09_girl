@@ -6,6 +6,7 @@ import { Item, PageType } from '../../../pages/admin'
 import PageGridFormAction from '@components/molecules/PageGridForm/PageGridFormAction'
 import { IconButton, Tooltip } from '@mui/material'
 import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined'
+import PageGridFormView from '@components/molecules/PageGridForm/PageGridFormView'
 
 export type PageGridFormProps = {
   rows: PageType[]
@@ -45,12 +46,11 @@ const PageGridForm = ({ rows, selectionModel, setSelectionModel }: PageGridFormP
   const newProps = {
     rows,
     columns,
-    ...actions,
     selectionModel,
     setSelectionModel,
-  } as DataGridFormViewProps & DataGridFormActionProps
+  }
 
-  return <DataGridFormView {...newProps} />
+  return <PageGridFormView {...newProps} />
 }
 
 export default PageGridForm

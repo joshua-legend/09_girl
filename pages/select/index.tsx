@@ -2,15 +2,10 @@ import type { NextPage } from 'next'
 import React, { useEffect, useState } from 'react'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import jwt from 'jsonwebtoken'
-import StoreCard from '@components/molecules/StoreCard/StoreCard'
 import { Box, BoxProps, TypographyProps } from '@mui/system'
-import Typography from '@mui/material/Typography'
 import { FONTS } from '../../constants/fonts'
-import { verifyToken } from '../../utils/verifyToken'
-import Divider from '@components/atoms/Divider/Divider'
 import PageInputForm from '@components/molecules/PageInputForm/PageInputForm'
 import PageGridForm from '@components/molecules/PageGridForm/PageGridForm'
-import { PageType } from '../admin'
 import axios from 'axios'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -51,8 +46,8 @@ export type Item = { name: string; price: number; _id: string }
 type ProcessProps = {
   gochonData: PageType[]
 }
-const Index: NextPage = ({ gochonData }: ProcessProps) => {
-  const [gochonRows, setGochonRows] = useState<PageType[]>(gochonData)
+const Index: NextPage<ProcessProps> = (props: ProcessProps) => {
+  const [gochonRows, setGochonRows] = useState<PageType[]>([])
   const [gochonModel, setGochonModel] = useState<any[]>([])
   const uiConfig = {
     Container: {

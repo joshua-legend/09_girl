@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 
 type ProcessProps = {
-  title: IntroBannerProps
+  title: string
   items?: ItemCounterProps[]
 }
 

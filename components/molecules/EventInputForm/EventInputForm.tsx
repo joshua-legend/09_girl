@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { PageType, Item } from '../../../pages/admin'
-import EventInputFormView from '@components/molecules/EventInputForm/EventInputFormView'
+import EventInputFormView, { EventInputFormViewProps } from '@components/molecules/EventInputForm/EventInputFormView'
 import EventInputFormAction from '@components/molecules/EventInputForm/EventInputFormAction'
 import { BandPost, EventInfo } from '../../../pages/admin/register'
-import { post } from 'axios'
 
 export type EventInputFormProps = {
   info: EventInfo
@@ -23,6 +22,7 @@ const EventInputForm = ({ info, post, setInfo }: EventInputFormProps) => {
         handleChange: handleTitle,
         multiline: true,
         limitLength: 100,
+        placeholder: '',
       },
       {
         title: '시작 날짜',
@@ -30,6 +30,8 @@ const EventInputForm = ({ info, post, setInfo }: EventInputFormProps) => {
         label: 'startDay',
         text: info.startDay,
         handleChange: handleStartDay,
+        multiline: false,
+        placeholder: '',
         sx: {
           width: {
             xs: '80%',
@@ -42,7 +44,9 @@ const EventInputForm = ({ info, post, setInfo }: EventInputFormProps) => {
         type: 'date',
         label: 'endDay',
         text: info.endDay,
+        multiline: false,
         handleChange: handleEndDay,
+        placeholder: '',
         sx: {
           width: {
             xs: '80%',
@@ -54,7 +58,7 @@ const EventInputForm = ({ info, post, setInfo }: EventInputFormProps) => {
     post_key: info.post_key,
     handleStore,
     post,
-  }
+  } as EventInputFormViewProps
   return <EventInputFormView {...newProps} />
 }
 

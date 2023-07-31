@@ -1,12 +1,21 @@
 import React, { SyntheticEvent } from 'react'
 import BuyStore, { Item } from '../../../store/BuyStore'
 import SnackStore from '../../../store/SnackStore'
-import AddressStore, { Address } from '../../../store/AddressStore'
+import AddressStore from '../../../store/AddressStore'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 import { info } from 'next/dist/build/output/log'
 import { useRouter } from 'next/router'
 
+export type Address = {
+  mobile?: string
+  nickname?: string
+  require?: string
+  isDelivery?: boolean
+  address?: string
+  detail?: string
+  common?: string
+}
 export type BottomTotalBarActionProps = {}
 export type BottomTotalBarActionHandlersResult = {
   onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void

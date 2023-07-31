@@ -3,7 +3,7 @@ import ItemInputFormView, { ItemInputFormViewProps } from '@components/molecules
 import ItemInputFormAction, { ItemInputFormActionHandlersResult } from '@components/molecules/ItemInputForm/ItemInputFormAction'
 import { Item, PageType } from '../../../pages/admin'
 import PageInputFormAction from '@components/molecules/PageInputForm/PageInputFormAction'
-import PageInputFormView from '@components/molecules/PageInputForm/PageInputFormView'
+import PageInputFormView, { PageInputFormViewProps } from '@components/molecules/PageInputForm/PageInputFormView'
 
 export type PageInputFormProps = {
   name: string
@@ -16,7 +16,7 @@ const PageInputForm = ({ name, rows, setRows, selectionModel }: PageInputFormPro
   const newProps = {
     name,
     ...actions,
-  } as PageInputFormProps
+  } as PageInputFormViewProps
 
   return <PageInputFormView {...newProps} />
 }

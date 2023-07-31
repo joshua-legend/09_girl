@@ -51,9 +51,9 @@ const Index: NextPage<ProcessProps> = ({ items, title }: ProcessProps) => {
   const [selectionModel, setSelectionModel] = useState<any[]>([])
   return (
     <Box sx={{ padding: '1rem' }}>
-      <ItemInputForm storeName={title.title} setRows={setRows} />
-      <DataGridForm rows={rows} selectionModel={selectionModel} setSelectionModel={setSelectionModel} />
-      <DataButtonGroup storeID={1} originData={items} selectionModel={selectionModel} rows={rows} setRows={setRows} />
+      {/*<ItemInputForm rows={rows} setRows={setRows} selectionModel={selectionModel} />*/}
+      {/*<DataGridForm rows={rows} selectionModel={selectionModel} setSelectionModel={setSelectionModel} />*/}
+      {/*<DataButtonGroup storeID={1} originData={items} selectionModel={selectionModel} rows={rows} setRows={setRows} />*/}
     </Box>
   )
 }
