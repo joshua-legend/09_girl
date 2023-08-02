@@ -23,6 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   //   return { redirect: { destination: `/?redirectUrl=${redirectUrl}`, permanent: false } }
   // }
   const getData = await requestData('getItemsByStore', context)
+  if (!'items' in getData) return redirectIfError()
   if (!isDateExpired(getData.items.endDay)) {
     return redirectIfError()
   }
