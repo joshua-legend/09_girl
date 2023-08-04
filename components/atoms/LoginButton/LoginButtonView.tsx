@@ -29,7 +29,7 @@ const LoginButtonView = ({ sns, href, bgColor, logo, color = 'white' }: LoginBut
       variant: 'contained',
       onClick: () => {
         // window.location.href = `${process.env.API_URL}${href}`
-        const redirectURI = encodeURIComponent('http://localhost:3001/test') // 여기에 앱의 콜백 URL을 입력합니다.
+        const redirectURI = encodeURIComponent('https://09-girl.vercel.app/test') // 여기에 앱의 콜백 URL을 입력합니다.
         let naverLoginUrl = 'https://nid.naver.com/oauth2.0/authorize?response_type=code'
         naverLoginUrl += '&client_id=' + 'xepzSwvaERHPUsbzSaVP'
         naverLoginUrl += '&redirect_uri=' + redirectURI
