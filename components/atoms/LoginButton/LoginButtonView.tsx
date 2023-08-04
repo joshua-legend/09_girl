@@ -11,7 +11,7 @@ export type LoginButtonViewProps = {} & LoginButtonProps
 const LoginButtonView = ({ sns, href, bgColor, logo, color = 'white' }: LoginButtonViewProps) => {
   const fetchTokenData = async () => {
     try {
-      const response = await axios.get(`${process.env.API_URL}/auth/naver/callback`)
+      const response = await axios.get(`${process.env.API_URL}/auth/naver/disconnect`)
       return response.data
     } catch (error) {
       console.error('Error:', error)
@@ -65,10 +65,13 @@ const LoginButtonView = ({ sns, href, bgColor, logo, color = 'white' }: LoginBut
   }
 
   return (
-    <Button {...uiConfig.Confirm}>
-      <Box {...uiConfig.Logo} />
-      {sns}로 쉬운 시작
-    </Button>
+    <>
+      <Button {...uiConfig.Confirm}>
+        <Box {...uiConfig.Logo} />
+        {sns}로 쉬운 시작
+      </Button>
+      {/*<button onClick={fetchTokenData}>/auth/naver/disconnect</button>*/}
+    </>
   )
 }
 

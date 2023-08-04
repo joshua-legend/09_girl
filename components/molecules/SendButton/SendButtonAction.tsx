@@ -18,7 +18,7 @@ const SendButtonAction = ({ info, rows }: SendDataActionProps): SendDataActionHa
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const responses = await axios.post(`${process.env.API_URL}/postPageByStore`, { _id: uuidv4(), ...info, items: rows })
     if (responses.status === 200) {
-      console.log('성공')
+      await router.push('/admin')
     } else console.log('실패')
   }
 
