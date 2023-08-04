@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     }
   } catch (error) {
     console.error(`Failed to get access token: ${error}`)
-    return { redirect: { destination: '/', permanent: false } }
+    // return { redirect: { destination: '/', permanent: false } }
   }
 }
 type ProcessProps = {
@@ -55,6 +55,7 @@ type ProcessProps = {
   }
 }
 const Test: NextPage = (props: ProcessProps) => {
+  console.log(props.props.data, props.props.profile)
   useEffect(() => {
     const { data, profile } = props
     localStorage.setItem('09_girl_token', data.token)
