@@ -28,13 +28,13 @@ const LoginButtonView = ({ sns, href, bgColor, logo, color = 'white' }: LoginBut
     Confirm: {
       variant: 'contained',
       onClick: () => {
-        window.location.href = `${process.env.API_URL}${href}`
-        // const redirectURI = encodeURIComponent('https://09-girl.vercel.app/test') // 여기에 앱의 콜백 URL을 입력합니다.
-        // let naverLoginUrl = 'https://nid.naver.com/oauth2.0/authorize?response_type=code'
-        // naverLoginUrl += '&client_id=' + 'xepzSwvaERHPUsbzSaVP'
-        // naverLoginUrl += '&redirect_uri=' + redirectURI
-        // naverLoginUrl += '&state=' + 'false' // 이 함수는 랜덤한 문자열을 반환해야 합니다. 이 문자열은 공격을 방어하기 위한 CSRF 토큰 역할을 합니다.
-        // window.location.href = naverLoginUrl
+        // window.location.href = `${process.env.API_URL}${href}`
+        const redirectURI = encodeURIComponent('https://09-girl.vercel.app/test') // 여기에 앱의 콜백 URL을 입력합니다.
+        let naverLoginUrl = 'https://nid.naver.com/oauth2.0/authorize?response_type=code'
+        naverLoginUrl += '&client_id=' + 'xepzSwvaERHPUsbzSaVP'
+        naverLoginUrl += '&redirect_uri=' + redirectURI
+        naverLoginUrl += '&state=' + 'false' // 이 함수는 랜덤한 문자열을 반환해야 합니다. 이 문자열은 공격을 방어하기 위한 CSRF 토큰 역할을 합니다.
+        window.location.href = naverLoginUrl
       },
       sx: {
         backgroundColor: `${bgColor}`,
