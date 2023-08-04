@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
         grant_type: 'authorization_code',
         state: state,
         code: code,
-        redirect_uri: `${process.env.CLIENT_URL}/test`,
+        redirect_uri: `${process.env.API_URL}/test`,
       },
     })
 
@@ -55,7 +55,7 @@ type ProcessProps = {
   }
 }
 const Test: NextPage = (props: ProcessProps) => {
-  console.log(props.props.data, props.props.profile)
+  console.log(props.props.data, props.props.data)
   useEffect(() => {
     const { data, profile } = props
     localStorage.setItem('09_girl_token', data.token)
