@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
         grant_type: 'authorization_code',
         state: state,
         code: code,
-        redirect_uri: 'http://localhost:3001/test',
+        redirect_uri: `${process.env.CLIENT_URL}/test`,
       },
     })
 
