@@ -29,7 +29,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
         redirect_uri: `${process.env.API_URL}/test`,
       },
     })
-
     const token = response.data.access_token
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -45,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     }
   } catch (error) {
     console.error(`Failed to get access token: ${error}`)
-    // return { redirect: { destination: '/', permanent: false } }
+    return { redirect: { destination: '/', permanent: false } }
   }
 }
 type ProcessProps = {
