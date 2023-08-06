@@ -6,32 +6,34 @@ import { Box } from '@mui/material'
 import EventInputForm from '@components/molecules/EventInputForm/EventInputForm'
 import SendButton from '@components/molecules/SendButton/SendButton'
 import axios from 'axios'
+import { CheckAuthenticationResponse } from '../../../utils/verifyToken'
+import PATH from '../../../constants/path'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  // const clientCookie = context.req.headers.cookie ?? ''
-  // const response = await axios.get<CheckAuthenticationResponse>(`${process.env.API_URL}/checkAuthentication`, {
-  //   headers: {
-  //     ...(clientCookie && { Cookie: clientCookie }),
-  //   },
-  //   withCredentials: true,
-  // })
-  //
-  // if (!response?.data.success) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: PATH.ADMIN_LOGIN_PAGE,
-  //     },
-  //   }
-  // }
+  const clientCookie = context.req.headers.cookie ?? ''
+  const response = await axios.get<CheckAuthenticationResponse>(`${process.env.API_URL}/checkAuthentication`, {
+    headers: {
+      ...(clientCookie && { Cookie: clientCookie }),
+    },
+    withCredentials: true,
+  })
 
-  // const responseItems = await axios.get(`${process.env.API_URL}/getItemsByStore/1`, {
-  //   withCredentials: true,
-  // })
-  //
-  // const originData = responseItems.data.data.items.map((item: any) => ({
-  //   ...item,
-  // }))
+  if (!response?.data.success) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: PATH.ADMIN_LOGIN_PAGE,
+      },
+    }
+  }
+
+  const responseItems = await axios.get(`${process.env.API_URL}/getItemsByStore/1`, {
+    withCredentials: true,
+  })
+
+  const originData = responseItems.data.data.items.map((item: any) => ({
+    ...item,
+  }))
 
   const posts = await axios.get(`${process.env.API_URL}/getBandPosts`, {
     withCredentials: true,

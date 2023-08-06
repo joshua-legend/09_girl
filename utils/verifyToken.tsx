@@ -9,6 +9,7 @@ export type CheckAuthenticationResponse = {
 export const verifyToken = async (context: GetServerSidePropsContext): Promise<boolean> => {
   const { req } = context
   const token = req.cookies.token
+  console.log('token', token)
   try {
     const response = await axios.get<CheckAuthenticationResponse>(`${process.env.API_URL}/verifyToken`, {
       headers: {

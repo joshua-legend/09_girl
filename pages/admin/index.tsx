@@ -14,22 +14,22 @@ import PageGridForm from '@components/molecules/PageGridForm/PageGridForm'
 import PageInputForm from '@components/molecules/PageInputForm/PageInputForm'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  // const clientCookie = context.req.headers.cookie ?? ''
-  // const response = await axios.get<CheckAuthenticationResponse>(`${process.env.API_URL}/checkAuthentication`, {
-  //   headers: {
-  //     ...(clientCookie && { Cookie: clientCookie }),
-  //   },
-  //   withCredentials: true,
-  // })
-  //
-  // if (!response?.data.success) {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: PATH.ADMIN_LOGIN_PAGE,
-  //     },
-  //   }
-  // }
+  const clientCookie = context.req.headers.cookie ?? ''
+  const response = await axios.get<CheckAuthenticationResponse>(`${process.env.API_URL}/checkAuthentication`, {
+    headers: {
+      ...(clientCookie && { Cookie: clientCookie }),
+    },
+    withCredentials: true,
+  })
+
+  if (!response?.data.success) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: PATH.ADMIN_LOGIN_PAGE,
+      },
+    }
+  }
 
   const unyangItems = await axios.get(`${process.env.API_URL}/getPagesByStore/1`, {
     withCredentials: true,
@@ -70,10 +70,6 @@ type ProcessProps = {
 }
 
 const Index: NextPage<ProcessProps> = ({ unyangData, janggiData, gochonData }: ProcessProps) => {
-  // const [unyangRows, setUnyangRows] = useState<PageType[]>(unyangData)
-  // const [unyangModel, setUnyangModel] = useState<any[]>([])
-  // const [janggiRows, setJanggiRows] = useState<PageType[]>(janggiData)
-  // const [janggiModel, setJanggiModel] = useState<any[]>([])
   const [gochonRows, setGochonRows] = useState<PageType[]>(gochonData)
   const [gochonModel, setGochonModel] = useState<any[]>([])
   return (
@@ -82,14 +78,6 @@ const Index: NextPage<ProcessProps> = ({ unyangData, janggiData, gochonData }: P
         <PageInputForm name={'고촌점'} setRows={setGochonRows} rows={gochonRows} selectionModel={gochonModel} />
         <PageGridForm rows={gochonRows} selectionModel={gochonModel} setSelectionModel={setGochonModel} />
       </Box>
-      {/*<Box sx={{ padding: '3rem' }}>*/}
-      {/*  <PageInputForm name={'장기점'} setRows={setJanggiRows} rows={janggiRows} selectionModel={janggiModel} />*/}
-      {/*  <PageGridForm rows={janggiRows} selectionModel={janggiModel} setSelectionModel={setJanggiModel} />*/}
-      {/*</Box>*/}
-      {/*<Box sx={{ padding: '3rem' }}>*/}
-      {/*  <PageInputForm name={'운양점'} setRows={setUnyangRows} rows={unyangRows} selectionModel={unyangModel} />*/}
-      {/*  <PageGridForm rows={unyangRows} selectionModel={unyangModel} setSelectionModel={setUnyangModel} />*/}
-      {/*</Box>*/}
     </>
   )
 }

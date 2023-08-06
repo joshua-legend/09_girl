@@ -26,9 +26,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
         grant_type: 'authorization_code',
         state: state,
         code: code,
-        redirect_uri: `${process.env.API_URL}/test`,
+        redirect_uri: 'http://localhost:3001/test',
       },
     })
+    console.log(response.data)
     const token = response.data.access_token
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -36,15 +37,19 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     const profileResponse = await axios.get('https://openapi.naver.com/v1/nid/me', { headers })
     const profile = profileResponse.data.response
     const naver = await axios.post(`${process.env.API_URL}/auth/naver`, profile)
+    console.log('naver', naver)
     return {
       props: {
         data: naver.data,
-        profile,
       },
     }
   } catch (error) {
     console.error(`Failed to get access token: ${error}`)
-    return { redirect: { destination: '/', permanent: false } }
+    return {
+      props: {
+        data: null,
+      },
+    }
   }
 }
 type ProcessProps = {
@@ -54,11 +59,9 @@ type ProcessProps = {
   }
 }
 const Test: NextPage = (props: ProcessProps) => {
-  console.log(props.props.data, props.props.data)
+  console.log(props)
   useEffect(() => {
-    const { data, profile } = props
-    localStorage.setItem('09_girl_token', data.token)
-    localStorage.setItem('09_girl_token_id', profile.id)
+    // const { data } = props
   }, [])
 
   const { push } = useRouter()

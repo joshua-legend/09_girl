@@ -15,10 +15,10 @@ import AddressStore from '../../../store/AddressStore'
 import Snackbar from '@components/atoms/Snackbar/Snackbar'
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<any>> => {
-  // const isTokenValid = await verifyToken(context)
-  // if (!isTokenValid) {
-  //   return { redirect: { destination: '/', permanent: false } }
-  // }
+  const isTokenValid = await verifyToken(context)
+  if (!isTokenValid) {
+    return { redirect: { destination: '/', permanent: false } }
+  }
   const getData = await requestData('getItemsByStore', context)
   const JWT_SECRET = process.env.JWT_SECRET
   if (!JWT_SECRET) {
@@ -48,7 +48,7 @@ const Index: NextPage<ProcessProps> = ({ title, items, payload }: ProcessProps) 
     }
   }, [items, setItems])
 
-  const { setAddress, addressInfo } = AddressStore()
+  const { setAddress } = AddressStore()
   useEffect(() => {
     const { mobile, nickname, require, address, detail, common } = payload
     const mobileReg = mobile.replace(/-/g, '')
